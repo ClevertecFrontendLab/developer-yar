@@ -1,0 +1,15 @@
+export const enum ROUTE_CATEGORIES {
+    SALADS = 'salads',
+    SNACKS = 'snacks',
+    FIRST_COURSES = 'first-courses',
+    SECOND_COURSES = 'second-courses',
+    DESSERTS_PASTRIES = 'desserts-pastries',
+    GRILLED_DISHES = 'grilled-dishes',
+    VEGAN_CUISINE = 'vegan-cuisine',
+    CHILDRENS_DISHES = 'childrens-dishes',
+    THERAPEUTIC_NUTRITION = 'therapeutic-nutrition',
+    NATIONAL_CUISINES = 'national-cuisines',
+    SAUCES = 'sauces',
+    DRINKS = 'drinks',
+    SEMIMANUFACTURES = 'semimanufactures',
+}

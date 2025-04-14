@@ -1,0 +1,15 @@
+export const CATEGORY_NAMES = {
+    SALADS: 'Салаты',
+    SNACKS: 'Закуски',
+    FIRST_COURSES: 'Первые блюда',
+    SECOND_COURSES: 'Вторые блюда',
+    DESSERTS_PASTRIES: 'Десерты, выпечка',
+    GRILLED_DISHES: 'Блюда на гриле',
+    VEGAN_CUISINE: 'Веганская кухня',
+    CHILDRENS_DISHES: 'Детские блюда',
+    THERAPEUTIC_NUTRITION: 'Лечебное питание',
+    NATIONAL_CUISINES: 'Национальные',
+    SAUCES: 'Соусы',
+    DRINKS: 'Напитки',
+    SEMIMANUFACTURES: 'Заготовки',
+} as const;
