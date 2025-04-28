@@ -1,15 +1,22 @@
 import { Button } from '@chakra-ui/react';
 import { FC } from 'react';
+import { Link } from 'react-router';
 
 import { CookRecipeButtonVariant } from '../model/types';
 import { cookRecipeButtonVariants } from './cook-recipe.styles';
 
-interface CookRecipeButtonProps {
+type CookRecipeButtonProps = {
+    id: string;
+    url: string;
     variant?: CookRecipeButtonVariant;
-}
+};
 
-export const CookRecipeButton: FC<CookRecipeButtonProps> = ({ variant = 'black' }) => {
+export const CookRecipeButton: FC<CookRecipeButtonProps> = ({ id, url, variant = 'black' }) => {
     const styles = cookRecipeButtonVariants[variant] || cookRecipeButtonVariants.black;
 
-    return <Button {...styles}>Готовить</Button>;
+    return (
+        <Button as={Link} to={url} {...styles} data-test-id={`card-link-${id}`}>
+            Готовить
+        </Button>
+    );
 };

@@ -1,43 +1,53 @@
-import { Avatar, Box, Flex, Grid, GridItem, Heading, Image, Stack, Text } from '@chakra-ui/react';
+import { Avatar, Flex, Grid, GridItem, Heading, Image, Stack, Text } from '@chakra-ui/react';
 import { useBreakpointValue } from '@chakra-ui/react';
-import { FC, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren, ReactNode } from 'react';
 
+import { User } from '~/entities/user/@x/recipe';
 import { getDisplayForBreakpoints } from '~/shared/lib';
-import { CategoryBadge } from '~/shared/ui/category-badge';
-import { RecipeStats } from '~/shared/ui/recipe-stats';
+import { CategoryTags } from '~/shared/ui/category-tags';
 
-import { Recipe } from '../../model/recipe';
+import { RecipeStats } from '../recipe-stats';
 import { recipeGalleryCardStyles as styles } from './index.styles';
 
 const shownRecommendationFromXlBreakpoint = getDisplayForBreakpoints({ from: 'xl' });
 const shownTextFromXlBreakpoint = getDisplayForBreakpoints({
-    from: 'xl',
     display: '-webkit-box',
+    from: 'xl',
 });
 
-interface RecipeGalleryCardProps extends Recipe, PropsWithChildren {}
+type RecipeGalleryCardProps = {
+    bookmarks: number;
+    category: string[];
+    description: string;
+    id: string;
+    image: string;
+    likes: number;
+    recommendedBy?: User;
+    title: string | ReactNode;
+} & PropsWithChildren;
 
 export const RecipeGalleryCard: FC<RecipeGalleryCardProps> = ({
     children,
+    id,
     title,
     description,
     image,
     category,
     bookmarks = 0,
-    emojies = 0,
+    likes = 0,
     recommendedBy,
 }) => {
     const headingLines = useBreakpointValue({ base: 2, xl: 1 });
 
     return (
-        <Grid {...styles.card}>
+        <Grid {...styles.card} data-test-id={`food-card-${id}`}>
             <GridItem {...styles.imageBox}>
-                <Image src={image} alt={title} {...styles.image} />
+                <Image alt='Карточка рецепта' src={image} {...styles.image} />
                 {recommendedBy && (
                     <Flex {...shownRecommendationFromXlBreakpoint} {...styles.recommendationBox}>
                         <Avatar
-                            src={recommendedBy.avatar}
                             name={recommendedBy.fullName}
+                            src={recommendedBy.avatar}
                             {...styles.recommendationAvatar}
                         />
                         <Text {...styles.recommendationText}>
@@ -50,10 +60,10 @@ export const RecipeGalleryCard: FC<RecipeGalleryCardProps> = ({
             <GridItem {...styles.contentBox}>
                 <Stack {...styles.content}>
                     <Flex {...styles.metadata}>
-                        <Box {...styles.badgeBox}>
-                            <CategoryBadge text={category} bg='yellow' />
-                        </Box>
-                        <RecipeStats bookmarks={bookmarks} emojies={emojies} />
+                        <Grid {...styles.badgeBox}>
+                            <CategoryTags categories={category} variant='yellow' />
+                        </Grid>
+                        <RecipeStats bookmarks={bookmarks} likes={likes} />
                     </Flex>
 
                     <Stack {...styles.infoBox}>

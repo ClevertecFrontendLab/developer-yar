@@ -1,12 +1,13 @@
-import { Box, Flex, Grid } from '@chakra-ui/react';
+import { Box, Flex, Grid, Stack, useBreakpointValue } from '@chakra-ui/react';
 import { FC } from 'react';
 import { Outlet } from 'react-router';
 
+import { MenuTree } from '~/entities/navigation';
+import { UserStats } from '~/entities/user';
+import { LogOut } from '~/features/log-out';
 import { WriteRecipe } from '~/features/write-recipe';
 import { getDisplayForBreakpoints, useScrollOnNavigate } from '~/shared/lib';
-import { Navigation } from '~/shared/ui/navigation';
-import { StatsBar } from '~/shared/ui/stats-bar';
-import { Footer } from '~/widgets/footer';
+import { InfoPanel } from '~/shared/ui/info-panel';
 import { Header } from '~/widgets/header';
 import { MobileTabBar } from '~/widgets/mobile-tab-bar';
 
@@ -18,27 +19,34 @@ const shownToLgBreakpoint = getDisplayForBreakpoints({ to: 'lg' });
 export const AppLayout: FC = () => {
     useScrollOnNavigate();
 
+    const isDesktop = useBreakpointValue({ base: false, xl: true });
+
     return (
-        <Grid {...styles.container}>
+        <Box {...styles.container}>
             <Box {...styles.headerWrapper}>
                 <Header />
             </Box>
+
             <Grid as='main' {...styles.mainGrid}>
                 <Flex {...shownFromXlBreakpoint} {...styles.leftSidebar}>
-                    <Box {...styles.navigationWrapper}>
-                        <Navigation />
-                    </Box>
-                    <Box {...styles.footerWrapper}>
-                        <Footer />
+                    <Box {...styles.navigationWrapper}>{isDesktop && <MenuTree />}</Box>
+
+                    <Box {...styles.infoPanelWrapper}>
+                        <InfoPanel>
+                            <LogOut />
+                        </InfoPanel>
                     </Box>
                 </Flex>
-                <Box {...styles.contentArea}>
+
+                <Stack {...styles.contentArea}>
                     <Outlet />
-                </Box>
+                </Stack>
+
                 <Flex {...shownFromXlBreakpoint} {...styles.rightSidebar}>
-                    <Box {...styles.statsBarWrapper}>
-                        <StatsBar />
+                    <Box {...styles.userStatsWrapper}>
+                        <UserStats />
                     </Box>
+
                     <Box {...styles.writeRecipeWrapper}>
                         <WriteRecipe />
                     </Box>
@@ -47,6 +55,6 @@ export const AppLayout: FC = () => {
             <Box {...shownToLgBreakpoint}>
                 <MobileTabBar />
             </Box>
-        </Grid>
+        </Box>
     );
 };

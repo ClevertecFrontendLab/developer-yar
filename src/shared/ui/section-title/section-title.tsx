@@ -3,9 +3,9 @@ import { FC, ReactNode } from 'react';
 
 import { sectionTitleStyles as styles } from './section-title.styles';
 
-interface SectionTitleProps {
+type SectionTitleProps = {
     children: ReactNode;
-}
+};
 
 export const SectionTitle: FC<SectionTitleProps> = ({ children }) => (
     <Heading as='h2' {...styles.heading}>

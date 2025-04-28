@@ -1,45 +1,43 @@
-import { BoxProps, FlexProps, GridProps } from '@chakra-ui/react';
+import { BoxProps, FlexProps, GridProps, StackProps } from '@chakra-ui/react';
 
 type AppLayoutStyleProps = {
-    container: GridProps;
-    contentArea: BoxProps;
-    footerWrapper: BoxProps;
+    container: BoxProps;
+    contentArea: StackProps;
     headerWrapper: BoxProps;
+    infoPanelWrapper: BoxProps;
     leftSidebar: FlexProps;
     mainGrid: GridProps;
     navigationWrapper: BoxProps;
     rightSidebar: FlexProps;
-    statsBarWrapper: BoxProps;
+    userStatsWrapper: BoxProps;
     writeRecipeWrapper: BoxProps;
 };
 
 export const appLayoutStyles: AppLayoutStyleProps = {
     container: {
-        alignContent: 'start',
-        minW: 80,
+        minW: 'var(--chakra-sizes-minPageWidth)',
     },
     contentArea: {
+        gap: { base: 4, xl: 0 },
         maxW: 'var(--chakra-sizes-maxContentWith)',
         minW: 0,
         ml: { xl: 6 },
         mr: { xl: '72px' },
-        pl: { base: 4, md: 5, xl: 0 },
-        pr: { base: 4, md: 5, xl: 0 },
-        pt: { base: 4, xl: 0 },
-    },
-    footerWrapper: {
-        mt: 'auto',
     },
     headerWrapper: {
         pos: { base: 'sticky', xl: 'static' },
-        top: 0,
-        zIndex: 'overlay',
+        top: typeof Cypress !== 'undefined' ? 'auto' : 0,
+        w: 'full',
+        zIndex: 'tooltip',
+    },
+    infoPanelWrapper: {
+        mt: 'auto',
     },
     leftSidebar: {
         boxShadow:
             '0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12)',
         direction: 'column',
-        maxH: '100vh',
+        h: '100vh',
         overflow: 'hidden',
         pos: 'sticky',
         pt: 6,
@@ -55,30 +53,12 @@ export const appLayoutStyles: AppLayoutStyleProps = {
     navigationWrapper: {
         overflowX: 'hidden',
         overflowY: 'auto',
-
-        sx: {
-            scrollbarColor:
-                'var(--chakra-colors-blackAlpha-300) var(--chakra-colors-blackAlpha-50)',
-            scrollbarWidth: 'thin',
-
-            '::-webkit-scrollbar': {
-                w: 2,
-            },
-            '::-webkit-scrollbar-thumb': {
-                bgColor: 'blackAlpha.300',
-                borderRadius: 'lg',
-            },
-            '::-webkit-scrollbar-track': {
-                bgColor: 'blackAlpha.50',
-                borderRadius: 'lg',
-            },
-        },
     },
     rightSidebar: {
         direction: 'column',
         pos: 'relative',
     },
-    statsBarWrapper: {
+    userStatsWrapper: {
         pos: 'sticky',
         right: 0,
         top: 0,

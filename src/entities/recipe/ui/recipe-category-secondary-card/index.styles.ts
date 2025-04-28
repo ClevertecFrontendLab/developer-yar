@@ -10,10 +10,10 @@ export const recipeCategorySecondaryCardStyles: RecipeCategorySecondaryCardStyle
     container: {
         alignItems: 'center',
         gap: 2,
-        h: { base: '52px', '2xl': '56px' },
+        h: { '2xl': '56px', base: '52px' },
         justify: 'space-between',
-        layerStyle: 'subtleOutline',
-        px: { base: 3, '2xl': 6 },
+        layerStyle: 'subtleOutlineHover',
+        px: { '2xl': 6, base: 3 },
     },
     info: {
         alignItems: 'center',
@@ -21,7 +21,7 @@ export const recipeCategorySecondaryCardStyles: RecipeCategorySecondaryCardStyle
     },
     title: {
         color: 'black',
-        fontSize: { base: 'md', xl: 'lg', '2xl': 'xl' },
+        fontSize: { '2xl': 'xl', base: 'md', xl: 'lg' },
         fontWeight: 'medium',
         lineHeight: { base: '6', xl: '7' },
         overflowWrap: 'anywhere',

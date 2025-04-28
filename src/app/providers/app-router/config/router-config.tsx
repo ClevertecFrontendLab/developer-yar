@@ -2,15 +2,13 @@ import { createBrowserRouter } from 'react-router';
 
 import { AppLayout } from '~/app/providers/app-layout';
 
-import { homePage } from '../consts/home-page';
-import { otherPage } from '../consts/other';
-import { theJuiciestPage } from '../consts/the-juiciest-page';
-import { veganCuisinePage } from '../consts/vegan-cuisine-page';
+import { routes } from './routes';
 
 export const Router = createBrowserRouter([
     {
-        path: '/',
+        children: routes,
         element: <AppLayout />,
-        children: [homePage, theJuiciestPage, veganCuisinePage, otherPage],
+        errorElement: <>Not found</>,
+        path: '/',
     },
 ]);

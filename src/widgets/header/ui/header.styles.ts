@@ -1,54 +1,93 @@
-import type { BoxProps, FlexProps, MenuButtonProps } from '@chakra-ui/react';
+import { BoxProps, FlexProps, MenuButtonProps, StackProps } from '@chakra-ui/react';
 
 type HeaderStyleProps = {
-    breadcrumbsContainer: BoxProps;
+    breadcrumbsBox: BoxProps;
     burgerButton: MenuButtonProps;
-    headerContainer: BoxProps;
+    headerContainer: (withMenu: boolean) => BoxProps;
     headerContent: FlexProps;
-    logotypeContainer: BoxProps;
-    navigationContainer: BoxProps;
-    profileContainer: BoxProps;
+    infoPanelWrapper: BoxProps;
+    logoBox: BoxProps;
+    menuListWrapper: BoxProps;
+    mobileUserStats: (withMenu: boolean) => BoxProps;
+    navOverlay: BoxProps;
+    profileBox: BoxProps;
+    slideOutMenuBox: StackProps;
 };
 
 export const headerStyles: HeaderStyleProps = {
-    breadcrumbsContainer: {
-        px: 32,
+    breadcrumbsBox: {
+        minH: { base: '52px', xl: 'auto' },
+        px: { base: 5, xl: 32 },
     },
     burgerButton: {
+        _active: { bg: 'transparent' },
+        _hover: { bg: 'transparent' },
         bg: 'transparent',
         boxSize: 12,
         cursor: 'pointer',
         zIndex: 'tooltip',
-        _active: { bg: 'transparent' },
-        _hover: { bg: 'transparent' },
     },
-    headerContainer: {
-        bg: 'lime.50',
+    headerContainer: (withMenu) => ({
+        bg: { base: withMenu ? 'white' : 'lime.50', xl: 'lime.50' },
         w: 'full',
-    },
+    }),
     headerContent: {
         align: 'center',
-        bg: 'lime.50',
         m: 'auto',
         maxW: 'var(--chakra-sizes-maxPageWidth)',
         pl: { base: 4, md: 5 },
         pr: { base: 4, md: 5, xl: 20 },
         py: { base: 2, xl: 4 },
     },
-    logotypeContainer: {
-        mr: { base: 'auto', xl: 0 },
-        zIndex: 'tooltip',
+    infoPanelWrapper: {
+        pt: 4,
     },
-    navigationContainer: {
-        bgColor: 'white',
-        h: 'calc(100vh - var(--chakra-sizes-headerBase))',
-        overflow: 'auto',
-        position: 'absolute',
-        right: 0,
-        top: 'var(--chakra-sizes-headerBase)',
+    logoBox: {
+        mr: { base: 'auto', xl: 0 },
         zIndex: 'docked',
     },
-    profileContainer: {
+    menuListWrapper: {
+        maxH: '668px',
+        overflowY: 'auto',
+        pr: 2,
+        py: 2,
+    },
+    mobileUserStats: (withMenu) => ({
+        display: { base: withMenu ? 'none' : 'block', xl: 'none' },
+    }),
+    navOverlay: {
+        backdropFilter: 'blur(4px)',
+        bg: 'blackAlpha.300',
+        bottom: 0,
+        h: 'calc(100vh - var(--chakra-sizes-headerBase))',
+        pos: 'absolute',
+        w: 'full',
+        zIndex: '-1',
+    },
+    profileBox: {
         ml: 'auto',
+    },
+    slideOutMenuBox: {
+        bg: 'white',
+        borderBottomRadius: 'lg',
+        borderLeftRadius: 'lg',
+        boxShadow: '0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+        gap: 3,
+        maxH: 'calc(100vh - var(--chakra-sizes-headerBase))',
+        maxW: '344px',
+        minW: 'var(--chakra-sizes-minPageWidth)',
+        ml: 'auto',
+        overflowY: 'auto',
+        pos: 'relative',
+        pt: 4,
+        right: 2,
+        sx: {
+            '@media screen and (max-width: 359px)': {
+                maxWidth: 'calc(100vw - 16px)',
+            },
+        },
+        top: 'var(--chakra-sizes-headerBase)',
+        w: 'full',
+        zIndex: 'tooltip',
     },
 };

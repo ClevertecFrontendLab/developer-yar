@@ -1,7 +1,7 @@
-import { BookmarkHeartIcon, EmojiHeartEyesIcon, PeopleFillIcon } from '~/shared/ui/icons';
+import { BookmarkIcon, FollowerIcon, LikeIcon } from '~/shared/ui/icons';
 
-import { withBadge } from './with-badge/with-badge';
+import { withBadge } from './with-badge';
 
-export const PeopleBadge = withBadge(PeopleFillIcon);
-export const EmojiBadge = withBadge(EmojiHeartEyesIcon);
-export const BookmarkBadge = withBadge(BookmarkHeartIcon);
+export const FollowersBadge = withBadge(FollowerIcon);
+export const LikesBadge = withBadge(LikeIcon);
+export const BookmarksBadge = withBadge(BookmarkIcon);

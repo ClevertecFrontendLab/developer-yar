@@ -10,14 +10,14 @@ type PostCardStyleProps = {
 export const postCardStyles: PostCardStyleProps = {
     authorBlock: {
         justifySelf: 'start',
-        pb: { base: 2, '2xl': 4 },
-        pt: { base: 4, '2xl': 6 },
-        px: { base: 4, '2xl': 6 },
+        pb: { '2xl': 4, base: 2 },
+        pt: { '2xl': 6, base: 4 },
+        px: { '2xl': 6, base: 4 },
     },
     container: {
         alignContent: 'start',
         bg: 'white',
-        layerStyle: 'subtleOutline',
+        layerStyle: 'subtleOutlineHover',
     },
     contentText: {
         color: 'black',
@@ -27,8 +27,8 @@ export const postCardStyles: PostCardStyleProps = {
         minH: 16,
     },
     textBlock: {
-        pb: { base: 4, '2xl': 5 },
-        pt: { base: 2, '2xl': 3 },
-        px: { base: 4, '2xl': 6 },
+        pb: { '2xl': 5, base: 4 },
+        pt: { '2xl': 3, base: 2 },
+        px: { '2xl': 6, base: 4 },
     },
 };

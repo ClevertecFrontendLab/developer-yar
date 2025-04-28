@@ -16,11 +16,11 @@ export const foodBlogStyles: FoodBlogStyleProps = {
         bg: 'transparent',
         bgColor: 'lime.300',
         color: 'black',
-        fontSize: { base: 'md', '2xl': 'lg' },
+        fontSize: { '2xl': 'lg', base: 'md' },
         fontWeight: 'semibold',
         gap: 2,
-        h: { base: 10, '2xl': 12 },
-        lineHeight: { base: '6', '2xl': '7' },
+        h: { '2xl': 12, base: 10 },
+        lineHeight: { '2xl': '7', base: '6' },
         px: 4,
     },
     authorButtonContainer: {
@@ -44,7 +44,7 @@ export const foodBlogStyles: FoodBlogStyleProps = {
         alignItems: 'center',
         bgColor: 'lime.300',
         borderRadius: '2xl',
-        gap: { base: 3, xl: 4, '2xl': 6 },
+        gap: { '2xl': 6, base: 3, xl: 4 },
         padding: { base: 3, xl: 6 },
         templateAreas: {
             base: `"title"
@@ -56,9 +56,9 @@ export const foodBlogStyles: FoodBlogStyleProps = {
     },
     title: {
         color: 'black',
-        fontSize: { base: '2xl', xl: '3xl', '2xl': '4xl' },
-        fontWeight: { base: 'medium', '2xl': 'normal' },
-        lineHeight: { base: '8', xl: '9', '2xl': '10' },
+        fontSize: { '2xl': '4xl', base: '2xl', xl: '3xl' },
+        fontWeight: { '2xl': 'normal', base: 'medium' },
+        lineHeight: { '2xl': '10', base: '8', xl: '9' },
     },
     titleContainer: {
         area: 'title',

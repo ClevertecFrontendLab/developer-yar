@@ -1,30 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useDisclosure } from '@chakra-ui/react';
+import { useEffect } from 'react';
 
 type MenuToggle = {
     isOpen: boolean;
-    toggle: () => void;
-    open: () => void;
-    close: () => void;
+    onClose: () => void;
+    onOpen: () => void;
+    onToggle: () => void;
 };
 
-export const useToggleMenu = (): MenuToggle => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const toggle = () => setIsOpen((prev) => !prev);
-    const open = () => setIsOpen(true);
-    const close = () => setIsOpen(false);
+export const useToggleMenu = (lockScroll = true): MenuToggle => {
+    const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
 
     useEffect(() => {
+        if (!lockScroll) return;
+
         document.documentElement.style.overflow = isOpen ? 'hidden' : '';
         return () => {
             document.documentElement.style.overflow = '';
         };
-    }, [isOpen]);
+    }, [isOpen, lockScroll]);
 
-    return {
-        isOpen,
-        toggle,
-        open,
-        close,
-    };
+    return { isOpen, onClose, onOpen, onToggle };
 };

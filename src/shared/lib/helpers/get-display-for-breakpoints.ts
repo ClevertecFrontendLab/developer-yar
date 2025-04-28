@@ -13,9 +13,9 @@ type Display =
     | '-webkit-box';
 
 type DisplayRange = {
+    display?: Display;
     from?: Breakpoint;
     to?: Breakpoint;
-    display?: Display;
 };
 
 type ResponsiveDisplay = Partial<Record<Breakpoint, Display>>;

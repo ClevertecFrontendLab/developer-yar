@@ -1,11 +1,15 @@
-import { StackProps } from '@chakra-ui/react';
+import { BoxProps, StackProps } from '@chakra-ui/react';
 
 type HomePageStyleProps = {
-    container: StackProps;
     layout: StackProps;
+    pageHeroBox: BoxProps;
 };
 
 export const homePageStyles: HomePageStyleProps = {
-    container: { gap: { base: 8, xl: 6 } },
-    layout: { gap: { base: 8, xl: 10 }, justify: 'center' },
+    layout: {
+        layerStyle: 'pageLayout',
+    },
+    pageHeroBox: {
+        pb: { xl: 6 },
+    },
 };
