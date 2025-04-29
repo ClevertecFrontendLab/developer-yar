@@ -4,7 +4,7 @@ type SearchRecipesStyleProps = {
     clearIcon: IconProps;
     clearIconWrapper: (isQueryNotLongEnough: boolean) => Omit<IconButtonProps, 'aria-label'>;
     iconWrapper: Omit<IconButtonProps, 'aria-label'>;
-    input: (isQueryNotEmpty: boolean) => InputProps;
+    input: (isQueryNotEmpty: boolean, isQueryNotLongEnough: boolean) => InputProps;
     inputButtons: FlexProps;
     inputWrapper: FlexProps;
     searchIcon: IconProps;
@@ -27,30 +27,24 @@ export const searchRecipesStyles: SearchRecipesStyleProps = {
         h: 'auto',
         minW: 'auto',
     },
-    input: (isQueryNotEmpty: boolean): InputProps => ({
-        _active: {
-            borderWidth: '1px',
-            boxShadow: 'none',
-        },
+    input: (isQueryNotEmpty: boolean, isQueryNotLongEnough: boolean): InputProps => ({
         _focus: {
-            borderWidth: '1px',
+            border: 'none',
             boxShadow: 'none',
-        },
-        _hover: {
-            borderWidth: '1px',
-            boxShadow: 'none',
+            outlineColor: isQueryNotLongEnough ? 'red.500' : 'blackAlpha.600',
+            outlineWidth: isQueryNotLongEnough ? '2px' : '1px',
         },
         _placeholder: { color: 'lime.800' },
-        borderColor: 'blackAlpha.600',
+        border: 'none',
         borderRadius: 'md',
-        borderStyle: 'solid',
-        borderWidth: '1px',
         boxShadow: 'none',
         color: 'lime.800',
         focusBorderColor: 'blackAlpha.600',
         fontSize: { base: 'sm', xl: 'lg' },
         fontWeight: 'normal',
         h: { base: 8, xl: 12 },
+        outlineColor: 'blackAlpha.600',
+        outline: '1px solid',
         paddingInlineEnd: isQueryNotEmpty ? 8 : 16,
     }),
     inputButtons: {

@@ -1,5 +1,5 @@
 import { Flex, Stack } from '@chakra-ui/react';
-import { FC, memo, ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 
 import { ExcludeAllergens } from '~/features/exclude-allergens';
 import { FilterRecipes } from '~/features/filter-recipes';
@@ -11,7 +11,7 @@ type PageHeroProps = {
     children: ReactNode | ReactNode[];
 };
 
-export const PageHero: FC<PageHeroProps> = memo(({ children }) => (
+export const PageHero: FC<PageHeroProps> = ({ children }) => (
     <Stack {...styles.pageHeroContainer}>
         <Stack {...styles.textContainer}>{children}</Stack>
         <Stack {...styles.featuresWrapper}>
@@ -22,4 +22,4 @@ export const PageHero: FC<PageHeroProps> = memo(({ children }) => (
             <ExcludeAllergens />
         </Stack>
     </Stack>
-));
+);

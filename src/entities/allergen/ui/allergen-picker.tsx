@@ -60,9 +60,9 @@ export const AllergenPicker: FC<AllergenPickerProps> = ({
         [onToggleAllergen],
     );
 
-    const handleSwitchChange = useCallback(() => {
+    const handleSwitchChange = () => {
         onToggleFilter();
-    }, [onToggleFilter]);
+    };
 
     const addUserAllergen = useCallback(() => {
         const isEmpty = !customAllergen.trim();
@@ -81,12 +81,9 @@ export const AllergenPicker: FC<AllergenPickerProps> = ({
         }
     }, [allergens, customAllergen, onAddAllergen]);
 
-    const removeUserAllergen = useCallback(
-        (id: number) => () => {
-            onRemoveAllergen(id);
-        },
-        [onRemoveAllergen],
-    );
+    const removeUserAllergen = (id: number) => {
+        onRemoveAllergen(id);
+    };
 
     const handleKeyDown = useCallback(
         (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -154,7 +151,7 @@ export const AllergenPicker: FC<AllergenPickerProps> = ({
                                                         {...allergenPickerBaseStyles.removeIcon}
                                                     />
                                                 }
-                                                onClick={removeUserAllergen(allergen.id)}
+                                                onClick={() => removeUserAllergen(allergen.id)}
                                                 {...allergenPickerBaseStyles.popoverAddAllergenButton}
                                                 data-test-id='remove-allergen-button'
                                             />

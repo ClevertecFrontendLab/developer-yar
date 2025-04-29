@@ -12,7 +12,7 @@ import {
     useDisclosure,
     Wrap,
 } from '@chakra-ui/react';
-import { FC, memo, useCallback } from 'react';
+import { FC } from 'react';
 
 import { AllergenPicker } from '~/entities/allergen';
 import { useAppDispatch, useAppSelector } from '~/shared/model';
@@ -46,7 +46,7 @@ import { FilterRecipeCheckbox } from './filter-recipe-checkbox';
 import { FilterRecipeMenu } from './filter-recipe-menu';
 import { filterRecipesStyles as styles } from './filter-recipes.styles';
 
-export const FilterRecipes: FC = memo(() => {
+export const FilterRecipes: FC = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     useFiltersData();
 
@@ -64,17 +64,17 @@ export const FilterRecipes: FC = memo(() => {
 
     const dispatch = useAppDispatch();
 
-    const reset = useCallback(() => dispatch(resetAllFilters()), [dispatch]);
+    const reset = () => dispatch(resetAllFilters());
 
-    const find = useCallback(() => {
+    const find = () => {
         dispatch(findRecipes());
         onClose();
-    }, [dispatch, onClose]);
+    };
 
-    const openDrawer = useCallback(() => {
+    const openDrawer = () => {
         reset();
         onOpen();
-    }, [reset, onOpen]);
+    };
 
     return (
         <>
@@ -198,4 +198,4 @@ export const FilterRecipes: FC = memo(() => {
             </Drawer>
         </>
     );
-});
+};

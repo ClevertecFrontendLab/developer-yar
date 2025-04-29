@@ -1,7 +1,7 @@
 import 'swiper/css';
 
 import { Box, Stack } from '@chakra-ui/react';
-import { FC, memo, useCallback, useMemo } from 'react';
+import { FC, memo, useMemo } from 'react';
 import { useNavigate } from 'react-router';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -23,7 +23,7 @@ type NewRecipesProps = {
 export const NewRecipes: FC<NewRecipesProps> = memo(({ recipes }) => {
     const navigate = useNavigate();
 
-    const handleClick = useCallback((link: string) => () => navigate(link), [navigate]);
+    const handleClick = (link: string) => navigate(link);
 
     const newRecipes = useMemo(() => filterTopNewest(recipes), [recipes]);
 
@@ -41,7 +41,7 @@ export const NewRecipes: FC<NewRecipesProps> = memo(({ recipes }) => {
                             <SwiperSlide
                                 key={recipe.id}
                                 style={{ ...styles.swiperSlide }}
-                                onClick={handleClick(link)}
+                                onClick={() => handleClick(link)}
                             >
                                 <Box
                                     {...styles.recipeCardContainer}

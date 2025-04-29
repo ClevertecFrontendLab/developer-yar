@@ -1,6 +1,6 @@
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { Box, Flex, IconButton, Slide, Stack } from '@chakra-ui/react';
-import { FC, memo } from 'react';
+import { FC } from 'react';
 
 import { Breadcrumbs, MenuTree } from '~/entities/navigation';
 import { UserCard, UserStats } from '~/entities/user';
@@ -16,7 +16,7 @@ import { headerStyles as styles } from './header.styles';
 const shownFromXlBreakpoint = getDisplayForBreakpoints({ from: 'xl' });
 const shownToLgBreakpoint = getDisplayForBreakpoints({ to: 'lg' });
 
-export const Header: FC = memo(() => {
+export const Header: FC = () => {
     const { isOpen, onClose, onToggle } = useToggleMenu();
 
     return (
@@ -65,4 +65,4 @@ export const Header: FC = memo(() => {
             </Flex>
         </Box>
     );
-});
+};

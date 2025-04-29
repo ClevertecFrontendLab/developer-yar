@@ -1,6 +1,6 @@
 import { SearchIcon, SmallCloseIcon } from '@chakra-ui/icons';
 import { Flex, IconButton, Input, InputGroup } from '@chakra-ui/react';
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 
 import { useAppDispatch, useAppSelector } from '~/shared/model';
 
@@ -19,25 +19,20 @@ export const SearchRecipes: FC = () => {
     const isQueryNotEmpty = useAppSelector(selectIsQueryNotEmpty);
     const isQueryNotLongEnough = useAppSelector(selectIsQueryNotLongEnough);
 
-    const handleSearch = useCallback(() => dispatch(setSearchingActive(true)), [dispatch]);
+    const handleSearch = () => dispatch(setSearchingActive(true));
 
-    const handleInputChange = useCallback(
-        (e: React.ChangeEvent<HTMLInputElement>) => {
-            dispatch(setSearchQuery(e.target.value));
-        },
-        [dispatch],
-    );
-    const handleKeyDown = useCallback(
-        (e: React.KeyboardEvent<HTMLInputElement>) => {
-            if (e.key === 'Enter') handleSearch();
-        },
-        [handleSearch],
-    );
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(setSearchQuery(e.target.value));
+    };
 
-    const handleClear = useCallback(() => {
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') handleSearch();
+    };
+
+    const handleClear = () => {
         dispatch(setSearchQuery(''));
         dispatch(setSearchingActive(false));
-    }, [dispatch]);
+    };
 
     return (
         <InputGroup {...styles.inputWrapper}>
@@ -47,7 +42,7 @@ export const SearchRecipes: FC = () => {
                 value={searchQuery}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
-                {...styles.input(isQueryNotEmpty)}
+                {...styles.input(isQueryNotEmpty, isQueryNotLongEnough)}
                 data-test-id='search-input'
                 noOfLines={1}
             />

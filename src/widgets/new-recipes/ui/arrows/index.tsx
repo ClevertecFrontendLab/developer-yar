@@ -1,11 +1,11 @@
 import { Flex, IconButton } from '@chakra-ui/react';
-import { FC, memo } from 'react';
+import { FC } from 'react';
 
 import { LeftArrowIcon, RightArrowIcon } from '~/shared/ui/icons';
 
 import { arrowStyles } from './index.styles';
 
-export const Arrows: FC = memo(() => (
+export const Arrows: FC = () => (
     <Flex {...arrowStyles.arrows}>
         <IconButton
             aria-label='Предыдущий слайд'
@@ -22,4 +22,4 @@ export const Arrows: FC = memo(() => (
             {...arrowStyles.arrowBox}
         />
     </Flex>
-));
+);

@@ -1,5 +1,5 @@
 import { Grid, GridItem, Text } from '@chakra-ui/react';
-import { FC, memo } from 'react';
+import { FC } from 'react';
 
 import {
     RecipeCategoryPrimaryCard,
@@ -12,7 +12,7 @@ import { SectionTitle } from '~/shared/ui/section-title';
 
 import { recipesByCategoryStyles as styles } from './recipes-by-category.styles';
 
-export const RecipesByCategory: FC = memo(() => {
+export const RecipesByCategory: FC = () => {
     const { data: recipes, isSuccess } = useGetAllRecipesQuery();
 
     if (isSuccess)
@@ -60,4 +60,4 @@ export const RecipesByCategory: FC = memo(() => {
                 </GridItem>
             </Grid>
         );
-});
+};

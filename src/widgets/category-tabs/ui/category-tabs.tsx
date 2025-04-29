@@ -1,5 +1,5 @@
 import { Button, Grid, Stack, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
-import { FC, memo, useCallback, useMemo } from 'react';
+import { FC, memo, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
 import { useGetNavigationSubmenuQuery } from '~/entities/navigation';
@@ -20,27 +20,18 @@ type ICategoryTabsProps = {
 
 export const CategoryTabs: FC<ICategoryTabsProps> = memo(({ recipes }) => {
     const navigate = useNavigate();
-
     const { category, subcategory } = useParams();
-
     const { data: subcategories = [], isSuccess } = useGetNavigationSubmenuQuery(`/${category}`);
-
     const currentPath = `/${category}/${subcategory}`;
 
-    const currentTabIndex = useMemo(
-        () => subcategories.findIndex((subcategory) => subcategory.url === currentPath),
-        [currentPath, subcategories],
+    const currentTabIndex = subcategories.findIndex(
+        (subcategory) => subcategory.url === currentPath,
     );
 
-    const handleTabChange = useCallback(
-        (index: number) => {
-            const selected = subcategories[index];
-            if (selected) {
-                navigate(selected.url);
-            }
-        },
-        [navigate, subcategories],
-    );
+    const handleTabChange = (index: number) => {
+        const sel = subcategories[index];
+        if (sel) navigate(sel.url);
+    };
 
     const filteredRecipesBySubcategory = useMemo(
         () =>

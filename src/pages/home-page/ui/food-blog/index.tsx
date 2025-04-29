@@ -1,12 +1,12 @@
 import { Button, Grid, GridItem, Heading } from '@chakra-ui/react';
-import { FC, memo } from 'react';
+import { FC } from 'react';
 
 import { PostCard, useGetAllPostsQuery } from '~/entities/post';
 import { RightArrowIcon } from '~/shared/ui/icons';
 
 import { foodBlogStyles as styles } from './index.styles';
 
-export const FoodBlog: FC = memo(() => {
+export const FoodBlog: FC = () => {
     const { data: posts, isSuccess } = useGetAllPostsQuery();
 
     if (isSuccess)
@@ -31,4 +31,4 @@ export const FoodBlog: FC = memo(() => {
                 </GridItem>
             </Grid>
         );
-});
+};
