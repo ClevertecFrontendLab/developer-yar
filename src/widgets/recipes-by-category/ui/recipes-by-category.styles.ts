@@ -29,14 +29,14 @@ export const recipesByCategoryStyles: RecipesByCategoryStyleProps = {
         gap: { base: 4, xl: 6 },
         pt: { base: 2, xl: 6 },
         templateAreas: {
+            '3xl': `"title title description description" "recipesByCategory recipesByCategory recipesByCategory recipesByCategory"`,
             base: `"title" "description" "recipesByCategory"`,
             xl: `"title description description" "recipesByCategory recipesByCategory recipesByCategory"`,
-            '3xl': `"title title description description" "recipesByCategory recipesByCategory recipesByCategory recipesByCategory"`,
         },
         templateColumns: {
+            '3xl': 'repeat(4,1fr)',
             base: '1fr',
             xl: 'repeat(3, 1fr)',
-            '3xl': 'repeat(4,1fr)',
         },
     },
     recipesByCategoryContainer: { area: 'recipesByCategory' },
@@ -44,9 +44,9 @@ export const recipesByCategoryStyles: RecipesByCategoryStyleProps = {
         gap: { '3xl': 6, base: 3, xl: 4 },
         minW: 0,
         templateColumns: {
+            '3xl': '0.25fr 0.25fr 0.5fr',
             base: '1fr',
             md: 'repeat(3,1fr)',
-            '3xl': '0.25fr 0.25fr 0.5fr',
         },
     },
     recipesSecondaryCards: { gap: { base: 1.5, xl: 3 } },

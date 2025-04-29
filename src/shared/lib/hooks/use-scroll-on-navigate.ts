@@ -6,8 +6,8 @@ export const useScrollOnNavigate = (): void => {
 
     useEffect(() => {
         window.scrollTo({
-            top: 0,
             behavior: 'auto',
+            top: 0,
         });
     }, [pathname]);
 };

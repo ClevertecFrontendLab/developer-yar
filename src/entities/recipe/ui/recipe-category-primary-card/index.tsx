@@ -1,20 +1,25 @@
 import { Flex, Heading, Stack, Text } from '@chakra-ui/react';
 import { FC } from 'react';
 
-import { CategoryBadge } from '~/shared/ui/category-badge';
-import { RecipeStats } from '~/shared/ui/recipe-stats';
+import { CategoryTags } from '~/shared/ui/category-tags';
 
-import { Recipe } from '../../model/recipe';
+import { RecipeStats } from '../recipe-stats';
 import { recipeCategoryPrimaryCardStyles as styles } from './index.styles';
 
-interface RecipeCategoryPrimaryCardProps extends Omit<Recipe, 'id' | 'image' | 'recommendedBy'> {}
+type RecipeCategoryPrimaryCardProps = {
+    bookmarks: number;
+    category: string[];
+    description: string;
+    likes: number;
+    title: string;
+};
 
 export const RecipeCategoryPrimaryCard: FC<RecipeCategoryPrimaryCardProps> = ({
     title,
     description,
     category,
     bookmarks = 0,
-    emojies = 0,
+    likes = 0,
 }) => (
     <Stack {...styles.card}>
         <Stack {...styles.text}>
@@ -27,8 +32,10 @@ export const RecipeCategoryPrimaryCard: FC<RecipeCategoryPrimaryCardProps> = ({
         </Stack>
 
         <Flex {...styles.meta}>
-            <CategoryBadge text={category} bg='yellow' />
-            <RecipeStats bookmarks={bookmarks} emojies={emojies} />
+            <Stack {...styles.categoryBadges}>
+                <CategoryTags categories={category} variant='yellow' />
+            </Stack>
+            <RecipeStats bookmarks={bookmarks} likes={likes} />
         </Flex>
     </Stack>
 );

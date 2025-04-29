@@ -1,12 +1,15 @@
 import { Grid, GridItem, Text } from '@chakra-ui/react';
 import { FC } from 'react';
 
-import { UserCard } from '~/entities/user/@x/post';
+import { User, UserCard } from '~/entities/user/@x/post';
 
-import { Post } from '../model/post';
+import { Post } from '../model/types';
 import { postCardStyles as styles } from './post-card.styles';
 
-interface PostCardProps extends Post {}
+type PostCardProps = {
+    author: User;
+    text: string;
+} & Post;
 
 export const PostCard: FC<PostCardProps> = ({ text, author }) => (
     <Grid {...styles.container}>

@@ -3,11 +3,11 @@ import { FC, ReactNode } from 'react';
 
 import { commonTabStyles as styles } from './common-tab.styles';
 
-interface CommonTabProps {
+type CommonTabProps = {
     children: ReactNode;
     isActiveTab?: boolean;
     text: string;
-}
+};
 
 export const CommonTab: FC<CommonTabProps> = ({ children, text, isActiveTab }) => (
     <Center {...styles.tabContainer(isActiveTab)}>

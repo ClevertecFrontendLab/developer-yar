@@ -1,50 +1,67 @@
-import { HamburgerIcon } from '@chakra-ui/icons';
-import { Box, Flex, IconButton, Slide } from '@chakra-ui/react';
+import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
+import { Box, Flex, IconButton, Slide, Stack } from '@chakra-ui/react';
 import { FC } from 'react';
 
-import { UserCard } from '~/entities/user';
+import { Breadcrumbs, MenuTree } from '~/entities/navigation';
+import { UserCard, UserStats } from '~/entities/user';
+import { LogOut } from '~/features/log-out';
 import { mockCurrentUser } from '~/shared/consts';
 import { getDisplayForBreakpoints, useToggleMenu } from '~/shared/lib';
-import { Breadcrumbs } from '~/shared/ui/breadcrumbs';
+import { InfoPanel } from '~/shared/ui/info-panel';
 import { Logotype } from '~/shared/ui/logotype';
-import { Navigation } from '~/shared/ui/navigation';
-import { StatsBar } from '~/shared/ui/stats-bar';
 
+import { BreadcrumbsMobile } from './breadcrumbs-mobile';
 import { headerStyles as styles } from './header.styles';
 
 const shownFromXlBreakpoint = getDisplayForBreakpoints({ from: 'xl' });
 const shownToLgBreakpoint = getDisplayForBreakpoints({ to: 'lg' });
 
 export const Header: FC = () => {
-    const { isOpen, toggle } = useToggleMenu();
+    const { isOpen, onClose, onToggle } = useToggleMenu();
 
     return (
-        <Box as='header' data-test-id='header' {...styles.headerContainer}>
+        <Box as='header' data-test-id='header' {...styles.headerContainer(isOpen)}>
             <Flex {...styles.headerContent}>
-                <Box {...styles.logotypeContainer}>
+                <Box {...styles.logoBox}>
                     <Logotype />
                 </Box>
-                <Box {...shownFromXlBreakpoint} {...styles.breadcrumbsContainer}>
+
+                <Box {...shownFromXlBreakpoint} {...styles.breadcrumbsBox}>
                     <Breadcrumbs />
                 </Box>
-                <Box {...shownFromXlBreakpoint} {...styles.profileContainer}>
+
+                <Box {...shownFromXlBreakpoint} {...styles.profileBox}>
                     <UserCard {...mockCurrentUser} />
                 </Box>
-                <Box {...shownToLgBreakpoint}>
-                    <StatsBar />
+
+                <Box {...shownToLgBreakpoint} {...styles.mobileUserStats(isOpen)}>
+                    <UserStats />
                 </Box>
-                <IconButton
-                    icon={<HamburgerIcon boxSize={6} />}
-                    onClick={toggle}
-                    aria-label='Navigation menu'
-                    {...shownToLgBreakpoint}
-                    {...styles.burgerButton}
-                />
-                <Slide direction='right' in={isOpen} unmountOnExit={true}>
-                    <Box {...shownToLgBreakpoint} {...styles.navigationContainer}>
-                        <Navigation />
-                    </Box>
-                </Slide>
+
+                <Box {...shownToLgBreakpoint}>
+                    <IconButton
+                        aria-label='Navigation menu'
+                        data-test-id={isOpen ? 'close-icon' : 'hamburger-icon'}
+                        icon={isOpen ? <CloseIcon boxSize={3} /> : <HamburgerIcon boxSize={6} />}
+                        onClick={onToggle}
+                        {...styles.burgerButton}
+                    />
+
+                    <Slide in={isOpen}>
+                        <Box as='span' onClick={onClose} {...styles.navOverlay} />
+                        <Stack {...styles.slideOutMenuBox}>
+                            <Box {...styles.breadcrumbsBox}>
+                                <BreadcrumbsMobile onLinkClick={onClose} />
+                            </Box>
+                            <Box {...styles.menuListWrapper}>{isOpen && <MenuTree />}</Box>
+                            <Box {...styles.infoPanelWrapper}>
+                                <InfoPanel>
+                                    <LogOut />
+                                </InfoPanel>
+                            </Box>
+                        </Stack>
+                    </Slide>
+                </Box>
             </Flex>
         </Box>
     );

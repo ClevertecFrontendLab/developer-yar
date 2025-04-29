@@ -1,15 +1,19 @@
 import { Button, Grid, GridItem } from '@chakra-ui/react';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { useNavigate } from 'react-router';
 
+import { Recipe } from '~/entities/recipe';
 import { RightArrowIcon } from '~/shared/ui/icons';
 import { SectionTitle } from '~/shared/ui/section-title';
 import { Recipes } from '~/widgets/recipes';
 
-import { mockTheJuiciest } from '../../consts/mock-the-juiciest';
 import { recipeListStyles as styles } from './index.styles';
 
-export const TheJuiciest: FC = () => {
+type TheJuiciestProps = {
+    recipes: Recipe[];
+};
+
+export const TheJuiciest: FC<TheJuiciestProps> = memo(({ recipes }) => {
     const navigate = useNavigate();
     const navigateToTheJuiciestPage = () => navigate('/the-juiciest');
 
@@ -19,24 +23,27 @@ export const TheJuiciest: FC = () => {
                 <SectionTitle>Самое сочное</SectionTitle>
             </GridItem>
             <GridItem {...styles.recipesArea}>
-                <Recipes recipes={mockTheJuiciest} />
+                <Recipes recipes={recipes} />
             </GridItem>
             <GridItem {...styles.actionArea}>
                 <Button
-                    data-test-id='juiciest-link'
+                    rightIcon={<RightArrowIcon {...styles.viewAllIcon} />}
                     onClick={navigateToTheJuiciestPage}
                     {...styles.viewAllButton}
+                    data-test-id='juiciest-link'
                 >
-                    Вся подборка <RightArrowIcon {...styles.viewAllIcon} />
+                    Вся подборка
                 </Button>
                 <Button
-                    data-test-id='juiciest-link-mobile'
+                    rightIcon={<RightArrowIcon {...styles.viewAllIcon} />}
                     onClick={navigateToTheJuiciestPage}
+                    {...styles.viewAllButton}
+                    data-test-id='juiciest-link-mobile'
                     display='none'
                 >
-                    Вся подборка <RightArrowIcon {...styles.viewAllIcon} />
+                    Вся подборка
                 </Button>
             </GridItem>
         </Grid>
     );
-};
+});

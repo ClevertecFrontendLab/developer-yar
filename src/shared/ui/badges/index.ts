@@ -1,1 +1,1 @@
-export { BookmarkBadge, EmojiBadge, PeopleBadge } from './badges';
+export { BookmarksBadge, FollowersBadge, LikesBadge } from './badges';

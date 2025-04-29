@@ -1,5 +1,10 @@
-export type { Recipe } from './model/recipe';
+export { excludeRecipesWithAllergens } from './lib/exclude-recipes-with-allergens';
+export { filterRecipesByCategoryAndSubcategory } from './lib/filter-recipes-by-category-and-subcategory';
+export { filterTopNewest } from './lib/filter-top-newest';
+export { useGetAllRecipesQuery, useGetRecipeByIdQuery } from './model/api';
+export { getRecipeById, recipeApi } from './model/api';
+export type { Ingredient, NutritionValue, Recipe, Step } from './model/types';
 export { RecipeCategoryPrimaryCard } from './ui/recipe-category-primary-card';
 export { RecipeCategorySecondaryCard } from './ui/recipe-category-secondary-card';
 export { RecipeGalleryCard } from './ui/recipe-gallery-card';
-export { RecipeSliderCard } from './ui/recipe-slider-card';
+export { RecipeStats } from './ui/recipe-stats';

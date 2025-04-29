@@ -8,6 +8,7 @@ type CommonTabStyleProps = {
 
 export const commonTabStyles: CommonTabStyleProps = {
     tabContainer: (isActiveTab) => ({
+        alignItems: 'center',
         bgImage: isActiveTab
             ? 'radial-gradient(62.52% 62.51% at 48.89% 37.5%, rgba(196, 255, 97, 0.4) 0%, rgba(255, 255, 255, 0) 100%)'
             : 'none',
@@ -15,7 +16,6 @@ export const commonTabStyles: CommonTabStyleProps = {
         flexDirection: 'column',
         gap: 1,
         h: 20,
-        alignItems: 'center',
         w: 20,
     }),
     tabIcon: (isActiveTab) => ({

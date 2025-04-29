@@ -13,6 +13,6 @@ export const mobileTabBarStyles: MobileTabBarStyleProps = {
         justify: 'space-around',
         pos: 'fixed',
         w: 'full',
-        zIndex: 'overlay',
+        zIndex: 'docked',
     },
 };

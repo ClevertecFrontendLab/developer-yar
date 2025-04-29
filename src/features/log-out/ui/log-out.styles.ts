@@ -1,4 +1,4 @@
-import type { FlexProps, IconProps, TextProps } from '@chakra-ui/react';
+import { FlexProps, IconProps, TextProps } from '@chakra-ui/react';
 
 type LogOutStyleProps = {
     container: FlexProps;

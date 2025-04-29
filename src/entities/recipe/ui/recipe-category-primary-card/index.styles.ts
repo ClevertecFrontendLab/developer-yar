@@ -3,6 +3,7 @@ import { BoxProps, FlexProps, HeadingProps, StackProps, TextProps } from '@chakr
 type RecipeCategoryPrimaryCardStyleProps = {
     badgeWrapper: BoxProps;
     card: StackProps;
+    categoryBadges: StackProps;
     description: TextProps;
     meta: FlexProps;
     text: StackProps;
@@ -13,10 +14,13 @@ export const recipeCategoryPrimaryCardStyles: RecipeCategoryPrimaryCardStyleProp
     badgeWrapper: {},
     card: {
         gap: 6,
-        layerStyle: 'subtleOutline',
-        pb: { base: 3, xl: 4, '2xl': 5 },
-        px: { base: 3, xl: 4, '2xl': 6 },
-        pt: { base: 3, xl: 4, '2xl': 6 },
+        layerStyle: 'subtleOutlineHover',
+        pb: { '2xl': 5, base: 3, xl: 4 },
+        pt: { '2xl': 6, base: 3, xl: 4 },
+        px: { '2xl': 6, base: 3, xl: 4 },
+    },
+    categoryBadges: {
+        gap: 1,
     },
     description: {
         color: 'black',
@@ -25,9 +29,10 @@ export const recipeCategoryPrimaryCardStyles: RecipeCategoryPrimaryCardStyleProp
         lineHeight: '5',
     },
     meta: {
+        align: 'flex-end',
         gap: 2,
         justify: 'space-between',
-        wrap: 'wrap',
+        wrap: 'nowrap',
     },
     text: {
         gap: 2,

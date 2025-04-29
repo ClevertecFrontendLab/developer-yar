@@ -11,13 +11,13 @@ export const postsApiSlice = apiSlice
     .injectEndpoints({
         endpoints: (builder) => ({
             getPosts: builder.query<void, void>({
-                query: () => ({
-                    url: ApiEndpoints.POSTS,
-                    method: 'GET',
-                    apiGroupName: ApiGroupNames.POSTS,
-                    name: EndpointNames.GET_POSTS,
-                }),
                 providesTags: [Tags.POSTS],
+                query: () => ({
+                    apiGroupName: ApiGroupNames.POSTS,
+                    method: 'GET',
+                    name: EndpointNames.GET_POSTS,
+                    url: ApiEndpoints.POSTS,
+                }),
             }),
         }),
     });

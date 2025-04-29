@@ -1,15 +1,13 @@
 import { Button, Stack, Text } from '@chakra-ui/react';
-import { Component, ErrorInfo, ReactNode } from 'react';
+import { Component, ErrorInfo, PropsWithChildren, ReactNode } from 'react';
 
 import { errorBoundaryStyles as styles } from './error-boundary.styles';
 
-interface ErrorBoundaryProps {
-    children: ReactNode;
-}
+type ErrorBoundaryProps = PropsWithChildren;
 
-interface ErrorBoundaryState {
+type ErrorBoundaryState = {
     hasError: boolean;
-}
+};
 
 export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     constructor(props: ErrorBoundaryProps) {

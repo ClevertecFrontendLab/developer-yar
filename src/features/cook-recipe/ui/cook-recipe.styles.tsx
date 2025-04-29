@@ -3,9 +3,9 @@ import { ButtonProps } from '@chakra-ui/react';
 import { CookRecipeButtonVariant } from '../model/types';
 
 const baseButtonStyles: ButtonProps = {
-    borderWidth: '1px',
-    borderStyle: 'solid',
     borderRadius: 'md',
+    borderStyle: 'solid',
+    borderWidth: '1px',
     flexShrink: 0,
     fontWeight: 'semibold',
     lineHeight: '5',
@@ -29,8 +29,8 @@ export const cookRecipeButtonVariants: Record<CookRecipeButtonVariant, ButtonPro
         bgColor: 'white',
         borderColor: 'lime.600',
         color: 'lime.600',
-        fontSize: { base: 'xs', '2xl': 'sm' },
+        fontSize: { '2xl': 'sm', base: 'xs' },
         h: 8,
-        w: { base: '70px', '2xl': '87px' },
+        w: { '2xl': '87px', base: '70px' },
     },
 };

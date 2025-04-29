@@ -25,7 +25,7 @@ export const recipeListStyles: TheJuiciestStyleProps = {
         layerStyle: 'gridLayout',
     },
     sectionContainer: {
-        rowGap: { base: 4, '2xl': 6 },
+        rowGap: { '2xl': 6, base: 4 },
         templateAreas: {
             base: `"header"
                "recipes"
@@ -40,9 +40,9 @@ export const recipeListStyles: TheJuiciestStyleProps = {
         fontSize: 'md',
         fontWeight: 'semibold',
         gap: 2,
-        h: { base: 10, '2xl': 12 },
-        lineHeight: { base: '6', '2xl': 7 },
-        w: { base: '167px', '2xl': '197px' },
+        h: { '2xl': 12, base: 10 },
+        lineHeight: { '2xl': 7, base: '6' },
+        w: { '2xl': '197px', base: '167px' },
     },
     viewAllIcon: {
         color: 'black',
