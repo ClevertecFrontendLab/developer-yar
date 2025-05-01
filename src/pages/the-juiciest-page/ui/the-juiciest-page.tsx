@@ -1,4 +1,4 @@
-import { Stack } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { FC, useMemo } from 'react';
 
 import { useGetAllRecipesQuery } from '~/entities/recipe';
@@ -31,10 +31,10 @@ const TheJuiciestPage: FC = () => {
             <PageHero>
                 <PageTitle>Самое сочное</PageTitle>
             </PageHero>
-            <Stack {...styles.layout}>
+            <Flex {...styles.layout}>
                 <Recipes recipes={visibleRecipes} />
                 <RecipesByCategory />
-            </Stack>
+            </Flex>
         </>
     );
 };

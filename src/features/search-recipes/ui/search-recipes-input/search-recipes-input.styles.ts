@@ -1,17 +1,30 @@
 import type { FlexProps, IconButtonProps, IconProps, InputProps } from '@chakra-ui/react';
 
-type SearchRecipesStyleProps = {
+import { SearchResultStatus } from '../../model/types';
+
+type SearchRecipesInputStyleProps = {
     clearIcon: IconProps;
     clearIconWrapper: (isQueryNotLongEnough: boolean) => Omit<IconButtonProps, 'aria-label'>;
     iconWrapper: Omit<IconButtonProps, 'aria-label'>;
-    input: (isQueryNotEmpty: boolean, isQueryNotLongEnough: boolean) => InputProps;
+    input: (isQueryNotEmpty: boolean, searchResultStatus: SearchResultStatus) => InputProps;
     inputButtons: FlexProps;
     inputWrapper: FlexProps;
     searchIcon: IconProps;
     searchIconWrapper: (isQueryNotLongEnough: boolean) => Omit<IconButtonProps, 'aria-label'>;
 };
 
-export const searchRecipesStyles: SearchRecipesStyleProps = {
+const getOutlineColor = (status: SearchResultStatus) => {
+    switch (status) {
+        case 'success':
+            return 'lime.600';
+        case 'error':
+            return 'red.500';
+        default:
+            return 'blackAlpha.600';
+    }
+};
+
+export const searchRecipesInputStyles: SearchRecipesInputStyleProps = {
     clearIcon: {
         boxSize: 6,
         color: 'blackAlpha.500',
@@ -27,12 +40,12 @@ export const searchRecipesStyles: SearchRecipesStyleProps = {
         h: 'auto',
         minW: 'auto',
     },
-    input: (isQueryNotEmpty: boolean, isQueryNotLongEnough: boolean): InputProps => ({
+    input: (isQueryNotEmpty: boolean, searchResultStatus: SearchResultStatus): InputProps => ({
         _focus: {
             border: 'none',
             boxShadow: 'none',
-            outlineColor: isQueryNotLongEnough ? 'red.500' : 'blackAlpha.600',
-            outlineWidth: isQueryNotLongEnough ? '2px' : '1px',
+            outlineColor: getOutlineColor(searchResultStatus),
+            outlineWidth: searchResultStatus === 'error' ? '2px' : '1px',
         },
         _placeholder: { color: 'lime.800' },
         border: 'none',
@@ -43,8 +56,8 @@ export const searchRecipesStyles: SearchRecipesStyleProps = {
         fontSize: { base: 'sm', xl: 'lg' },
         fontWeight: 'normal',
         h: { base: 8, xl: 12 },
-        outlineColor: 'blackAlpha.600',
         outline: '1px solid',
+        outlineColor: 'blackAlpha.600',
         paddingInlineEnd: isQueryNotEmpty ? 8 : 16,
     }),
     inputButtons: {

@@ -2,19 +2,19 @@ import { extendTheme } from '@chakra-ui/react';
 
 const styles = {
     global: {
-        html: {
+        '*': {
             scrollbarColor:
                 'var(--chakra-colors-blackAlpha-300) var(--chakra-colors-blackAlpha-50)',
             scrollbarWidth: 'thin',
         },
-        'html::-webkit-scrollbar': {
+        '*::-webkit-scrollbar': {
             width: '2px',
         },
-        'html::-webkit-scrollbar-thumb': {
+        '*::-webkit-scrollbar-thumb': {
             backgroundColor: 'var(--chakra-colors-blackAlpha-300)',
             borderRadius: '0.5rem',
         },
-        'html::-webkit-scrollbar-track': {
+        '*::-webkit-scrollbar-track': {
             backgroundColor: 'var(--chakra-colors-blackAlpha-50)',
             borderRadius: '0.5rem',
         },
@@ -24,14 +24,18 @@ const styles = {
 const sizes = {
     headerBase: '4rem',
     headerXL: '5rem',
+    footer: '84px',
     maxContentWidth: '85rem',
     maxPageWidth: '120rem',
     minPageWidth: '20rem',
 };
 
 const pageLayout = {
+    display: 'flex',
+    flexDirection: 'column',
     gap: { base: 8, xl: 10 },
-    justify: 'center',
+    justifyContent: 'center',
+    flex: 1,
     pl: { base: 4, md: 5, xl: 0 },
     pr: { base: 4, md: 5, xl: 0 },
 };

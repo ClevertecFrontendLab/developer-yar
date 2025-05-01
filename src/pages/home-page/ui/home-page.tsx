@@ -1,4 +1,4 @@
-import { Box, Stack } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import { FC, useMemo } from 'react';
 
 import { useGetAllRecipesQuery } from '~/entities/recipe';
@@ -40,7 +40,7 @@ const HomePage: FC = () => {
                 </PageHero>
             </Box>
 
-            <Stack {...styles.layout}>
+            <Flex {...styles.layout}>
                 {isSearching ? (
                     <FoundRecipes recipes={foundRecipes} searchQuery={searchQuery} />
                 ) : isFullFiltering || isFilteringAllergens ? (
@@ -50,10 +50,10 @@ const HomePage: FC = () => {
                         <NewRecipes recipes={recipes} />
                         <TheJuiciest recipes={recipes} />
                         <FoodBlog />
-                        <RecipesByCategory />
                     </>
                 )}
-            </Stack>
+                <RecipesByCategory />
+            </Flex>
         </>
     );
 };

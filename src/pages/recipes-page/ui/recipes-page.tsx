@@ -1,4 +1,4 @@
-import { Stack } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { FC, useMemo } from 'react';
 import { useParams } from 'react-router';
 
@@ -64,14 +64,14 @@ const RecipesPage: FC = () => {
                 </PageDescription>
             </PageHero>
 
-            <Stack {...styles.layout}>
+            <Flex {...styles.layout}>
                 {isSearching ? (
                     <FoundRecipes recipes={foundRecipes} searchQuery={searchQuery} />
                 ) : (
                     <CategoryTabs recipes={visibleRecipes} />
                 )}
                 <RecipesByCategory />
-            </Stack>
+            </Flex>
         </>
     );
 };

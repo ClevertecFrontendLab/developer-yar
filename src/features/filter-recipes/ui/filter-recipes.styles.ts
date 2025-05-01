@@ -14,13 +14,11 @@ export type FilterRecipesStyleProps = {
     filterHeaderText: TextProps;
     filterIcon: IconProps;
     findRecipeButton: (isDisabled: boolean) => ButtonProps;
-    selectedItemTag: CenterProps;
-    selectedTag: CenterProps;
 };
 
 export const filterRecipesStyles: FilterRecipesStyleProps = {
     clearButton: {
-        bgColor: 'blackAlpha.100',
+        bgColor: 'whiteAlpha.100',
         borderColor: 'blackAlpha.600',
         borderRadius: 'md',
         borderStyle: 'solid',
@@ -47,7 +45,6 @@ export const filterRecipesStyles: FilterRecipesStyleProps = {
         pl: { base: 4, xl: 8 },
         pr: { base: 5, xl: 8 },
         py: { base: 4, xl: 8 },
-        zIndex: 'tooltip',
     },
     dropdownButton: {
         bgColor: 'transparent',
@@ -111,16 +108,4 @@ export const filterRecipesStyles: FilterRecipesStyleProps = {
         px: { base: 3, xl: 6 },
         w: '172px',
     }),
-    selectedItemTag: {
-        alignItems: 'center',
-        bgColor: 'blackAlpha.200',
-        borderRadius: 'full',
-        display: 'flex',
-        px: 2,
-        py: 1,
-    },
-    selectedTag: {
-        alignItems: 'center',
-        display: 'flex',
-    },
 };

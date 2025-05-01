@@ -1,4 +1,4 @@
-import { Box, Stack } from '@chakra-ui/react';
+import { Box, Flex, Stack } from '@chakra-ui/react';
 import { FC } from 'react';
 import { useParams } from 'react-router';
 
@@ -39,7 +39,7 @@ const RecipePage: FC = () => {
     if (isRecipesSuccess && isRecipeSuccess) {
         return (
             <Stack {...styles.pageContainer}>
-                <Stack {...styles.layout}>
+                <Flex {...styles.layout}>
                     <RecipeDetails
                         bookmarks={recipe.bookmarks}
                         category={recipe.category}
@@ -61,7 +61,7 @@ const RecipePage: FC = () => {
                     </Stack>
 
                     <NewRecipes recipes={recipes} />
-                </Stack>
+                </Flex>
             </Stack>
         );
     }

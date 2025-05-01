@@ -25,10 +25,10 @@ export const appLayoutStyles: AppLayoutStyleProps = {
         mr: { xl: '72px' },
     },
     headerWrapper: {
-        pos: { base: 'sticky', xl: 'static' },
-        top: typeof Cypress !== 'undefined' ? 'auto' : 0,
+        pos: { base: 'fixed', xl: 'absolute' },
+        top: 0,
         w: 'full',
-        zIndex: 'tooltip',
+        zIndex: 'overlay',
     },
     infoPanelWrapper: {
         mt: 'auto',
@@ -46,7 +46,8 @@ export const appLayoutStyles: AppLayoutStyleProps = {
     mainGrid: {
         margin: 'auto',
         maxW: 'var(--chakra-sizes-maxPageWidth)',
-        pb: { base: '84px', xl: 0 },
+        pb: { base: 'var(--chakra-sizes-footer)', xl: 0 },
+        pt: { base: 'var(--chakra-sizes-headerBase)', xl: 'var(--chakra-sizes-headerXL)' },
         templateColumns: { base: '1fr', xl: '256px 1fr 208px' },
         w: 'full',
     },
