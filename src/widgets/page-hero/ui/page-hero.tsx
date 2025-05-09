@@ -1,9 +1,7 @@
-import { Flex, Stack } from '@chakra-ui/react';
+import { Stack, Text } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
 
-import { ExcludeAllergens } from '~/features/exclude-allergens';
-import { FilterRecipes } from '~/features/filter-recipes';
-import { SearchRecipes } from '~/features/search-recipes';
+import { RecipeSearch, useSearchResultStatus } from '~/features/recipe-search';
 
 import { pageHeroStyles as styles } from './page-hero.styles';
 
@@ -11,15 +9,19 @@ type PageHeroProps = {
     children: ReactNode | ReactNode[];
 };
 
-export const PageHero: FC<PageHeroProps> = ({ children }) => (
-    <Stack {...styles.pageHeroContainer}>
-        <Stack {...styles.textContainer}>{children}</Stack>
-        <Stack {...styles.featuresWrapper}>
-            <Flex {...styles.filterAndSearchWrapper}>
-                <FilterRecipes />
-                <SearchRecipes />
-            </Flex>
-            <ExcludeAllergens />
+export const PageHero: FC<PageHeroProps> = ({ children }) => {
+    const { status, isRecipeQueryActive } = useSearchResultStatus();
+
+    return (
+        <Stack {...styles.pageHeroContainer(isRecipeQueryActive)}>
+            {status === 'error' ? (
+                <Text {...styles.errorMessage}>
+                    По вашему запросу ничего не найдено. Попробуйте другой запрос
+                </Text>
+            ) : (
+                <Stack {...styles.textContainer}>{children}</Stack>
+            )}
+            <RecipeSearch />
         </Stack>
-    </Stack>
-);
+    );
+};

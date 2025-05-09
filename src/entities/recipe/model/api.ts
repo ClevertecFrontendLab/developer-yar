@@ -1,29 +1,35 @@
-import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { mockRecipes } from '../consts/mock-recipes';
-import { Recipe } from './types';
+import { queryWithParams } from '~/shared/lib';
 
-export const recipeApi = createApi({
-    baseQuery: fakeBaseQuery(),
+import {
+    ApiRecipe,
+    ApiRecipeItem,
+    GetAllRecipesQueryParams,
+    GetRecipesBySubcategoryIdArgs,
+} from './types';
+
+export const recipesApi = createApi({
+    baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_DATA_API_URL }),
     endpoints: (builder) => ({
-        getAllRecipes: builder.query<Recipe[], void>({
-            queryFn: async () => ({ data: mockRecipes }),
+        getAllRecipes: builder.query<ApiRecipe, GetAllRecipesQueryParams>({
+            query: (params: GetAllRecipesQueryParams) =>
+                queryWithParams({ params, url: '/recipe' }),
         }),
-        getRecipeById: builder.query<Recipe, string>({
-            queryFn: async (id: string) => {
-                const recipe = mockRecipes.find((recipe: Recipe) => recipe.id === id);
-                if (!recipe) {
-                    return { error: { status: 404, statusText: 'Recipe not found' } };
-                }
-                return { data: recipe };
-            },
+        getRecipeById: builder.query<ApiRecipeItem, string>({
+            query: (id: string) => `/recipe/${id}`,
+        }),
+        getRecipesBySubcategoryId: builder.query<ApiRecipe, GetRecipesBySubcategoryIdArgs>({
+            query: ({ id, params }: GetRecipesBySubcategoryIdArgs) =>
+                queryWithParams({ params, url: `/recipe/category/${id}` }),
         }),
     }),
-    reducerPath: 'recipeApi',
+    reducerPath: 'recipesApi',
 });
 
 export const {
     useGetAllRecipesQuery,
+    useGetRecipesBySubcategoryIdQuery,
     useGetRecipeByIdQuery,
-    endpoints: { getRecipeById },
-} = recipeApi;
+    endpoints: { getAllRecipes, getRecipesBySubcategoryId, getRecipeById },
+} = recipesApi;

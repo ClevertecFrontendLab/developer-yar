@@ -25,7 +25,7 @@ export const headerStyles: HeaderStyleProps = {
         bg: 'transparent',
         boxSize: 12,
         cursor: 'pointer',
-        zIndex: 'tooltip',
+        zIndex: 'docked',
     },
     headerContainer: (withMenu) => ({
         bg: { base: withMenu ? 'white' : 'lime.50', xl: 'lime.50' },
@@ -60,9 +60,8 @@ export const headerStyles: HeaderStyleProps = {
         bg: 'blackAlpha.300',
         bottom: 0,
         h: 'calc(100vh - var(--chakra-sizes-headerBase))',
-        pos: 'absolute',
+        pos: 'fixed',
         w: 'full',
-        zIndex: '-1',
     },
     profileBox: {
         ml: 'auto',
@@ -88,6 +87,5 @@ export const headerStyles: HeaderStyleProps = {
         },
         top: 'var(--chakra-sizes-headerBase)',
         w: 'full',
-        zIndex: 'tooltip',
     },
 };

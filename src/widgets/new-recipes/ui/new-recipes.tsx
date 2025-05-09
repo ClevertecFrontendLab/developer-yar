@@ -1,12 +1,14 @@
 import 'swiper/css';
 
 import { Box, Stack } from '@chakra-ui/react';
-import { FC, memo, useMemo } from 'react';
+import { FC, useCallback } from 'react';
 import { useNavigate } from 'react-router';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { filterTopNewest, Recipe } from '~/entities/recipe';
+import { useRecipes } from '~/entities/recipe';
+import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
 import { getDisplayForBreakpoints } from '~/shared/lib';
+import { useAppStatusSync } from '~/shared/model';
 import { SectionTitle } from '~/shared/ui/section-title';
 
 import { swiperConfig } from '../config/swiper.config';
@@ -16,44 +18,53 @@ import { RecipeSliderCard } from './recipe-slider-card';
 
 const shownFromXlBreakpoint = getDisplayForBreakpoints({ from: 'xl' });
 
-type NewRecipesProps = {
-    recipes: Recipe[];
-};
-
-export const NewRecipes: FC<NewRecipesProps> = memo(({ recipes }) => {
+export const NewRecipes: FC = () => {
     const navigate = useNavigate();
 
-    const handleClick = (link: string) => navigate(link);
+    const handleClick = useCallback((link: string) => () => navigate(link), [navigate]);
 
-    const newRecipes = useMemo(() => filterTopNewest(recipes), [recipes]);
+    const {
+        data: recipes,
+        isLoading: isRecipesLoading,
+        isError: isRecipesError,
+        isSuccess: isRecipesSuccess,
+    } = useRecipes({ limit: 10, sortBy: 'createdAt', sortOrder: 'DESC' });
 
-    return (
-        <Stack {...styles.newRecipesContainer}>
-            <SectionTitle>Новые рецепты</SectionTitle>
-            <Box {...shownFromXlBreakpoint}>
-                <Arrows />
-            </Box>
-            <Box>
-                <Swiper {...swiperConfig} data-test-id='carousel'>
-                    {newRecipes.map((recipe, index) => {
-                        const link = `${recipe.category[0]}/${recipe.subcategory[0]}/${recipe.id}`;
-                        return (
+    useAppStatusSync(isRecipesLoading, isRecipesError);
+
+    if (isRecipesSuccess && recipes)
+        return (
+            <Stack {...styles.newRecipesContainer}>
+                <SectionTitle>Новые рецепты</SectionTitle>
+                <Box {...shownFromXlBreakpoint}>
+                    <Arrows />
+                </Box>
+                <Box>
+                    <Swiper {...swiperConfig} data-test-id={DATA_TEST_ATTRIBUTES.CAROUSEL}>
+                        {recipes.map((recipe, index) => (
                             <SwiperSlide
                                 key={recipe.id}
                                 style={{ ...styles.swiperSlide }}
-                                onClick={() => handleClick(link)}
+                                onClick={handleClick(recipe.url)}
                             >
                                 <Box
                                     {...styles.recipeCardContainer}
-                                    data-test-id={`carousel-card-${index}`}
+                                    data-test-id={`${DATA_TEST_ATTRIBUTES.CAROUSEL_CARD}-${index}`}
                                 >
-                                    <RecipeSliderCard {...recipe} />
+                                    <RecipeSliderCard
+                                        bookmarks={recipe.bookmarks}
+                                        categories={recipe.categories}
+                                        description={recipe.description}
+                                        image={recipe.image}
+                                        likes={recipe.likes}
+                                        title={recipe.title}
+                                    />
                                 </Box>
                             </SwiperSlide>
-                        );
-                    })}
-                </Swiper>
-            </Box>
-        </Stack>
-    );
-});
+                        ))}
+                    </Swiper>
+                </Box>
+            </Stack>
+        );
+    else return null;
+};

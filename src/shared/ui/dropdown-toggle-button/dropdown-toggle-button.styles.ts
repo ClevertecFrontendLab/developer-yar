@@ -18,7 +18,6 @@ export const dropdownToggleButtonStyles: DropdownToggleButtonStyleProps = {
         gap: 2,
         h: 'auto',
         justifyContent: 'space-between',
-        minH: 10,
         outline: 'none',
         px: 3,
         py: '7px',

@@ -2,25 +2,23 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import { breadcrumbsReducer, navigationApi } from '~/entities/navigation';
 import { postsApi } from '~/entities/post';
-import { recipeApi } from '~/entities/recipe';
-import { allergensReducer } from '~/features/exclude-allergens';
-import { filtersReducer } from '~/features/filter-recipes';
-import { searchReducer } from '~/features/search-recipes';
+import { recipesApi } from '~/entities/recipe';
+import { recipeSearchReducer } from '~/features/recipe-search';
+import { appStatusReducer } from '~/shared/model';
 
 export const store = configureStore({
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(
             navigationApi.middleware,
-            recipeApi.middleware,
+            recipesApi.middleware,
             postsApi.middleware,
         ),
     reducer: {
         [navigationApi.reducerPath]: navigationApi.reducer,
-        [recipeApi.reducerPath]: recipeApi.reducer,
+        [recipesApi.reducerPath]: recipesApi.reducer,
         [postsApi.reducerPath]: postsApi.reducer,
-        allergens: allergensReducer,
+        appStatus: appStatusReducer,
         breadcrumbs: breadcrumbsReducer,
-        filters: filtersReducer,
-        search: searchReducer,
+        recipeSearch: recipeSearchReducer,
     },
 });

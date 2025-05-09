@@ -21,15 +21,14 @@ import { IngredientRow } from './ingredient-row';
 
 type IngredientsProps = {
     ingredients: Ingredient[];
+    recipePortions: number;
 };
 
-export const Ingredients: FC<IngredientsProps> = memo(({ ingredients }) => {
-    const [portions, setPortions] = useState(1);
+export const Ingredients: FC<IngredientsProps> = memo(({ ingredients, recipePortions }) => {
+    const [currentPortions, setCurrentPortions] = useState(recipePortions);
 
     const handlePortionChange = (_: string, valueAsNumber: number): void => {
-        if (!isNaN(valueAsNumber) && valueAsNumber >= 1 && valueAsNumber !== portions) {
-            setPortions(valueAsNumber);
-        }
+        setCurrentPortions(valueAsNumber);
     };
 
     return (
@@ -42,11 +41,9 @@ export const Ingredients: FC<IngredientsProps> = memo(({ ingredients }) => {
                             <Flex {...styles.portionsFlexContainer}>
                                 Порций
                                 <NumberInput
-                                    defaultValue={1}
                                     max={10}
                                     min={1}
-                                    step={0.25}
-                                    value={portions}
+                                    value={currentPortions}
                                     onChange={handlePortionChange}
                                     {...styles.portionsInput}
                                 >
@@ -65,9 +62,10 @@ export const Ingredients: FC<IngredientsProps> = memo(({ ingredients }) => {
                     {ingredients.map((ingredient, index) => (
                         <IngredientRow
                             key={ingredient.title}
+                            currentPortions={currentPortions}
                             dataTestId={`ingredient-quantity-${index}`}
                             ingredient={ingredient}
-                            portions={portions}
+                            recipePortions={recipePortions}
                             variant={index % 2 === 1 ? 'white' : 'gray'}
                         />
                     ))}

@@ -1,13 +1,10 @@
 export { useBreadcrumbs } from './hooks/use-breadcrumbs';
-export { getCategories } from './lib/get-categories';
-export {
-    getNavigationMenu,
-    getNavigationSubmenu,
-    navigationApi,
-    useGetNavigationMenuQuery,
-    useGetNavigationSubmenuQuery,
-} from './model/api';
+export { useCategoryList } from './hooks/use-category-list';
+export { useSubcategoriesByCategory } from './hooks/use-subcategories-by-category';
+export { getCategoryListQuery } from './lib/get-category-list';
+export { getSubcategoriesByCategoryQuery } from './lib/get-subcategories-by-category';
+export { navigationApi } from './model/api';
 export { breadcrumbsReducer, setBreadcrumbs } from './model/slice';
-export type { Breadcrumb, CategoryData, Menu, Submenu } from './model/types';
+export type { Breadcrumb, Category, Subcategory } from './model/types';
 export { Breadcrumbs } from './ui/breadcrumbs';
 export { MenuTree } from './ui/menu-tree';

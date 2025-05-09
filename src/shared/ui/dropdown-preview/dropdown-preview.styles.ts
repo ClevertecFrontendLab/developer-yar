@@ -13,5 +13,9 @@ export const DropdownPreviewStyles: DropdownPreviewStyleProps = {
         lineHeight: 6,
         textAlign: 'center',
     },
-    tags: {},
+    tags: {
+        alignItems: 'center',
+        display: 'flex',
+        minH: 6,
+    },
 };

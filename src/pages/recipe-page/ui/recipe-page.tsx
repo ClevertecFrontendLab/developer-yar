@@ -2,7 +2,8 @@ import { Box, Flex, Stack } from '@chakra-ui/react';
 import { FC } from 'react';
 import { useParams } from 'react-router';
 
-import { useGetAllRecipesQuery, useGetRecipeByIdQuery } from '~/entities/recipe';
+import { useRecipeById } from '~/entities/recipe';
+import { useAppStatusSync } from '~/shared/model';
 import { NewRecipes } from '~/widgets/new-recipes';
 
 import { CookingSteps } from './cooking-steps';
@@ -16,33 +17,21 @@ const RecipePage: FC = () => {
     const { id } = useParams();
 
     const {
-        data: recipes = [],
-        isSuccess: isRecipesSuccess,
-        isLoading: isRecipesLoading,
-        isError: isRecipesError,
-    } = useGetAllRecipesQuery();
-    const {
         data: recipe,
         isSuccess: isRecipeSuccess,
         isLoading: isRecipeLoading,
         isError: isRecipeError,
-    } = useGetRecipeByIdQuery(id!);
+    } = useRecipeById(id);
 
-    if (isRecipesLoading || isRecipeLoading) {
-        return <div>Загрузка...</div>;
-    }
+    useAppStatusSync(isRecipeLoading, isRecipeError);
 
-    if (isRecipesError || isRecipeError) {
-        return <div>Ошибка загрузки данных</div>;
-    }
-
-    if (isRecipesSuccess && isRecipeSuccess) {
+    if (isRecipeSuccess && recipe) {
         return (
             <Stack {...styles.pageContainer}>
                 <Flex {...styles.layout}>
                     <RecipeDetails
                         bookmarks={recipe.bookmarks}
-                        category={recipe.category}
+                        categories={recipe.categories}
                         description={recipe.description}
                         image={recipe.image}
                         likes={recipe.likes}
@@ -55,18 +44,19 @@ const RecipePage: FC = () => {
                     </Box>
 
                     <Stack {...styles.recipeContentWrapper}>
-                        <Ingredients ingredients={recipe.ingredients} />
+                        <Ingredients
+                            ingredients={recipe.ingredients}
+                            recipePortions={recipe.portions}
+                        />
                         <CookingSteps steps={recipe.steps} />
                         <RecipeAuthor author={recipe.author} />
                     </Stack>
 
-                    <NewRecipes recipes={recipes} />
+                    <NewRecipes />
                 </Flex>
             </Stack>
         );
-    }
-
-    return <div>Нет данных для отображения</div>;
+    } else return null;
 };
 
 export default RecipePage;
