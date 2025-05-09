@@ -10,6 +10,9 @@ export const homePageStyles: HomePageStyleProps = {
         layerStyle: 'pageLayout',
     },
     pageHeroBox: {
-        pb: { xl: 6 },
+        margin: 'auto',
+        maxW: { '2xl': '898px', base: 'full', md: '480px', xl: '578px' },
+        pb: { base: 4, xl: 6 },
+        w: 'full',
     },
 };

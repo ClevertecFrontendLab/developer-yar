@@ -1,79 +1,78 @@
-import { Flex } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import { FC, useMemo } from 'react';
 import { useParams } from 'react-router';
 
-import { filterRecipesByCategoryAndSubcategory, useGetAllRecipesQuery } from '~/entities/recipe';
-import { useRecipesWithoutAllergens } from '~/features/exclude-allergens';
-import { useFilteredRecipes } from '~/features/filter-recipes';
-import { useFoundRecipes } from '~/features/search-recipes';
+import { useCategoryList, useSubcategoriesByCategory } from '~/entities/navigation';
+import { useFoundRecipes } from '~/features/recipe-search';
+import { useAppStatusSync } from '~/shared/model';
 import { PageDescription } from '~/shared/ui/page-description';
 import { PageTitle } from '~/shared/ui/page-title';
 import { CategoryTabs } from '~/widgets/category-tabs';
 import { FoundRecipes } from '~/widgets/found-recipes';
 import { PageHero } from '~/widgets/page-hero';
-import { RecipesByCategory } from '~/widgets/recipes-by-category';
+import { Recipes } from '~/widgets/recipes';
+import { RecipesByRandomCategory } from '~/widgets/recipes-by-random-category';
 
 import { recipesPageStyles as styles } from './recipes-page.styles';
 
 const RecipesPage: FC = () => {
-    const { data: allRecipes = [], isLoading, isError } = useGetAllRecipesQuery();
-    const { category, subcategory } = useParams<{ category: string; subcategory: string }>();
-
-    const categoryFilteredRecipes = useMemo(() => {
-        if (!category || !subcategory) return allRecipes;
-        return filterRecipesByCategoryAndSubcategory(allRecipes, category, subcategory);
-    }, [allRecipes, category, subcategory]);
-
-    const { recipes: recipesWithoutAllergens, isFilteringAllergens } =
-        useRecipesWithoutAllergens(categoryFilteredRecipes);
-    const { recipes: filteredRecipes, isFullFiltering } =
-        useFilteredRecipes(categoryFilteredRecipes);
+    const { category } = useParams();
     const {
-        recipes: foundRecipes,
-        isSearching,
-        searchQuery,
-    } = useFoundRecipes(categoryFilteredRecipes);
+        data: categories,
+        isLoading: isCategoriesLoading,
+        isError: isCategoriesError,
+        isSuccess: isCategoriesSuccess,
+    } = useCategoryList();
 
-    const visibleRecipes = useMemo(() => {
-        if (isFullFiltering) return filteredRecipes;
-        if (isFilteringAllergens) return recipesWithoutAllergens;
-        return categoryFilteredRecipes;
-    }, [
-        isFullFiltering,
-        isFilteringAllergens,
-        filteredRecipes,
-        recipesWithoutAllergens,
-        categoryFilteredRecipes,
-    ]);
-
-    if (isLoading) {
-        return <div>Загрузка...</div>;
-    }
-
-    if (isError) {
-        return <div>Ошибка загрузки данных</div>;
-    }
-
-    return (
-        <>
-            <PageHero>
-                <PageTitle>Веганская кухня</PageTitle>
-                <PageDescription>
-                    Интересны не только убеждённым вегетарианцам, но и тем, кто хочет попробовать
-                    вегетарианскую диету и готовить вкусные вегетарианские блюда.
-                </PageDescription>
-            </PageHero>
-
-            <Flex {...styles.layout}>
-                {isSearching ? (
-                    <FoundRecipes recipes={foundRecipes} searchQuery={searchQuery} />
-                ) : (
-                    <CategoryTabs recipes={visibleRecipes} />
-                )}
-                <RecipesByCategory />
-            </Flex>
-        </>
+    const currentCategory = useMemo(
+        () => categories.find(({ slug }) => slug === category),
+        [categories, category],
     );
+
+    const {
+        data: subcategories,
+        isLoading: isSubcategoriesLoading,
+        isError: isSubcategoriesError,
+        isSuccess: isSubcategoriesSuccess,
+    } = useSubcategoriesByCategory(currentCategory?.id);
+
+    const { recipes, isRecipesLoading, isRecipesError, isRecipesSuccess, searchQuery, mode } =
+        useFoundRecipes();
+
+    const isLoading = isCategoriesLoading || isSubcategoriesLoading || isRecipesLoading;
+    const isError = isCategoriesError || isSubcategoriesError || isRecipesError;
+
+    useAppStatusSync(isLoading, isError);
+
+    if (
+        isCategoriesSuccess &&
+        isSubcategoriesSuccess &&
+        isRecipesSuccess &&
+        currentCategory &&
+        subcategories
+    )
+        return (
+            <>
+                <Box {...styles.pageHeroBox}>
+                    <PageHero>
+                        <PageTitle>{currentCategory.title}</PageTitle>
+                        <PageDescription>{currentCategory.description}</PageDescription>
+                    </PageHero>
+                </Box>
+
+                <Flex {...styles.layout}>
+                    {mode === 'search' ? (
+                        <FoundRecipes recipes={recipes} searchQuery={searchQuery} />
+                    ) : mode === 'filter' ? (
+                        <Recipes recipes={recipes} />
+                    ) : (
+                        <CategoryTabs subcategories={subcategories} />
+                    )}
+                    <RecipesByRandomCategory />
+                </Flex>
+            </>
+        );
+    else return null;
 };
 
 export default RecipesPage;

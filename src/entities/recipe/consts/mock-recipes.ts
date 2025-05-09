@@ -49,8 +49,9 @@ export const mockRecipes: Recipe[] = [
             },
         ],
         subcategory: ['poultry-dish'],
-        time: '40 минут',
+        time: 40,
         title: 'Лапша с курицей и шафраном',
+        views: 0,
     },
     {
         author: mockRecipeAuthor,
@@ -59,6 +60,7 @@ export const mockRecipes: Recipe[] = [
         date: '2025-03-28T00:00:00Z',
         description:
             'Картошка, тушенная с болгарским перцем, фасолью, морковью и луком, - вариант сытного блюда на каждый день. Фасоль в данном случае заменяет мясо, делая рагу сытным и питательным. Чтобы сократить время приготовления, возьмём консервированную фасоль. Блюдо хоть и простое, но в полной мере наполнено ароматами и имеет выразительный вкус за счёт добавления томатной пасты.',
+        garnish: 'potatoes',
         id: '0',
         image: image1,
         ingredients: [
@@ -73,7 +75,6 @@ export const mockRecipes: Recipe[] = [
         meat: '',
         nutritionValue: { calories: 250, carbohydrates: 40, fats: 8, proteins: 5 },
         portions: 2,
-        side: 'potatoes',
         steps: [
             {
                 description: 'Нарезать картошку и перец.',
@@ -97,8 +98,9 @@ export const mockRecipes: Recipe[] = [
             },
         ],
         subcategory: ['snacks', 'vegetables'],
-        time: '40 минут',
+        time: 40,
         title: 'Картошка, тушенная с болгарским перцем и фасолью в томатном соусе',
+        views: 0,
     },
     {
         author: mockRecipeAuthor,
@@ -107,6 +109,7 @@ export const mockRecipes: Recipe[] = [
         date: '2024-02-20T00:00:00Z',
         description:
             'Рекомендую всем приготовить постное блюдо из картофеля и грибов. Готовится это блюдо без яиц, без мяса и без сыра, из самых простых ингредиентов, а получается очень вкусно и сытно. Постный рецепт картофельных рулетиков с грибами, в томатном соусе, - на обед, ужин и даже на праздничный стол!',
+        garnish: 'potatoes',
         id: '2',
         image: image2,
         ingredients: [
@@ -118,7 +121,6 @@ export const mockRecipes: Recipe[] = [
         likes: 1152,
         nutritionValue: { calories: 180, carbohydrates: 28, fats: 6, proteins: 4 },
         portions: 2,
-        side: 'potatoes',
         steps: [
             {
                 description: 'Отварить картошку и сделать пюре.',
@@ -137,8 +139,9 @@ export const mockRecipes: Recipe[] = [
             },
         ],
         subcategory: ['snacks', 'warm-snacks'],
-        time: '30 минут',
+        time: 30,
         title: 'Картофельные рулетики с грибами',
+        views: 0,
     },
     {
         author: mockRecipeAuthor,
@@ -176,8 +179,9 @@ export const mockRecipes: Recipe[] = [
             },
         ],
         subcategory: ['second-dish', 'vegetables', 'italian', 'snacks'],
-        time: '1 час',
+        time: 1,
         title: 'Овощная лазанья из лаваша',
+        views: 0,
     },
     {
         author: mockRecipeAuthor,
@@ -215,8 +219,9 @@ export const mockRecipes: Recipe[] = [
             },
         ],
         subcategory: ['second-dish', 'poultry-dish'],
-        time: '50 минут',
+        time: 50,
         title: 'Тефтели из булгура и чечевицы, запечённые в томатном соусе',
+        views: 0,
     },
     {
         author: mockRecipeAuthor,
@@ -225,6 +230,7 @@ export const mockRecipes: Recipe[] = [
         date: '2024-03-01T00:00:00Z',
         description:
             'Такая картошечка украсит любой семейный обед! Все будут в полном восторге, очень вкусно! Аромат чеснока, хрустящая корочка на картошечке - просто объедение! Отличная идея для обеда или ужина, готовится просто!',
+        garnish: 'potatoes',
         id: '5',
         image: image5,
         ingredients: [
@@ -236,7 +242,6 @@ export const mockRecipes: Recipe[] = [
         likes: 342,
         nutritionValue: { calories: 220, carbohydrates: 35, fats: 7, proteins: 4 },
         portions: 2,
-        side: 'potatoes',
         steps: [
             {
                 description: 'Очистить и нарезать картошку.',
@@ -255,8 +260,9 @@ export const mockRecipes: Recipe[] = [
             },
         ],
         subcategory: ['side-dishes', 'second-dish', 'vegetables'],
-        time: '30 минут',
+        time: 30,
         title: 'Чесночная картошка',
+        views: 0,
     },
     {
         author: mockRecipeAuthor,
@@ -293,8 +299,9 @@ export const mockRecipes: Recipe[] = [
             },
         ],
         subcategory: ['second-dish', 'snacks'],
-        time: '35 минут',
+        time: 35,
         title: 'Капустные котлеты',
+        views: 0,
     },
     {
         author: mockRecipeAuthor,
@@ -333,8 +340,9 @@ export const mockRecipes: Recipe[] = [
             },
         ],
         subcategory: ['side-dishes', 'vegetables', 'snacks'],
-        time: '1 час',
+        time: 1,
         title: 'Овощное рагу',
+        views: 0,
     },
     {
         author: mockRecipeAuthor,
@@ -352,6 +360,7 @@ export const mockRecipes: Recipe[] = [
         ],
         likes: 80,
         nutritionValue: { calories: 150, carbohydrates: 20, fats: 6, proteins: 4 },
+        portions: 0,
         steps: [
             {
                 description: 'Обжарить овощи на гриле.',
@@ -365,8 +374,9 @@ export const mockRecipes: Recipe[] = [
             },
         ],
         subcategory: ['warm-salads'],
-        time: '25 минут',
+        time: 25,
         title: 'Гриль-салат из куриного мяса и капусты',
+        views: 0,
     },
     {
         author: mockRecipeAuthor,
@@ -385,6 +395,7 @@ export const mockRecipes: Recipe[] = [
         ],
         likes: 120,
         nutritionValue: { calories: 230, carbohydrates: 10, fats: 10, proteins: 25 },
+        portions: 0,
         steps: [
             {
                 description: 'Подготавливаем все необходимые продукты.',
@@ -416,7 +427,8 @@ export const mockRecipes: Recipe[] = [
             },
         ],
         subcategory: ['poultry'],
-        time: '15 минут',
+        time: 15,
         title: 'Жареная курица с пекинской капустой и соевым соусом',
+        views: 0,
     },
 ];

@@ -6,7 +6,7 @@ export function assertParamsExist(
 ): asserts params is Record<string, string> {
     for (const key of keys) {
         if (!params[key]) {
-            throw new Response(`The "${key}" parameter is not provided`, { status: 400 });
+            throw new Error(`The "${key}" parameter is not provided`);
         }
     }
 }
