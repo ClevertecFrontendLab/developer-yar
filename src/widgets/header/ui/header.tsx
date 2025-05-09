@@ -5,7 +5,7 @@ import { FC } from 'react';
 import { Breadcrumbs, MenuTree } from '~/entities/navigation';
 import { UserCard, UserStats } from '~/entities/user';
 import { LogOut } from '~/features/log-out';
-import { mockCurrentUser } from '~/shared/consts';
+import { DATA_TEST_ATTRIBUTES, mockCurrentUser } from '~/shared/consts';
 import { getDisplayForBreakpoints, useToggleMenu } from '~/shared/lib';
 import { InfoPanel } from '~/shared/ui/info-panel';
 import { Logotype } from '~/shared/ui/logotype';
@@ -20,7 +20,11 @@ export const Header: FC = () => {
     const { isOpen, onClose, onToggle } = useToggleMenu();
 
     return (
-        <Box as='header' data-test-id='header' {...styles.headerContainer(isOpen)}>
+        <Box
+            as='header'
+            data-test-id={DATA_TEST_ATTRIBUTES.HEADER}
+            {...styles.headerContainer(isOpen)}
+        >
             <Flex {...styles.headerContent}>
                 <Box {...styles.logoBox}>
                     <Logotype />
@@ -41,7 +45,11 @@ export const Header: FC = () => {
                 <Box {...shownToLgBreakpoint}>
                     <IconButton
                         aria-label='Navigation menu'
-                        data-test-id={isOpen ? 'close-icon' : 'hamburger-icon'}
+                        data-test-id={
+                            isOpen
+                                ? DATA_TEST_ATTRIBUTES.CLOSE_ICON
+                                : DATA_TEST_ATTRIBUTES.HAMBURGER_ICON
+                        }
                         icon={isOpen ? <CloseIcon boxSize={3} /> : <HamburgerIcon boxSize={6} />}
                         onClick={onToggle}
                         {...styles.burgerButton}

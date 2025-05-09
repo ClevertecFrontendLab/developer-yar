@@ -1,5 +1,5 @@
 import { Avatar, Grid, GridItem, Text } from '@chakra-ui/react';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 
 import { userCardStyles as styles } from './index.styles';
 
@@ -9,7 +9,7 @@ type UserCardProps = {
     username: string;
 };
 
-export const UserCard: FC<UserCardProps> = ({ avatar, fullName, username }) => (
+export const UserCard: FC<UserCardProps> = memo(({ avatar, fullName, username }) => (
     <Grid {...styles.container}>
         <GridItem {...styles.avatarBox}>
             <Avatar name={fullName} src={avatar} {...styles.avatar} />
@@ -25,4 +25,4 @@ export const UserCard: FC<UserCardProps> = ({ avatar, fullName, username }) => (
             </Text>
         </GridItem>
     </Grid>
-);
+));

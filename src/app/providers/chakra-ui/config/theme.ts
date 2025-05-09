@@ -1,5 +1,7 @@
 import { extendTheme } from '@chakra-ui/react';
 
+import { componentsWithDefaultStyles } from './reset';
+
 const styles = {
     global: {
         '*': {
@@ -22,20 +24,19 @@ const styles = {
 };
 
 const sizes = {
+    footer: '84px',
     headerBase: '4rem',
     headerXL: '5rem',
-    footer: '84px',
     maxContentWidth: '85rem',
     maxPageWidth: '120rem',
     minPageWidth: '20rem',
 };
 
 const pageLayout = {
-    display: 'flex',
     flexDirection: 'column',
     gap: { base: 8, xl: 10 },
     justifyContent: 'center',
-    flex: 1,
+
     pl: { base: 4, md: 5, xl: 0 },
     pr: { base: 4, md: 5, xl: 0 },
 };
@@ -93,6 +94,9 @@ const breakpoints = {
 const theme = extendTheme({
     breakpoints,
     colors,
+    components: {
+        ...componentsWithDefaultStyles,
+    },
     layerStyles,
     sizes,
     styles,

@@ -8,7 +8,6 @@ export const Router = createBrowserRouter([
     {
         children: routes,
         element: <AppLayout />,
-        errorElement: <>Not found</>,
         path: '/',
     },
 ]);
