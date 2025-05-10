@@ -1,20 +1,22 @@
 import { extendTheme } from '@chakra-ui/react';
 
+import { componentsWithDefaultStyles } from './reset';
+
 const styles = {
     global: {
-        html: {
+        '*': {
             scrollbarColor:
                 'var(--chakra-colors-blackAlpha-300) var(--chakra-colors-blackAlpha-50)',
             scrollbarWidth: 'thin',
         },
-        'html::-webkit-scrollbar': {
+        '*::-webkit-scrollbar': {
             width: '2px',
         },
-        'html::-webkit-scrollbar-thumb': {
+        '*::-webkit-scrollbar-thumb': {
             backgroundColor: 'var(--chakra-colors-blackAlpha-300)',
             borderRadius: '0.5rem',
         },
-        'html::-webkit-scrollbar-track': {
+        '*::-webkit-scrollbar-track': {
             backgroundColor: 'var(--chakra-colors-blackAlpha-50)',
             borderRadius: '0.5rem',
         },
@@ -22,6 +24,7 @@ const styles = {
 };
 
 const sizes = {
+    footer: '84px',
     headerBase: '4rem',
     headerXL: '5rem',
     maxContentWidth: '85rem',
@@ -30,8 +33,10 @@ const sizes = {
 };
 
 const pageLayout = {
+    flexDirection: 'column',
     gap: { base: 8, xl: 10 },
-    justify: 'center',
+    justifyContent: 'center',
+
     pl: { base: 4, md: 5, xl: 0 },
     pr: { base: 4, md: 5, xl: 0 },
 };
@@ -89,6 +94,9 @@ const breakpoints = {
 const theme = extendTheme({
     breakpoints,
     colors,
+    components: {
+        ...componentsWithDefaultStyles,
+    },
     layerStyles,
     sizes,
     styles,

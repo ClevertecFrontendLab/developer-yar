@@ -1,21 +1,32 @@
-import { TextProps } from '@chakra-ui/react';
+import { TagCloseButtonProps, TagLabelProps, TagProps } from '@chakra-ui/react';
 
 export type SelectedItemTagStyleProps = {
-    selectedItemTag: TextProps;
+    selectedItemTagCloseIcon: TagCloseButtonProps;
+    selectedItemTagContainer: TagProps;
+    selectedItemTagText: TagLabelProps;
 };
 
 export const selectedItemTagStyles: SelectedItemTagStyleProps = {
-    selectedItemTag: {
+    selectedItemTagCloseIcon: {
+        boxSize: 2.5,
+        color: 'lime.700',
+        cursor: 'pointer',
+    },
+    selectedItemTagContainer: {
+        alignItems: 'center',
+        bgColor: 'lime.100',
         borderColor: 'lime.400',
         borderRadius: 'md',
         borderStyle: 'solid',
         borderWidth: '1px',
-        color: 'lime.600',
-        fontSize: 'xs',
-        fontWeight: 'medium',
         gap: 2,
         h: 5,
-        lineHeight: '4',
         px: 2,
+    },
+    selectedItemTagText: {
+        color: 'lime.700',
+        fontSize: 'xs',
+        fontWeight: 'medium',
+        lineHeight: '4',
     },
 };

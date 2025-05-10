@@ -21,7 +21,7 @@ export const recipePageStyles: RecipePageStyleProps = {
         ...baseRecipePageStyles,
     },
     pageContainer: {
-        pt: { xl: 14 },
+        pt: { base: 4, xl: 14 },
     },
     recipeContentWrapper: {
         gap: { base: 6, xl: 10 },

@@ -1,15 +1,15 @@
 import { Box, Grid, Text } from '@chakra-ui/react';
 import { FC, memo, useMemo } from 'react';
 
-import { Recipe, RecipeGalleryCard } from '~/entities/recipe';
+import { RecipeGalleryCard } from '~/entities/recipe';
+import { RecipeItem } from '~/entities/recipe/model/types';
 import { AddRecipeToFavoritesButton } from '~/features/add-recipe-to-favorites';
 import { CookRecipeButton } from '~/features/cook-recipe';
-import { buildUrl } from '~/shared/lib';
 
 import { foundRecipesStyles as styles } from './found-recipes.styles';
 
 type RecipesProps = {
-    recipes: Recipe[];
+    recipes: RecipeItem[];
     searchQuery: string;
 };
 
@@ -48,7 +48,7 @@ export const FoundRecipes: FC<RecipesProps> = memo(({ recipes, searchQuery }) =>
                 <RecipeGalleryCard
                     key={recipe.id}
                     bookmarks={recipe.bookmarks}
-                    category={recipe.category}
+                    categories={recipe.categories}
                     description={recipe.description}
                     id={recipe.id}
                     image={recipe.image}
@@ -71,10 +71,7 @@ export const FoundRecipes: FC<RecipesProps> = memo(({ recipes, searchQuery }) =>
                     }
                 >
                     <AddRecipeToFavoritesButton variant='secondary' />
-                    <CookRecipeButton
-                        id={index.toString()}
-                        url={buildUrl(recipe.category[0], recipe.subcategory[0], recipe.id)}
-                    />
+                    <CookRecipeButton id={index.toString()} url={recipe.url} />
                 </RecipeGalleryCard>
             ))}
         </Grid>

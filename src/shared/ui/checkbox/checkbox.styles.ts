@@ -15,12 +15,9 @@ export const checkboxStyles: CheckboxStyleProps = {
                     _hover: {
                         bg: 'lime.400 !important',
                         borderColor: 'transparent !important',
-                        boxShadow: 'none !important',
-                        outline: 'none !important',
                     },
                     bg: 'lime.400',
                     borderColor: 'lime.400',
-                    outline: 'none !important',
                 },
                 _focus: {
                     boxShadow: 'none',
@@ -35,6 +32,6 @@ export const checkboxStyles: CheckboxStyleProps = {
                 lineHeight: '5',
             },
         },
-        width: 'full',
+        w: 'full',
     },
 };

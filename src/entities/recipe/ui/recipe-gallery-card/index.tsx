@@ -2,10 +2,12 @@ import { Avatar, Flex, Grid, GridItem, Heading, Image, Stack, Text } from '@chak
 import { useBreakpointValue } from '@chakra-ui/react';
 import { FC, PropsWithChildren, ReactNode } from 'react';
 
+import { Category } from '~/entities/navigation/@x/recipe';
 import { User } from '~/entities/user/@x/recipe';
+import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
 import { getDisplayForBreakpoints } from '~/shared/lib';
-import { CategoryTags } from '~/shared/ui/category-tags';
 
+import { RecipeCategories } from '../recipe-categories';
 import { RecipeStats } from '../recipe-stats';
 import { recipeGalleryCardStyles as styles } from './index.styles';
 
@@ -17,7 +19,7 @@ const shownTextFromXlBreakpoint = getDisplayForBreakpoints({
 
 type RecipeGalleryCardProps = {
     bookmarks: number;
-    category: string[];
+    categories: Category[];
     description: string;
     id: string;
     image: string;
@@ -32,7 +34,7 @@ export const RecipeGalleryCard: FC<RecipeGalleryCardProps> = ({
     title,
     description,
     image,
-    category,
+    categories,
     bookmarks = 0,
     likes = 0,
     recommendedBy,
@@ -40,7 +42,7 @@ export const RecipeGalleryCard: FC<RecipeGalleryCardProps> = ({
     const headingLines = useBreakpointValue({ base: 2, xl: 1 });
 
     return (
-        <Grid {...styles.card} data-test-id={`food-card-${id}`}>
+        <Grid {...styles.card} data-test-id={`${DATA_TEST_ATTRIBUTES.FOOD_CARD}-${id}`}>
             <GridItem {...styles.imageBox}>
                 <Image alt='Карточка рецепта' src={image} {...styles.image} />
                 {recommendedBy && (
@@ -61,7 +63,7 @@ export const RecipeGalleryCard: FC<RecipeGalleryCardProps> = ({
                 <Stack {...styles.content}>
                     <Flex {...styles.metadata}>
                         <Grid {...styles.badgeBox}>
-                            <CategoryTags categories={category} variant='yellow' />
+                            <RecipeCategories categories={categories} variant='yellow' />
                         </Grid>
                         <RecipeStats bookmarks={bookmarks} likes={likes} />
                     </Flex>

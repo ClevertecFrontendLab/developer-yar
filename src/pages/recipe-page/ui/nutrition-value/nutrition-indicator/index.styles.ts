@@ -31,6 +31,7 @@ export const nutritionIndicatorStyles: NutritionIndicatorStyleProps = {
         fontSize: { base: 'xs', md: 'sm' },
         fontWeight: 'semibold',
         lineHeight: { base: '4', md: '5' },
+        textAlign: 'center',
         textTransform: 'uppercase',
     },
     valueText: {

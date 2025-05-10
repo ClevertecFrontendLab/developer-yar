@@ -1,9 +1,8 @@
 import { Badge, Text } from '@chakra-ui/react';
 import { FC, PropsWithChildren, ReactElement } from 'react';
 
-import { TagColor } from '~/shared/model';
-
 import { tagStyles as styles } from './tag.styles';
+import { TagColor } from './tag.types';
 
 type TagProps = {
     icon?: ReactElement;

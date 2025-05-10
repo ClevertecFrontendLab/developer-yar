@@ -49,5 +49,6 @@ export const submenuTreeStyles: SubmenuTreeStyleProps = {
         flex: 1,
         justify: 'start',
         ml: 3,
+        textAlign: 'left',
     },
 };
