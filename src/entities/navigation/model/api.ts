@@ -1,32 +1,22 @@
-import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { urlStartsWith } from '~/shared/lib';
-
-import { mockMenu } from '../consts/mock-menu';
-import { Menu, Submenu } from './types';
+import { ApiCategory } from './types';
 
 export const navigationApi = createApi({
-    baseQuery: fakeBaseQuery(),
-    endpoints: (builder) => ({
-        getNavigationMenu: builder.query<Menu[], void>({
-            queryFn: async () => ({ data: mockMenu }),
+    baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_DATA_API_URL }),
+    endpoints: (build) => ({
+        getCategoryList: build.query<ApiCategory[], void>({
+            query: () => `/category`,
         }),
-        getNavigationSubmenu: builder.query<Submenu[], string>({
-            queryFn: async (url) => {
-                const menu = mockMenu.find((item: Submenu) => urlStartsWith(item.url, url));
-
-                if (!menu) {
-                    return { error: { status: 404, statusText: 'Menu not found' } };
-                }
-                return { data: menu.submenu };
-            },
+        getSubcategoriesByCategory: build.query<ApiCategory, string>({
+            query: (id) => `/category/${id}`,
         }),
     }),
     reducerPath: 'navigationApi',
 });
 
 export const {
-    useGetNavigationMenuQuery,
-    useGetNavigationSubmenuQuery,
-    endpoints: { getNavigationMenu, getNavigationSubmenu },
+    useGetCategoryListQuery,
+    useGetSubcategoriesByCategoryQuery,
+    endpoints: { getCategoryList, getSubcategoriesByCategory },
 } = navigationApi;

@@ -1,9 +1,10 @@
 import { Flex, Heading, Image, Stack, Text, useBreakpointValue } from '@chakra-ui/react';
 import { FC, memo } from 'react';
 
+import { Category } from '~/entities/navigation';
 import { RecipeStats } from '~/entities/recipe';
+import { RecipeCategories } from '~/entities/recipe';
 import { getDisplayForBreakpoints } from '~/shared/lib';
-import { CategoryTags } from '~/shared/ui/category-tags';
 
 import { recipeSliderCardStyles as styles } from './index.styles';
 
@@ -14,7 +15,7 @@ const shownFromXlBreakpoint = getDisplayForBreakpoints({
 
 type RecipeSliderCardProps = {
     bookmarks: number;
-    category: string[];
+    categories: Category[];
     description: string;
     image: string;
     likes: number;
@@ -22,7 +23,7 @@ type RecipeSliderCardProps = {
 };
 
 export const RecipeSliderCard: FC<RecipeSliderCardProps> = memo(
-    ({ title, description, image, category, bookmarks = 0, likes = 0 }) => {
+    ({ title, description, image, categories, bookmarks = 0, likes = 0 }) => {
         const headingLines = useBreakpointValue({ base: 2, xl: 1 });
 
         return (
@@ -39,7 +40,7 @@ export const RecipeSliderCard: FC<RecipeSliderCardProps> = memo(
                     </Stack>
                     <Flex {...styles.meta}>
                         <Stack {...styles.badgeBox}>
-                            <CategoryTags categories={category} variant='green' />
+                            <RecipeCategories categories={categories} variant='green' />
                         </Stack>
                         <RecipeStats bookmarks={bookmarks} likes={likes} />
                     </Flex>

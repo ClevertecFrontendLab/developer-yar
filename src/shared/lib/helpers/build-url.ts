@@ -1,1 +1,4 @@
-export const buildUrl = (...args: string[]) => '/' + args.join('/');
+export const buildUrl = (segments: string[], relative: boolean = false): string => {
+    const path = segments.join('/');
+    return relative ? `/${path}` : path;
+};

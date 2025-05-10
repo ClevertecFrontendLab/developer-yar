@@ -1,104 +1,64 @@
-import { Button, Grid, Stack, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
+import { Stack, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import { FC, memo, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
-import { useGetNavigationSubmenuQuery } from '~/entities/navigation';
-import {
-    filterRecipesByCategoryAndSubcategory,
-    Recipe,
-    RecipeGalleryCard,
-} from '~/entities/recipe';
-import { AddRecipeToFavoritesButton } from '~/features/add-recipe-to-favorites';
-import { CookRecipeButton } from '~/features/cook-recipe';
-import { buildUrl, getUrlSegments } from '~/shared/lib';
+import { Subcategory } from '~/entities/navigation';
+import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
+import { LoadMoreButton } from '~/shared/ui/load-more-button';
 
 import { categoryTabsStyles as styles } from './category-tabs.styles';
+import { SubcategoryPanel } from './subcategory-panel';
 
-type ICategoryTabsProps = {
-    recipes: Recipe[];
+type CategoryTabsProps = {
+    subcategories: Subcategory[];
 };
 
-export const CategoryTabs: FC<ICategoryTabsProps> = memo(({ recipes }) => {
+export const CategoryTabs: FC<CategoryTabsProps> = memo(({ subcategories }) => {
+    const { subcategory: activeSlug } = useParams();
     const navigate = useNavigate();
-    const { category, subcategory } = useParams();
-    const { data: subcategories = [], isSuccess } = useGetNavigationSubmenuQuery(`/${category}`);
-    const currentPath = `/${category}/${subcategory}`;
 
-    const currentTabIndex = subcategories.findIndex(
-        (subcategory) => subcategory.url === currentPath,
+    const activeTabIndex = useMemo(
+        () => subcategories.findIndex((subcategory) => subcategory.slug === activeSlug) ?? 0,
+        [activeSlug, subcategories],
     );
 
     const handleTabChange = (index: number) => {
-        const sel = subcategories[index];
-        if (sel) navigate(sel.url);
+        navigate(`/${subcategories[index].url}`);
     };
 
-    const filteredRecipesBySubcategory = useMemo(
-        () =>
-            subcategories.map(({ url }) => {
-                const [category, subcategory] = getUrlSegments(url);
-                return filterRecipesByCategoryAndSubcategory(recipes, category, subcategory);
-            }),
-        [subcategories, recipes],
+    return (
+        <Stack {...styles.stackContainer}>
+            <Tabs isLazy index={activeTabIndex} onChange={handleTabChange}>
+                <TabList {...styles.tabList}>
+                    {subcategories.map((subcategory, index) => (
+                        <Tab
+                            key={subcategory.id}
+                            {...styles.tab}
+                            data-test-id={
+                                index === activeTabIndex && subcategory.slug === 'first-dish'
+                                    ? `${subcategory.slug === 'first-dish' ? 'side-dishes' : subcategory.slug}-active`
+                                    : `${DATA_TEST_ATTRIBUTES.TAB}-${
+                                          subcategory.slug === 'first-dish'
+                                              ? 'side-dishes'
+                                              : subcategory.slug
+                                      }-${index}`
+                            }
+                        >
+                            {subcategory.title}
+                        </Tab>
+                    ))}
+                </TabList>
+
+                <TabPanels>
+                    {subcategories.map((subcategory) => (
+                        <TabPanel key={subcategory.id} {...styles.tabPanel}>
+                            <SubcategoryPanel subcategoryId={subcategory.id} />
+                        </TabPanel>
+                    ))}
+                </TabPanels>
+            </Tabs>
+
+            <LoadMoreButton />
+        </Stack>
     );
-
-    if (isSuccess) {
-        return (
-            <Stack {...styles.stackContainer}>
-                <Tabs
-                    isLazy
-                    index={currentTabIndex >= 0 ? currentTabIndex : 0}
-                    onChange={handleTabChange}
-                >
-                    <TabList {...styles.tabList}>
-                        {subcategories.map(({ url, title }, index) => (
-                            <Tab
-                                key={url}
-                                {...styles.tab}
-                                data-test-id={`tab-${getUrlSegments(url)[1]}-${index}`}
-                            >
-                                {title}
-                            </Tab>
-                        ))}
-                    </TabList>
-                    <TabPanels>
-                        {subcategories.map(({ url }, index) => {
-                            const filteredRecipes = filteredRecipesBySubcategory[index];
-
-                            return (
-                                <TabPanel key={url} {...styles.tabPanel}>
-                                    <Grid {...styles.gridTabContent}>
-                                        {filteredRecipes.map((recipe, index) => (
-                                            <RecipeGalleryCard
-                                                key={recipe.id}
-                                                bookmarks={recipe.bookmarks}
-                                                category={recipe.category}
-                                                description={recipe.description}
-                                                id={index.toString()}
-                                                image={recipe.image}
-                                                likes={recipe.likes}
-                                                recommendedBy={recipe.recommendedBy}
-                                                title={recipe.title}
-                                            >
-                                                <AddRecipeToFavoritesButton variant='secondary' />
-                                                <CookRecipeButton
-                                                    id={recipe.id}
-                                                    url={buildUrl(
-                                                        recipe.category[0],
-                                                        recipe.subcategory[0],
-                                                        recipe.id,
-                                                    )}
-                                                />
-                                            </RecipeGalleryCard>
-                                        ))}
-                                    </Grid>
-                                </TabPanel>
-                            );
-                        })}
-                    </TabPanels>
-                </Tabs>
-                <Button {...styles.buttonLoadMore}>Загрузить ещё</Button>
-            </Stack>
-        );
-    }
 });

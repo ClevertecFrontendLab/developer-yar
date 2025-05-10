@@ -1,57 +1,46 @@
 import {
-    getNavigationMenu,
-    getNavigationSubmenu,
-    Menu,
-    setBreadcrumbs,
+    Breadcrumb,
+    Category,
+    getCategoryListQuery,
+    getSubcategoriesByCategoryQuery,
+    Subcategory,
 } from '~/entities/navigation';
-import { Breadcrumb, Submenu } from '~/entities/navigation/model/types';
-import { getRecipeById } from '~/entities/recipe';
-import { isEqualUrl, urlStartsWith } from '~/shared/lib';
+import { getRecipeByIdQuery } from '~/entities/recipe';
+import { buildUrl } from '~/shared/lib';
 
-import { store } from '../../redux';
 import { Params } from '../model/types';
 import { assertParamsExist } from './asserts-params-exist';
 
 async function fetchNavigationData(
     categoryUrl: string,
-): Promise<{ categories: Menu[]; subcategories: Submenu[] }> {
-    const [menuResult, submenuResult] = await Promise.all([
-        store.dispatch(getNavigationMenu.initiate()),
-        store.dispatch(getNavigationSubmenu.initiate(categoryUrl)),
-    ]);
+): Promise<{ categories: Category[]; subcategories: Subcategory[] }> {
+    const categories = await getCategoryListQuery();
 
-    const categories = menuResult.data;
-    const subcategories = submenuResult.data;
+    const category = findCategory(categories, categoryUrl);
 
-    if (!categories || !subcategories) {
-        throw new Response('Failed to load categories or subcategories', { status: 503 });
-    }
+    const subcategories = await getSubcategoriesByCategoryQuery(category.id);
 
     return { categories, subcategories };
 }
 
-function findCategory(categories: Menu[], categoryUrl: string): Menu {
-    const category = categories.find((cat) => urlStartsWith(cat.url, categoryUrl));
-    if (!category) {
-        throw new Response('Category not found', { status: 404 });
-    }
+function findCategory(categories: Category[], categorySlug: string): Category {
+    const category = categories.find(({ slug }) => slug === categorySlug);
+    if (!category) throw new Error('Category not found');
+
     return category;
 }
 
-function findSubcategory(
-    subcategories: Submenu[],
-    categoryUrl: string,
-    subcategoryUrl: string,
-): Submenu {
-    const fullUrl = `${categoryUrl}/${subcategoryUrl}`;
-    const subcategory = subcategories.find((sub) => isEqualUrl(sub.url, fullUrl));
-    if (!subcategory) {
-        throw new Response('Subcategory not found', { status: 404 });
-    }
+function findSubcategory(subcategories: Subcategory[], subcategorySlug: string): Subcategory {
+    const subcategory = subcategories.find(({ slug }) => slug === subcategorySlug);
+    if (!subcategory) throw new Error('Subcategory not found');
+
     return subcategory;
 }
 
-function buildBreadcrumbs(category: Menu, subcategory: Submenu): Record<'title' | 'url', string>[] {
+function buildBreadcrumbs(
+    category: Category,
+    subcategory: Subcategory,
+): Record<'title' | 'url', string>[] {
     return [
         { title: category.title, url: category.url },
         { title: subcategory.title, url: subcategory.url },
@@ -60,15 +49,14 @@ function buildBreadcrumbs(category: Menu, subcategory: Submenu): Record<'title' 
 
 export const setCategoryAndSubcategory = async (params: Params): Promise<Breadcrumb[]> => {
     assertParamsExist(params, ['category', 'subcategory']);
-    const { category: categoryUrl, subcategory: subcategoryUrl } = params;
+    const { category: categorySlug, subcategory: subcategorySlug } = params;
 
-    const { categories, subcategories } = await fetchNavigationData(categoryUrl);
+    const { categories, subcategories } = await fetchNavigationData(categorySlug);
 
-    const category = findCategory(categories, categoryUrl);
-    const subcategory = findSubcategory(subcategories, categoryUrl, subcategoryUrl);
+    const category = findCategory(categories, categorySlug);
+    const subcategory = findSubcategory(subcategories, subcategorySlug);
 
     const breadcrumbs = buildBreadcrumbs(category, subcategory);
-    store.dispatch(setBreadcrumbs(breadcrumbs));
 
     return breadcrumbs;
 };
@@ -79,17 +67,16 @@ export const setRecipe = async (params: Params) => {
     assertParamsExist(params, ['id']);
     const id = params.id;
 
-    const recipeQuery = await store.dispatch(getRecipeById.initiate(id));
-    const recipe = recipeQuery.data;
+    const recipe = await getRecipeByIdQuery(id);
 
-    if (!recipe) throw new Response('Recipe not found', { status: 404 });
+    if (!recipe) throw new Error('Recipe not found');
 
     const categoryAndSubcategoryBreadcumbs = await setCategoryAndSubcategory(params);
 
     const breadcrumbs = categoryAndSubcategoryBreadcumbs.concat({
         title: recipe.title,
-        url: `/${params.category}/${params.subcategory}/${params.id}`,
+        url: buildUrl([params.category, params.subcategory, params.id], true),
     });
 
-    store.dispatch(setBreadcrumbs(breadcrumbs));
+    return breadcrumbs;
 };

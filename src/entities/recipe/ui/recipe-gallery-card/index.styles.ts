@@ -71,6 +71,7 @@ export const recipeGalleryCardStyles: RecipeGalleryCardStyleProps = {
         objectFit: 'cover',
     },
     imageBox: {
+        minW: 0,
         pos: 'relative',
     },
     infoBox: {

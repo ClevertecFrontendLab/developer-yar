@@ -7,32 +7,42 @@ import {
     Text,
 } from '@chakra-ui/react';
 import { FC } from 'react';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
-import { CategoryIcon } from '~/shared/ui/category-icon';
+import { Icon } from '~/shared/ui/icon';
 
-import { Menu, Submenu } from '../../../model/types';
+import { Subcategory } from '../../../model/types';
 import { submenuTreeStyles as styles } from './index.styles';
 import { SubmenuItem } from './submenu-item';
 
-type SubmenuTreeProps = Menu;
+type SubmenuTreeProps = {
+    icon: string;
+    id: string;
+    submenu: Subcategory[];
+    title: string;
+    url: string;
+};
 
-export const SubmenuTree: FC<SubmenuTreeProps> = ({ title, url, submenu }) => {
+export const SubmenuTree: FC<SubmenuTreeProps> = ({ title, url, submenu, icon }) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
         navigate(url);
     };
 
+    const { pathname } = useLocation();
+    const isActive = (url: string) => pathname === `/${url}`;
+
     return (
         <AccordionItem {...styles.accordionItem}>
             {({ isExpanded }) => (
                 <h2>
                     <AccordionButton onClick={handleClick} {...styles.accordionToggleButton}>
-                        <CategoryIcon boxSize={6} category={url.split('/')[1]} />
+                        <Icon icon={icon} variant='big' />
                         <Flex {...styles.textWrapper}>
                             <Text
-                                data-test-id={`${title === 'Веганская кухня' ? 'vegan-cuisine' : url}`}
+                                data-test-id={title === 'Веганская кухня' ? 'vegan-cuisine' : ''}
+                                noOfLines={1}
                                 {...styles.text(isExpanded)}
                             >
                                 {title}
@@ -41,8 +51,13 @@ export const SubmenuTree: FC<SubmenuTreeProps> = ({ title, url, submenu }) => {
                         <AccordionIcon {...styles.accordionIcon} />
                     </AccordionButton>
                     <AccordionPanel {...styles.accordionPanel}>
-                        {submenu.map((submenu: Submenu) => (
-                            <SubmenuItem key={submenu.id} {...submenu} />
+                        {submenu.map((item) => (
+                            <SubmenuItem
+                                key={item.id}
+                                isActive={isActive(item.url)}
+                                title={item.title}
+                                url={item.url}
+                            />
                         ))}
                     </AccordionPanel>
                 </h2>
