@@ -1,0 +1,3 @@
+export const PERSONAL_FIELDS = 3;
+export const ACCOUNT_FIELDS = 3;
+export const TOTAL_FIELDS = PERSONAL_FIELDS + ACCOUNT_FIELDS;

@@ -23,7 +23,7 @@ type SubmenuTreeProps = {
     url: string;
 };
 
-export const SubmenuTree: FC<SubmenuTreeProps> = ({ title, url, submenu, icon }) => {
+export const SubmenuTree: FC<SubmenuTreeProps> = ({ icon, submenu, title, url }) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
@@ -53,8 +53,8 @@ export const SubmenuTree: FC<SubmenuTreeProps> = ({ title, url, submenu, icon })
                     <AccordionPanel {...styles.accordionPanel}>
                         {submenu.map((item) => (
                             <SubmenuItem
-                                key={item.id}
                                 isActive={isActive(item.url)}
+                                key={item.id}
                                 title={item.title}
                                 url={item.url}
                             />

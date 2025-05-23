@@ -11,7 +11,7 @@ type PostCardProps = {
     text: string;
 } & Post;
 
-export const PostCard: FC<PostCardProps> = ({ text, author }) => (
+export const PostCard: FC<PostCardProps> = ({ author, text }) => (
     <Grid {...styles.container}>
         <GridItem {...styles.authorBlock}>
             <UserCard

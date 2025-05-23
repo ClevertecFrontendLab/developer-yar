@@ -4,7 +4,7 @@ import { useNavigationType } from 'react-router';
 import { REDIRECT_ERROR } from '~/shared/consts';
 
 import { useAppDispatch } from '../../redux/hooks';
-import { setError } from '../slice';
+import { showError } from '../slice';
 
 export const useHandleRedirectError = () => {
     const dispatch = useAppDispatch();
@@ -15,7 +15,15 @@ export const useHandleRedirectError = () => {
             navigationType === 'PUSH' &&
             sessionStorage.getItem(REDIRECT_ERROR.STORAGE_KEY) === REDIRECT_ERROR.VALUE
         ) {
-            dispatch(setError({ message: REDIRECT_ERROR.MESSAGE, type: 'redirect' }));
+            dispatch(
+                showError({
+                    message: {
+                        description: 'Попробуйте поискать снова попозже',
+                        title: 'Ошибка сервера',
+                    },
+                    type: 'redirect',
+                }),
+            );
             sessionStorage.removeItem(REDIRECT_ERROR.STORAGE_KEY);
         }
     }, [dispatch, navigationType]);

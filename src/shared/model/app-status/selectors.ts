@@ -2,11 +2,18 @@ import { createSelector } from '@reduxjs/toolkit';
 
 import { RootState } from '../redux/hooks';
 
-export const selectLoading = (state: RootState) => state.appStatus.isLoading;
-const selectErrorType = (state: RootState) => state.appStatus.errorType;
-const selectErrorMessage = (state: RootState) => state.appStatus.errorMessage;
-export const selectErrorState = createSelector(
-    selectErrorType,
+export const selectIsLoading = (state: RootState) => state.appStatus.isLoading;
+export const selectErrorCategory = (state: RootState) => state.appStatus.errorType;
+export const selectErrorMessage = (state: RootState) => state.appStatus.errorMessage;
+export const selectErrorAlignment = (state: RootState) => state.appStatus.errorAlignment;
+
+export const selectErrorInfo = createSelector(
+    selectErrorCategory,
     selectErrorMessage,
-    (errorType, errorMessage) => ({ errorMessage, errorType }),
+    selectErrorAlignment,
+    (errorType, errorMessage, errorAlignment) => ({
+        errorAlignment,
+        errorMessage,
+        errorType,
+    }),
 );

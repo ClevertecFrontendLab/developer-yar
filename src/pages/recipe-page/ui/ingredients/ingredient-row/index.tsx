@@ -20,8 +20,8 @@ const numberFormatter = new Intl.NumberFormat('ru-RU', {
 });
 
 export const IngredientRow: FC<IngredientRowProps> = memo(
-    ({ ingredient, recipePortions, currentPortions, variant = 'white', dataTestId }) => {
-        const { title, count, measureUnit } = ingredient;
+    ({ currentPortions, dataTestId, ingredient, recipePortions, variant = 'white' }) => {
+        const { count, measureUnit, title } = ingredient;
 
         const amount = numberFormatter.format((count / recipePortions) * currentPortions);
 

@@ -2,27 +2,29 @@ import { useMemo } from 'react';
 
 import { useCategoryList } from '~/entities/navigation/@x/recipe';
 
+import { adaptRecipesFromDto } from '../adapters/adapt-recipes-from-dto';
 import { mockRecipeAuthor } from '../consts/mock-recipe-author';
-import { adaptApiRecipes } from '../lib/adapt-api-recipes';
 import { useGetAllRecipesQuery } from '../model/api';
 import { GetAllRecipesQueryParams } from '../model/types';
 
-export function useRecipes(rawParams: GetAllRecipesQueryParams = {}) {
+const DEFAULT_PARAMS = {};
+
+export function useRecipes(rawParams: GetAllRecipesQueryParams = DEFAULT_PARAMS) {
     const params = useMemo(() => rawParams, [rawParams]);
 
     const {
         data: apiRecipes,
-        isLoading: isApiRecipesLoading,
         isError: isApiRecipesError,
         isFetching: isApiRecipesFetching,
+        isLoading: isApiRecipesLoading,
         isSuccess: isApiRecipesSuccess,
     } = useGetAllRecipesQuery(params);
 
     const {
         data: apiCategories,
-        isLoading: isApiCategoriesLoading,
         isError: isApiCategoriesError,
         isFetching: isApiCategoriesFetching,
+        isLoading: isApiCategoriesLoading,
         isSuccess: isApiCategoriesSuccess,
     } = useCategoryList();
 
@@ -32,9 +34,9 @@ export function useRecipes(rawParams: GetAllRecipesQueryParams = {}) {
     const isSuccess = isApiRecipesSuccess && isApiCategoriesSuccess;
 
     const { data, meta } = useMemo(() => {
-        if (!apiRecipes || !apiCategories)
+        if (!apiRecipes?.data || !apiCategories)
             return { data: [], meta: { limit: 8, page: 1, total: 1, totalPages: 1 } };
-        return adaptApiRecipes(apiRecipes, mockRecipeAuthor, apiCategories);
+        return adaptRecipesFromDto(apiRecipes, mockRecipeAuthor, apiCategories);
     }, [apiRecipes, apiCategories]);
 
     return { data, isError, isFetching, isLoading, isSuccess, meta };

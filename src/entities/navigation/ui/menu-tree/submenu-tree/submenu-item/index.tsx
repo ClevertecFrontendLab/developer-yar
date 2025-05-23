@@ -10,7 +10,7 @@ type SubmenuItemProps = {
     url: string;
 };
 
-export const SubmenuItem: FC<SubmenuItemProps> = memo(({ title, url, isActive }) => (
+export const SubmenuItem: FC<SubmenuItemProps> = memo(({ isActive, title, url }) => (
     <Flex {...styles.itemWrapper}>
         <Flex {...styles.iconContainer}>
             <chakra.span className='icon' {...styles.activeIndicator(isActive)} />

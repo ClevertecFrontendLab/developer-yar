@@ -3,22 +3,34 @@ import { configureStore } from '@reduxjs/toolkit';
 import { breadcrumbsReducer, navigationApi } from '~/entities/navigation';
 import { postsApi } from '~/entities/post';
 import { recipesApi } from '~/entities/recipe';
-import { recipeSearchReducer } from '~/features/recipe-search';
+import { passwordResetApi } from '~/features/auth-password-reset';
+import { signInApi } from '~/features/auth-sign-in';
+import { signUpApi } from '~/features/auth-sign-up';
+import { tokenValidationApi } from '~/features/auth-token-validation';
+import { recipeRefinementReducer } from '~/features/recipe-refinement';
 import { appStatusReducer } from '~/shared/model';
 
 export const store = configureStore({
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(
             navigationApi.middleware,
-            recipesApi.middleware,
             postsApi.middleware,
+            recipesApi.middleware,
+            passwordResetApi.middleware,
+            signInApi.middleware,
+            signUpApi.middleware,
+            tokenValidationApi.middleware,
         ),
     reducer: {
         [navigationApi.reducerPath]: navigationApi.reducer,
-        [recipesApi.reducerPath]: recipesApi.reducer,
         [postsApi.reducerPath]: postsApi.reducer,
+        [recipesApi.reducerPath]: recipesApi.reducer,
+        [passwordResetApi.reducerPath]: passwordResetApi.reducer,
+        [signInApi.reducerPath]: signInApi.reducer,
+        [signUpApi.reducerPath]: signUpApi.reducer,
+        [tokenValidationApi.reducerPath]: tokenValidationApi.reducer,
         appStatus: appStatusReducer,
         breadcrumbs: breadcrumbsReducer,
-        recipeSearch: recipeSearchReducer,
+        recipeRefinement: recipeRefinementReducer,
     },
 });

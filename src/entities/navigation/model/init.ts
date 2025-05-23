@@ -1,13 +1,12 @@
-import { generateId } from '~/shared/lib';
 import { ROUTES } from '~/shared/routes';
 
 import { Breadcrumb } from './types';
 
-type BreadcrumbsState = Breadcrumb & { id: number };
+type BreadcrumbsState = Breadcrumb & { id: string };
 
 export const initialState: BreadcrumbsState[] = [
     {
-        id: generateId(),
+        id: '0',
         title: 'Главная',
         url: ROUTES.HOME,
     },

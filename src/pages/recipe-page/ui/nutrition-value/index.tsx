@@ -1,13 +1,13 @@
 import { Flex, Stack, Text } from '@chakra-ui/react';
 import { FC, memo } from 'react';
 
-import { NutritionValue as _NutritionValue } from '~/entities/recipe';
+import { NutritionValue as BaseNutritionValue } from '~/entities/recipe';
 
 import { nutritionValueStyles as styles } from './index.styles';
 import { NutritionIndicatorItem } from './nutrition-indicator';
 
 type NutritionValueProps = {
-    nutritionValue: _NutritionValue;
+    nutritionValue: BaseNutritionValue;
 };
 
 export const NutritionValue: FC<NutritionValueProps> = memo(({ nutritionValue }) => (

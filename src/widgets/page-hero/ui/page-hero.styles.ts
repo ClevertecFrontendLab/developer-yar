@@ -2,8 +2,8 @@ import { StackProps, TextProps } from '@chakra-ui/react';
 
 type PageHeroStyleProps = {
     errorMessage: TextProps;
+    labelContainer: StackProps;
     pageHeroContainer(isRecipeQueryActive: boolean): StackProps;
-    textContainer: StackProps;
 };
 
 const shadowStyles: StackProps = {
@@ -21,6 +21,7 @@ export const pageHeroStyles: PageHeroStyleProps = {
         maxW: 80,
         textAlign: 'center',
     },
+    labelContainer: { gap: { base: 4, xl: 3 }, maxW: { xl: '696px' }, textAlign: 'center' },
     pageHeroContainer: (isRecipeQueryActive: boolean): StackProps => ({
         alignItems: 'center',
         gap: { base: 4, xl: 8 },
@@ -30,5 +31,4 @@ export const pageHeroStyles: PageHeroStyleProps = {
             ...(isRecipeQueryActive ? shadowStyles : {}),
         },
     }),
-    textContainer: { gap: { base: 4, xl: 3 }, maxW: { xl: '696px' }, textAlign: 'center' },
 };

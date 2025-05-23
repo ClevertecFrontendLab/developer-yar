@@ -15,7 +15,7 @@ type RecipeCategoryPrimaryCardProps = {
 };
 
 export const RecipeCategoryPrimaryCard: FC<RecipeCategoryPrimaryCardProps> = memo(
-    ({ title, description, categories, bookmarks = 0, likes = 0 }) => (
+    ({ bookmarks = 0, categories, description, likes = 0, title }) => (
         <Stack {...styles.card}>
             <Stack {...styles.text}>
                 <Heading as='h3' noOfLines={1} {...styles.title}>

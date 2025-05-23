@@ -1,19 +1,3 @@
-export type ApiCategory = {
-    _id: string;
-    category: string;
-    description: string;
-    icon: string;
-    subCategories: ApiSubcategory[];
-    title: string;
-};
-
-export type ApiSubcategory = {
-    _id: string;
-    category: string;
-    rootCategoryId: string;
-    title: string;
-};
-
 export type Category = {
     description: string;
     icon: string;

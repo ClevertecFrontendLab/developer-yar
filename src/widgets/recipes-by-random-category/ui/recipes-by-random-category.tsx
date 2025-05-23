@@ -3,8 +3,8 @@ import { FC, useEffect, useState } from 'react';
 
 import { Category, Subcategory, useCategoryList } from '~/entities/navigation';
 import { useRecipesBySubcategoryId } from '~/entities/recipe';
-import { CookRecipeButton } from '~/features/cook-recipe';
-import { useAppStatusSync } from '~/shared/model';
+import { RecipeCookingButton } from '~/features/recipe-cooking';
+import { useApiStatusSync } from '~/shared/model';
 import { SectionTitle } from '~/shared/ui/section-title';
 
 import { RecipeCategoryPrimaryCard } from './recipe-category-primary-card';
@@ -16,8 +16,8 @@ const getRandomNumber = (to: number) => Math.floor(Math.random() * to);
 export const RecipesByRandomCategory: FC = () => {
     const {
         data: categories,
-        isLoading: isCategoriesLoading,
         isError: isCategoriesError,
+        isLoading: isCategoriesLoading,
         isSuccess: isCategoriesSuccess,
     } = useCategoryList();
     const [randomCategory, setRandomCategory] = useState<Category | null>(null);
@@ -35,8 +35,8 @@ export const RecipesByRandomCategory: FC = () => {
 
     const {
         data: recipes,
-        isLoading: isRecipesLoading,
         isError: isRecipesError,
+        isLoading: isRecipesLoading,
         isSuccess: isRecipesSuccess,
     } = useRecipesBySubcategoryId(randomSubcategory?.id, {
         limit: 5,
@@ -45,7 +45,7 @@ export const RecipesByRandomCategory: FC = () => {
     const isLoading = isCategoriesLoading || isRecipesLoading;
     const isError = isCategoriesError || isRecipesError;
 
-    useAppStatusSync(isLoading, isError);
+    useApiStatusSync(isLoading, isError);
 
     if (isCategoriesSuccess && isRecipesSuccess && randomCategory && recipes)
         return (
@@ -67,11 +67,11 @@ export const RecipesByRandomCategory: FC = () => {
                             <Grid {...styles.recipesSecondaryCards}>
                                 {recipes.slice(2, 5).map((recipe) => (
                                     <RecipeCategorySecondaryCard
+                                        icon={recipe.categories[0].icon}
                                         key={recipe.id}
-                                        icon={recipe.categories[0].url}
                                         title={recipe.title}
                                     >
-                                        <CookRecipeButton
+                                        <RecipeCookingButton
                                             id={recipe.id}
                                             url={recipe.url}
                                             variant='green'

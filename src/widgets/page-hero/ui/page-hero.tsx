@@ -1,7 +1,7 @@
 import { Stack, Text } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
 
-import { RecipeSearch, useSearchResultStatus } from '~/features/recipe-search';
+import { RecipeRefinement, useSearchResultStatus } from '~/features/recipe-refinement';
 
 import { pageHeroStyles as styles } from './page-hero.styles';
 
@@ -10,7 +10,7 @@ type PageHeroProps = {
 };
 
 export const PageHero: FC<PageHeroProps> = ({ children }) => {
-    const { status, isRecipeQueryActive } = useSearchResultStatus();
+    const { isRecipeQueryActive, status } = useSearchResultStatus();
 
     return (
         <Stack {...styles.pageHeroContainer(isRecipeQueryActive)}>
@@ -19,9 +19,9 @@ export const PageHero: FC<PageHeroProps> = ({ children }) => {
                     По вашему запросу ничего не найдено. Попробуйте другой запрос
                 </Text>
             ) : (
-                <Stack {...styles.textContainer}>{children}</Stack>
+                <Stack {...styles.labelContainer}>{children}</Stack>
             )}
-            <RecipeSearch />
+            <RecipeRefinement />
         </Stack>
     );
 };

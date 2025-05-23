@@ -2,29 +2,29 @@ import { Button, Grid, GridItem } from '@chakra-ui/react';
 import { FC } from 'react';
 import { useNavigate } from 'react-router';
 
-import { useFoundRecipes } from '~/features/recipe-search';
+import { useFoundRecipes } from '~/features/recipe-refinement';
 import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
 import { getDisplayForBreakpoints } from '~/shared/lib';
-import { useAppStatusSync } from '~/shared/model';
+import { useApiStatusSync } from '~/shared/model';
 import { RightArrowIcon } from '~/shared/ui/icons';
 import { SectionTitle } from '~/shared/ui/section-title';
 import { Recipes } from '~/widgets/recipes';
 
 import { recipeListStyles as styles } from './index.styles';
 
-const shownFromMdBreakpoint = getDisplayForBreakpoints({ from: 'md' });
-const shownToSmBreakpoint = getDisplayForBreakpoints({ to: 'sm' });
+const shownFromXlBreakpoint = getDisplayForBreakpoints({ from: 'xl' });
+const shownToLgBreakpoint = getDisplayForBreakpoints({ to: 'lg' });
 
 export const TheJuiciest: FC = () => {
     const navigate = useNavigate();
     const navigateToTheJuiciestPage = () => navigate('/the-juiciest');
 
-    const { recipes, isRecipesLoading, isRecipesError, isRecipesSuccess } = useFoundRecipes({
+    const { isRecipesError, isRecipesLoading, isRecipesSuccess, recipes } = useFoundRecipes({
         sortBy: 'likes',
         sortOrder: 'DESC',
     });
 
-    useAppStatusSync(isRecipesLoading, isRecipesError);
+    useApiStatusSync(isRecipesLoading, isRecipesError);
 
     if (isRecipesSuccess && recipes)
         return (
@@ -39,7 +39,7 @@ export const TheJuiciest: FC = () => {
                     <Button
                         rightIcon={<RightArrowIcon {...styles.viewAllIcon} />}
                         onClick={navigateToTheJuiciestPage}
-                        {...shownFromMdBreakpoint}
+                        {...shownFromXlBreakpoint}
                         {...styles.viewAllButton}
                         data-test-id={DATA_TEST_ATTRIBUTES.JUICIEST_LINK}
                     >
@@ -48,7 +48,7 @@ export const TheJuiciest: FC = () => {
                     <Button
                         rightIcon={<RightArrowIcon {...styles.viewAllIcon} />}
                         onClick={navigateToTheJuiciestPage}
-                        {...shownToSmBreakpoint}
+                        {...shownToLgBreakpoint}
                         {...styles.viewAllButton}
                         data-test-id={DATA_TEST_ATTRIBUTES.JUICIEST_LINK_MOBILE}
                     >

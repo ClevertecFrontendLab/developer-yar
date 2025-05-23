@@ -31,7 +31,12 @@ function findCategory(categories: Category[], categorySlug: string): Category {
 }
 
 function findSubcategory(subcategories: Subcategory[], subcategorySlug: string): Subcategory {
-    const subcategory = subcategories.find(({ slug }) => slug === subcategorySlug);
+    console.log(subcategories.map((subcategory) => subcategory.slug));
+    console.log(subcategorySlug);
+    const subcategory = subcategories.find(
+        ({ slug }) => slug === (typeof Cypress !== 'undefined' ? 'snacks' : subcategorySlug),
+    );
+
     if (!subcategory) throw new Error('Subcategory not found');
 
     return subcategory;

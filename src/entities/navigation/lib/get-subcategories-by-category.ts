@@ -1,7 +1,7 @@
 import { store } from '~/app/providers/redux';
 
+import { adaptSubcategoriesByCategoryFromDto } from '../adapters/adapt-subcategories-by-category-from-dto';
 import { getSubcategoriesByCategory } from '../model/api';
-import { adaptApiSubcategoriesByCategory } from './adapt-api-subcategories-by-category';
 
 export const getSubcategoriesByCategoryQuery = async (id: string) => {
     const subcategoriesResult = await store.dispatch(
@@ -10,7 +10,7 @@ export const getSubcategoriesByCategoryQuery = async (id: string) => {
 
     const subcategories = subcategoriesResult.data;
 
-    if (!subcategories) throw new Error('Failed to load subcategories');
-
-    return adaptApiSubcategoriesByCategory(subcategories);
+    if (!subcategories || !Object.keys(subcategories).length)
+        throw new Error('Failed to load subcategories');
+    return adaptSubcategoriesByCategoryFromDto(subcategories);
 };

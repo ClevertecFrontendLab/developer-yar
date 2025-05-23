@@ -1,4 +1,3 @@
-export { HomePageTab } from './home-page-tab';
-export { ProfileTab } from './profile-tab';
-export { SearchTab } from './search-tab';
-export { WriteRecipeTab } from './write-recipe-tab';
+export { Tab } from './tab';
+export { TabList } from './tab-list';
+export { TabPanel } from './tab-panel';

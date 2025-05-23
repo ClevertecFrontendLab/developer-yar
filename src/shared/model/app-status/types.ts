@@ -1,7 +1,14 @@
-export type AppStatus = {
-    errorMessage: string | null;
-    errorType: ErrorType;
-    isLoading: boolean;
+export type AppErrorType = 'server' | 'redirect';
+export type AppErrorMessage = {
+    description?: string;
+    title: string;
 };
 
-export type ErrorType = 'server' | 'redirect' | null;
+export type AppErrorAlignment = 'left' | 'center' | 'right';
+
+export type AppStatus = {
+    errorAlignment: AppErrorAlignment;
+    errorMessage: AppErrorMessage;
+    errorType: AppErrorType | null;
+    isLoading: boolean;
+};

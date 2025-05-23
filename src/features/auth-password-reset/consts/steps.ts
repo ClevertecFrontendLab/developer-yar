@@ -1,0 +1,5 @@
+export const enum STEPS {
+    EMAIL_VERIFICATION,
+    CODE_VERIFICATION,
+    RESET_CREDENTIALS,
+}

@@ -1,7 +1,8 @@
 import { FC } from 'react';
 
+import { useHandleRedirectError } from '~/shared/model';
+
 import { AppRoot } from './app-root';
-import { AppStatus } from './app-status';
 import { Content } from './content';
 import { Header } from './header';
 import { LeftSidebar } from './left-sidebar';
@@ -9,18 +10,20 @@ import { Main } from './main';
 import { MobileTabBar } from './mobile-tab-bar';
 import { RightSidebar } from './right-sidebar';
 
-export const AppLayout: FC = () => (
-    <AppRoot>
-        <Header />
+export const AppLayout: FC = () => {
+    useHandleRedirectError();
 
-        <Main>
-            <LeftSidebar />
-            <Content />
-            <RightSidebar />
-        </Main>
+    return (
+        <AppRoot>
+            <Header />
 
-        <MobileTabBar />
+            <Main>
+                <LeftSidebar />
+                <Content />
+                <RightSidebar />
+            </Main>
 
-        <AppStatus />
-    </AppRoot>
-);
+            <MobileTabBar />
+        </AppRoot>
+    );
+};

@@ -6,13 +6,17 @@ import { ChakraUI } from '~/app/providers/chakra-ui';
 import { ErrorBoundary } from '~/app/providers/error-boundary';
 import { Store } from '~/app/providers/redux';
 
+import { AppStatus } from './app/providers/app-status';
+
 const root = createRoot(document.getElementById('root')!);
 root.render(
     <StrictMode>
         <ErrorBoundary>
             <ChakraUI>
                 <Store>
-                    <AppRouter />
+                    <AppStatus>
+                        <AppRouter />
+                    </AppStatus>
                 </Store>
             </ChakraUI>
         </ErrorBoundary>

@@ -3,8 +3,6 @@ import { FC, PropsWithChildren } from 'react';
 
 import { theme } from '../config/theme';
 
-type ChakraUIProps = PropsWithChildren;
-
-export const ChakraUI: FC<ChakraUIProps> = ({ children }) => (
+export const ChakraUI: FC<PropsWithChildren> = ({ children }) => (
     <ChakraProvider theme={theme}>{children}</ChakraProvider>
 );

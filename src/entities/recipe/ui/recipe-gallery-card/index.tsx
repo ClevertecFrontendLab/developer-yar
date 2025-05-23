@@ -29,15 +29,15 @@ type RecipeGalleryCardProps = {
 } & PropsWithChildren;
 
 export const RecipeGalleryCard: FC<RecipeGalleryCardProps> = ({
-    children,
-    id,
-    title,
-    description,
-    image,
-    categories,
     bookmarks = 0,
+    categories,
+    children,
+    description,
+    id,
+    image,
     likes = 0,
     recommendedBy,
+    title,
 }) => {
     const headingLines = useBreakpointValue({ base: 2, xl: 1 });
 

@@ -1,9 +1,14 @@
+const EMAIL_INPUT = 'email-input';
+const LOGIN_INPUT = 'login-input';
+const PASSWORD_INPUT = 'password-input';
+const CONFIRM_PASSWORD_INPUT = 'confirm-password-input';
+const SUBMIT_BUTTON = 'submit-button';
+
 export const enum DATA_TEST_ATTRIBUTES {
     ADD_ALLERGEN_BUTTON = 'add-allergen-button',
     ADD_OTHER_ALLERGEN = 'add-other-allergen',
     ALLERGEN = 'allergen',
     ALLERGENS_MENU = 'allergens-menu',
-    ALLERGENS_QUERY_PARAM = 'allergens',
     ALLERGEN_MENU_BUTTON = 'allergens-menu-button',
     ALLERGEN_MENU_BUTTON_FILTER = 'allergens-menu-button-filter',
     ALLERGEN_SWITCHER = 'allergens-switcher',
@@ -17,7 +22,7 @@ export const enum DATA_TEST_ATTRIBUTES {
     CLOSE_ALERT_BUTTON = 'close-alert-button',
     CLOSE_FILTER_DRAWER = 'close-filter-drawer',
     CLOSE_ICON = 'close-icon',
-    CREATED_AT_SORT_PARAM = 'createdAt',
+    CLOSE_MODAL_BUTTON = 'close-button',
     ERROR_NOTIFICATION = 'error-notification',
     ERROR_PAGE_GO_HOME = 'error-page-go-home',
     FILTER_BUTTON = 'filter-button',
@@ -27,20 +32,48 @@ export const enum DATA_TEST_ATTRIBUTES {
     FIND_RECIPE_BUTTON = 'find-recipe-button',
     FOOD_CARD = 'food-card',
     FOOTER = 'footer',
-    GARNISH_QUERY_PARAM = 'garnish',
     HAMBURGER_ICON = 'hamburger-icon',
     HEADER = 'header',
-    JUICIEST_LIMIT = '4',
     JUICIEST_LINK = 'juiciest-link',
     JUICIEST_LINK_MOBILE = 'juiciest-link-mobile',
-    LIKES_SORT_PARAM = 'likes',
-    LIMIT_QUERY_PARAM = 'limit',
     LOADER_SEARCH_BLOCK = 'loader-search-block',
     LOAD_MORE_BUTTON = 'load-more-button',
     NAVIGATION = 'nav',
-    RELEVANT_KITCHEN_LIMIT = '5',
     SEARCH_BUTTON = 'search-button',
     SEARCH_INPUT = 'search-input',
     TAB = 'tab',
     VEGAN = 'vegan-cuisine',
+    PASSWORD_VISIBILITY_BUTTON = 'password-visibility-button',
+    SIGN_IN_SUBMIT_BUTTON = SUBMIT_BUTTON,
+    SIGN_IN_FORM = 'sign-in-form',
+    SIGN_IN_LOGIN_INPUT = LOGIN_INPUT,
+    SIGN_IN_PASSWORD_INPUT = PASSWORD_INPUT,
+    SIGN_IN_FORGOT_PASSWORD = 'forgot-password',
+    SIGN_IN_ERROR_MODAL = 'sign-in-error-modal',
+    SIGN_IN_RETRY_BUTTON = 'repeat-button',
+
+    SIGN_UP_FORM = 'sign-up-form',
+    SIGN_UP_PROGRESS = 'sign-up-progress',
+    SIGN_UP_SUBMIT_BUTTON = SUBMIT_BUTTON,
+    SIGN_UP_NAME_INPUT = 'first-name-input',
+    SIGN_UP_SURNAME_INPUT = 'last-name-input',
+    SIGN_UP_EMAIL_INPUT = EMAIL_INPUT,
+    SIGN_UP_LOGIN_INPUT = LOGIN_INPUT,
+    SIGN_UP_PASSWORD_INPUT = PASSWORD_INPUT,
+    SIGN_UP_CONFIRM_PASSWORD_INPUT = CONFIRM_PASSWORD_INPUT,
+    SIGN_UP_VERIFY_NOTICE_MODAL = 'sign-up-success-modal',
+    SIGN_UP_VERIFY_ERROR_MODAL = 'email-verification-failed-modal',
+
+    EMAIL_VERIFICATION_MODAL = 'send-email-modal',
+    EMAIL_VERIFICATION_INPUT = EMAIL_INPUT,
+    EMAIL_VERIFICATION_SUBMIT_BUTTON = SUBMIT_BUTTON,
+
+    OTP_CODE_VERIFICATION_MODAL = 'verification-code-modal',
+    OTP_CODE_VERIFICATION_INPUT = 'verification-code-input',
+
+    RESET_CREDENTIALS_MODAL = 'reset-credentials-modal',
+    RESET_CREDENTIALS_LOGIN_INPUT = LOGIN_INPUT,
+    RESET_CREDENTIALS_PASSWORD_INPUT = PASSWORD_INPUT,
+    RESET_CREDENTIALS_CONFIRM_PASSWORD_INPUT = CONFIRM_PASSWORD_INPUT,
+    RESET_CREDENTIALS_SUBMIT_BUTTON = SUBMIT_BUTTON,
 }

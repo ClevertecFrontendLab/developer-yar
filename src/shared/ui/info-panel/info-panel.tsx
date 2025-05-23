@@ -3,9 +3,7 @@ import { FC, PropsWithChildren } from 'react';
 
 import { infoPanelStyles as styles } from './info-panel.styles';
 
-type InfoPanelProps = PropsWithChildren;
-
-export const InfoPanel: FC<InfoPanelProps> = ({ children }) => (
+export const InfoPanel: FC<PropsWithChildren> = ({ children }) => (
     <Grid {...styles.infoPanel}>
         <Text {...styles.version}>Версия программы 03.25</Text>
         <Text {...styles.rights}>

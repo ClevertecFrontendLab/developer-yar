@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { adaptApiSubcategoriesByCategory } from '../lib/adapt-api-subcategories-by-category';
+import { adaptSubcategoriesByCategoryFromDto } from '../adapters/adapt-subcategories-by-category-from-dto';
 import { useGetSubcategoriesByCategoryQuery } from '../model/api';
 
 export const useSubcategoriesByCategory = (id?: string) => {
@@ -8,8 +8,25 @@ export const useSubcategoriesByCategory = (id?: string) => {
 
     const { data, ...rest } = useGetSubcategoriesByCategoryQuery(id ?? '', { skip });
     const subcategories = useMemo(
-        () => (data ? adaptApiSubcategoriesByCategory(data) : []),
+        () => (data?.subCategories ? adaptSubcategoriesByCategoryFromDto(data) : {}),
         [data],
     );
     return { data: subcategories, ...rest };
 };
+
+// import { useMemo } from 'react';
+
+// import { adaptSubcategoriesByCategoryFromDto } from '../adapters/adapt-subcategories-by-category-from-dto';
+// import { useGetSubcategoriesByCategoryQuery } from '../model/api';
+
+// export const useSubcategoriesByCategory = (id?: string) => {
+//     const skip = !id;
+
+//     const { data, ...rest } = useGetSubcategoriesByCategoryQuery(id ?? '', { skip });
+//     const subcategories = useMemo(() => {
+//         if (data) {
+//             adaptSubcategoriesByCategoryFromDto(data);
+//         } else return [];
+//     }, [data]);
+//     return { data: subcategories, ...rest };
+// };

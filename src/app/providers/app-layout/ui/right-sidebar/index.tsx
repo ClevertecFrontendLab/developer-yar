@@ -2,7 +2,7 @@ import { Box, Flex } from '@chakra-ui/react';
 import { FC } from 'react';
 
 import { UserStats } from '~/entities/user';
-import { WriteRecipe } from '~/features/write-recipe';
+import { RecipeCreationButton } from '~/features/recipe-creation';
 import { getDisplayForBreakpoints } from '~/shared/lib';
 
 import { rightSidebarStyles as styles } from './index.styles';
@@ -15,7 +15,7 @@ export const RightSidebar: FC = () => (
             <UserStats />
         </Box>
         <Box {...styles.writeRecipeWrapper}>
-            <WriteRecipe />
+            <RecipeCreationButton />
         </Box>
     </Flex>
 );

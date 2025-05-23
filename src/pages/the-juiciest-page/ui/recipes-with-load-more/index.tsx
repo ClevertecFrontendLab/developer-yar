@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from 'react';
 
 import { RecipeItem } from '~/entities/recipe';
-import { useFoundRecipes } from '~/features/recipe-search';
+import { useFoundRecipes } from '~/features/recipe-refinement';
 import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
-import { useAppStatusSync } from '~/shared/model';
+import { useApiStatusSync } from '~/shared/model';
 import { LoadMoreButton } from '~/shared/ui/load-more-button';
 import { Recipes } from '~/widgets/recipes';
 
@@ -11,7 +11,7 @@ export const RecipesWithLoadMore: FC = () => {
     const [page, setPage] = useState(1);
     const [visibleRecipes, setVisibleRecipes] = useState<RecipeItem[]>([]);
 
-    const { recipes, meta, isRecipesLoading, isRecipesError, isRecipesFetching, isRecipesSuccess } =
+    const { isRecipesError, isRecipesFetching, isRecipesLoading, isRecipesSuccess, meta, recipes } =
         useFoundRecipes({
             limit: 8,
             page,
@@ -22,7 +22,7 @@ export const RecipesWithLoadMore: FC = () => {
         if (recipes) setVisibleRecipes((prev) => [...prev, ...recipes]);
     }, [recipes]);
 
-    useAppStatusSync(isRecipesLoading || isRecipesFetching, isRecipesError);
+    useApiStatusSync(isRecipesLoading || isRecipesFetching, isRecipesError);
 
     if (isRecipesSuccess && visibleRecipes && meta)
         return (

@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 
 import { useCategoryList } from '~/entities/navigation/@x/recipe';
 
+import { adaptRecipeFromDto } from '../adapters/adapt-recipe-from-dto';
 import { mockRecipeAuthor } from '../consts/mock-recipe-author';
-import { adaptApiRecipe } from '../lib/adapt-api-recipes';
 import { useGetRecipeByIdQuery } from '../model/api';
 
 export const useRecipeById = (id?: string) => {
@@ -11,17 +11,17 @@ export const useRecipeById = (id?: string) => {
 
     const {
         data: apiRecipe,
-        isLoading: isApiRecipesLoading,
         isError: isApiRecipesError,
         isFetching: isApiRecipesFetching,
+        isLoading: isApiRecipesLoading,
         isSuccess: isApiRecipesSuccess,
     } = useGetRecipeByIdQuery(id ?? '', { skip });
 
     const {
         data: apiCategories,
-        isLoading: isApiCategoriesLoading,
         isError: isApiCategoriesError,
         isFetching: isApiCategoriesFetching,
+        isLoading: isApiCategoriesLoading,
         isSuccess: isApiCategoriesSuccess,
     } = useCategoryList(skip);
 
@@ -32,7 +32,7 @@ export const useRecipeById = (id?: string) => {
 
     const data = useMemo(() => {
         if (!apiRecipe || !apiCategories) return null;
-        return adaptApiRecipe(apiRecipe, mockRecipeAuthor, apiCategories);
+        return adaptRecipeFromDto(apiRecipe, mockRecipeAuthor, apiCategories);
     }, [apiRecipe, apiCategories]);
 
     return { data, isError, isFetching, isLoading, isSuccess };

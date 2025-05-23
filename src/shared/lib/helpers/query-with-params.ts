@@ -17,7 +17,7 @@ type QueryWithParams = {
  */
 type QueryParam = Record<string, string | number | boolean>;
 
-export const queryWithParams = ({ url, params }: QueryWithParams) => {
+export const queryWithParams = ({ params, url }: QueryWithParams) => {
     if (Object.keys(params).length === 0) {
         return { url };
     }

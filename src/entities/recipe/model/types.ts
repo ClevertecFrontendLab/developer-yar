@@ -1,41 +1,6 @@
 import { Category, Subcategory } from '~/entities/navigation/@x/recipe';
 import { User } from '~/entities/user/@x/recipe';
 
-export type ApiRecipeItem = {
-    _id: string;
-    authorId: string;
-    bookmarks: number;
-    categoriesIds: string[];
-    createdAt: string;
-    description: string;
-    garnish?: string;
-    image: string;
-    ingredients: {
-        count: string | number;
-        measureUnit: string;
-        title: string;
-    }[];
-    likes: number;
-    meat?: string;
-    nutritionValue: {
-        calories: number;
-        carbohydrates: number;
-        fats: number;
-        protein?: number;
-        proteins?: number;
-    };
-    portions: number;
-    steps: Step[];
-    time: number;
-    title: string;
-    views: number;
-};
-
-export type ApiRecipe = {
-    data: ApiRecipeItem[];
-    meta: RecipeMeta;
-};
-
 export type GetAllRecipesQueryParams = Partial<{
     allergens: string;
     garnish: string;

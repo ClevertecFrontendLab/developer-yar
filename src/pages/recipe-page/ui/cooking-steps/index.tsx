@@ -15,13 +15,8 @@ export const CookingSteps: FC<CookingStepsProps> = memo(({ steps }) => (
         <Heading as='h2' {...styles.title}>
             Шаги приготовления
         </Heading>
-        {steps.map(({ stepNumber, image, description }) => (
-            <CookingStep
-                key={stepNumber}
-                description={description}
-                image={image}
-                stepNumber={stepNumber}
-            />
+        {steps.map((step) => (
+            <CookingStep key={step.stepNumber} step={step} />
         ))}
     </Stack>
 ));
