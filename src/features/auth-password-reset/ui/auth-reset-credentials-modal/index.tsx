@@ -5,6 +5,7 @@ import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
 import { ModalContentGroup, ModalHeaderText } from '~/shared/ui/modal';
 
 import { useResetCredentialsModal } from '../../hooks/use-reset-credentials-modal';
+import { authResetCredentialsModalStyles as styles } from './index.styles';
 
 export const AuthResetCredentialsModal: FC = () => {
     const { errors, onSubmit, register, trimField } = useResetCredentialsModal();
@@ -12,7 +13,7 @@ export const AuthResetCredentialsModal: FC = () => {
     return (
         <>
             <ModalContentGroup spacing={6}>
-                <ModalHeaderText>Восстановление аккаунта</ModalHeaderText>
+                <ModalHeaderText {...styles.headerText}>Восстановление аккаунта</ModalHeaderText>
 
                 <AuthForm onSubmit={onSubmit}>
                     <ModalContentGroup spacing={8}>

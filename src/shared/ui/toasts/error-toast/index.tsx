@@ -17,7 +17,7 @@ type ErrorToastProps = {
 };
 
 export const ErrorToast: FC<ErrorToastProps> = ({ description, onClose, title }) => (
-    <Alert data-test-id={DATA_TEST_ATTRIBUTES.ERROR_NOTIFICATION} status='error'>
+    <Alert status='error'>
         <AlertIcon />
         <AlertBody>
             <AlertTitle>{title}</AlertTitle>

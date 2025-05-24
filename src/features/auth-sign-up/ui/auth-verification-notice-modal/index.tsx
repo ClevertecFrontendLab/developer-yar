@@ -50,7 +50,7 @@ export const AuthVerificationNoticeModal: FC<AuthVerificationNoticeModalProps> =
 
                     <ModalTextGroup>
                         <ModalText>Мы отправили вам на почту</ModalText>
-                        <ModalText variant='bold'>{email}</ModalText>
+                        <ModalText weight='bold'>{email}</ModalText>
                         <ModalText>ссылку для верификации.</ModalText>
                     </ModalTextGroup>
                 </ModalContentGroup>

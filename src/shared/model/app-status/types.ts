@@ -1,4 +1,4 @@
-export type AppErrorType = 'server' | 'redirect';
+export type AppErrorType = 'auth' | 'server' | 'redirect';
 export type AppErrorMessage = {
     description?: string;
     title: string;

@@ -60,7 +60,7 @@ export const useEmailVerificationModal = () => {
         }
     };
 
-    useApiStatusSync(isLoading, isError, errorMessage);
+    useApiStatusSync(isLoading, isError, errorMessage, { type: 'auth' });
 
     const onSubmit = handleSubmit(onSubmitCallback);
 

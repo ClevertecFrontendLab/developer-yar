@@ -10,6 +10,7 @@ export const overlayStyles: OverlayStyleProps = {
         background: 'blackAlpha.300',
         h: 'full',
         inset: 0,
+        minH: '100vh',
         overflow: 'hidden',
         pointerEvents: 'none',
         pos: 'absolute',

@@ -57,7 +57,10 @@ export const useSignInForm = () => {
         }
     };
 
-    useApiStatusSync(isLoading, isError, errorMessage, { alignment: 'left' });
+    useApiStatusSync(isLoading, isError, errorMessage, {
+        alignment: showNetworkError ? 'center' : 'left',
+        type: 'auth',
+    });
 
     const onSubmit = handleSubmit(onSubmitCallback);
 

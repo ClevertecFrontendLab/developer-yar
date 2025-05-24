@@ -66,7 +66,7 @@ export const useSignUpAccountForm = () => {
         setProgress((prev) => ({ ...prev, account: personalProgress }));
     }, [personalProgress, setProgress]);
 
-    useApiStatusSync(isLoading, isError, errorMessage, { alignment: 'left' });
+    useApiStatusSync(isLoading, isError, errorMessage, { alignment: 'left', type: 'auth' });
 
     const closeVerificationModal = () => {
         navigate(ROUTES.AUTH_SIGN_IN, { replace: true });

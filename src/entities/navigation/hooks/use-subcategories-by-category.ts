@@ -13,20 +13,3 @@ export const useSubcategoriesByCategory = (id?: string) => {
     );
     return { data: subcategories, ...rest };
 };
-
-// import { useMemo } from 'react';
-
-// import { adaptSubcategoriesByCategoryFromDto } from '../adapters/adapt-subcategories-by-category-from-dto';
-// import { useGetSubcategoriesByCategoryQuery } from '../model/api';
-
-// export const useSubcategoriesByCategory = (id?: string) => {
-//     const skip = !id;
-
-//     const { data, ...rest } = useGetSubcategoriesByCategoryQuery(id ?? '', { skip });
-//     const subcategories = useMemo(() => {
-//         if (data) {
-//             adaptSubcategoriesByCategoryFromDto(data);
-//         } else return [];
-//     }, [data]);
-//     return { data: subcategories, ...rest };
-// };

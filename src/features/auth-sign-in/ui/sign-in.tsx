@@ -15,7 +15,7 @@ import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
 import { useSignInForm } from '../hooks/use-sign-in-form';
 import { AuthResetToast } from './auth-reset-toast';
 import { AuthSignInErrorModal } from './auth-sign-in-error-modal';
-import { AuthVerificationToast } from './auth-verification-toast ';
+import { AuthVerificationToast } from './auth-verification-toast';
 import { signInStyles as styles } from './sign-in.styles';
 
 type SignInProps = {

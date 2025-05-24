@@ -39,7 +39,7 @@ export const AuthVerificationErrorModal: FC = () => {
                         <ModalHeaderText>Упс! Что-то пошло не так</ModalHeaderText>
 
                         <ModalTextGroup>
-                            <ModalText>
+                            <ModalText color='light'>
                                 Ваша ссылка для верификации недействительна. Попробуйте
                                 зарегистрироваться снова.
                             </ModalText>

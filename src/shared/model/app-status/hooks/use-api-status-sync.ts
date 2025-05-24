@@ -31,7 +31,7 @@ const useHideErrorWithinLoading = (isLoading: boolean) => {
     const dispatch = useAppDispatch();
     const { errorType } = useAppSelector(selectErrorInfo);
     useEffect(() => {
-        if (isLoading && errorType) dispatch(hideError());
+        if (isLoading && errorType !== 'redirect') dispatch(hideError());
     }, [isLoading, dispatch, errorType]);
 };
 

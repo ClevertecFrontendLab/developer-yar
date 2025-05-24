@@ -43,8 +43,8 @@ export const AuthSignInErrorModal: FC<SignInErrorModalProps> = ({
                     <ModalHeaderText>Вход не выполнен</ModalHeaderText>
 
                     <ModalTextGroup>
-                        <ModalText>Что-то пошло не так.</ModalText>
-                        <ModalText>Попробуйте еще раз</ModalText>
+                        <ModalText color='light'>Что-то пошло не так.</ModalText>
+                        <ModalText color='light'>Попробуйте еще раз</ModalText>
                     </ModalTextGroup>
                 </ModalContentGroup>
 

@@ -1,16 +1,16 @@
 import { TextProps } from '@chakra-ui/react';
 
-import { ModalTextVariant } from './index.types';
+import { ModalTextColorVariant, ModalTextWeightVariant } from './index.types';
 
 export type ModalTextStyleProps = {
-    text: (variant: ModalTextVariant) => TextProps;
+    text: (color: ModalTextColorVariant, weight: ModalTextWeightVariant) => TextProps;
 };
 
 export const modalTextStyles: ModalTextStyleProps = {
-    text: (variant: ModalTextVariant): TextProps => ({
-        color: 'blackAlpha.900',
+    text: (color: ModalTextColorVariant, weight: ModalTextWeightVariant): TextProps => ({
+        color: color === 'light' ? 'blackAlpha.700' : 'blackAlpha.900',
         fontSize: 'md',
-        fontWeight: variant,
+        fontWeight: weight,
         lineHeight: '6',
         sx: {
             textWrap: 'pretty',

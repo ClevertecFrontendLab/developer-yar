@@ -67,7 +67,7 @@ export const useCodeVerificationModal = () => {
         }
     }, [email, onSubmitCallback, otpCode]);
 
-    useApiStatusSync(isLoading, isError, errorMessage);
+    useApiStatusSync(isLoading, isError, errorMessage, { type: 'auth' });
 
     return {
         email,

@@ -25,7 +25,7 @@ export const AuthCodeVerificationModal: FC = () => {
                     {isInvalidOtpCode && <ModalHeaderText>Неверный код</ModalHeaderText>}
                     <ModalTextGroup>
                         <ModalText>Мы отправили вам на e-mail</ModalText>
-                        <ModalText variant='bold'>{email}</ModalText>
+                        <ModalText weight='bold'>{email}</ModalText>
                         <ModalText>шестизначный код. Введите его ниже.</ModalText>
                     </ModalTextGroup>
                     <AuthOtpCodeInput

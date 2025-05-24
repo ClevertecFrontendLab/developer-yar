@@ -1,17 +1,18 @@
 import { BoxProps } from '@chakra-ui/react';
 
-import { AppErrorAlignment } from '~/shared/model';
+import { AppErrorAlignment, AppErrorType } from '~/shared/model';
 
 type AppErrorNotificationStyleProps = {
-    container: (alignment: AppErrorAlignment) => BoxProps;
+    container: (alignment: AppErrorAlignment, type: AppErrorType) => BoxProps;
 };
 
 export const appErrorNotificationStyles: AppErrorNotificationStyleProps = {
-    container: (alignment: AppErrorAlignment): BoxProps => ({
+    container: (alignment: AppErrorAlignment, type: AppErrorType): BoxProps => ({
         bottom: {
-            base: 'calc(var(--chakra-sizes-footer) + 16px)',
+            base: type === 'auth' ? 25 : 'calc(var(--chakra-sizes-footer) + 16px)',
             xl: 20,
         },
+        mt: { base: type === 'auth' ? 16 : 0, xl: 0 },
         left: {
             base: '50%',
             xl: alignment === 'left' ? '25%' : alignment === 'center' ? '50%' : '75%',

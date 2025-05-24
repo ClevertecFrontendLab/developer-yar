@@ -1,6 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import { FC, useCallback } from 'react';
 
+import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
 import { hideError, selectErrorInfo, useAppDispatch, useAppSelector } from '~/shared/model';
 import { AutoClose } from '~/shared/ui/auto-close';
 import { ErrorToast } from '~/shared/ui/toasts';
@@ -18,7 +19,10 @@ export const AppErrorNotification: FC = () => {
     if (errorType)
         return (
             <AutoClose isOpen={!!errorType} onClose={handleOnClose}>
-                <Box {...styles.container(errorAlignment)}>
+                <Box
+                    {...styles.container(errorAlignment, errorType)}
+                    data-test-id={DATA_TEST_ATTRIBUTES.ERROR_NOTIFICATION}
+                >
                     <ErrorToast
                         description={errorMessage.description}
                         title={errorMessage.title}
