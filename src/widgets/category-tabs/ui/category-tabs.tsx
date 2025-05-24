@@ -1,10 +1,11 @@
-import { Stack, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
+import { Stack, TabPanels, Tabs } from '@chakra-ui/react';
 import { FC, memo, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
 import { Subcategory } from '~/entities/navigation';
 import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
 import { LoadMoreButton } from '~/shared/ui/load-more-button';
+import { Tab, TabList, TabPanel } from '~/shared/ui/tabs';
 
 import { categoryTabsStyles as styles } from './category-tabs.styles';
 import { SubcategoryPanel } from './subcategory-panel';
@@ -28,12 +29,10 @@ export const CategoryTabs: FC<CategoryTabsProps> = memo(({ subcategories }) => {
 
     return (
         <Stack {...styles.stackContainer}>
-            <Tabs isLazy index={activeTabIndex} onChange={handleTabChange}>
+            <Tabs index={activeTabIndex} isLazy onChange={handleTabChange}>
                 <TabList {...styles.tabList}>
                     {subcategories.map((subcategory, index) => (
                         <Tab
-                            key={subcategory.id}
-                            {...styles.tab}
                             data-test-id={
                                 index === activeTabIndex && subcategory.slug === 'first-dish'
                                     ? `${subcategory.slug === 'first-dish' ? 'side-dishes' : subcategory.slug}-active`
@@ -43,6 +42,8 @@ export const CategoryTabs: FC<CategoryTabsProps> = memo(({ subcategories }) => {
                                               : subcategory.slug
                                       }-${index}`
                             }
+                            key={subcategory.id}
+                            variant='recipe'
                         >
                             {subcategory.title}
                         </Tab>
@@ -51,7 +52,7 @@ export const CategoryTabs: FC<CategoryTabsProps> = memo(({ subcategories }) => {
 
                 <TabPanels>
                     {subcategories.map((subcategory) => (
-                        <TabPanel key={subcategory.id} {...styles.tabPanel}>
+                        <TabPanel key={subcategory.id}>
                             <SubcategoryPanel subcategoryId={subcategory.id} />
                         </TabPanel>
                     ))}

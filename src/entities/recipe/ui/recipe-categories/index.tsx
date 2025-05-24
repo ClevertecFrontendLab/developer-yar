@@ -12,8 +12,8 @@ type RecipeCategoriesProps = {
 };
 
 export const RecipeCategories: FC<RecipeCategoriesProps> = ({ categories, variant = 'yellow' }) =>
-    categories.map(({ id, title, icon }) => (
-        <Tag key={id} icon={<Icon icon={icon} variant='small' />} variant={variant}>
+    categories.map(({ icon, id, title }) => (
+        <Tag icon={<Icon icon={icon} variant='small' />} key={id} variant={variant}>
             {title}
         </Tag>
     ));

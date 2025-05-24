@@ -1,22 +1,28 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { ApiCategory } from './types';
+import { createBaseQuery, ENDPOINTS } from '~/shared/api';
+
+import { adaptCategoryList } from '../adapters/adapt-caregory-list';
+import { adaptSubcategoriesByCategory } from '../adapters/adapt-subcategories-by-category';
+import { CategoryDto } from '../dto/category.dto';
 
 export const navigationApi = createApi({
-    baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_DATA_API_URL }),
+    baseQuery: createBaseQuery(),
     endpoints: (build) => ({
-        getCategoryList: build.query<ApiCategory[], void>({
-            query: () => `/category`,
+        getCategoryList: build.query<CategoryDto[], void>({
+            query: () => ENDPOINTS.CATEGORIES,
+            transformResponse: adaptCategoryList,
         }),
-        getSubcategoriesByCategory: build.query<ApiCategory, string>({
-            query: (id) => `/category/${id}`,
+        getSubcategoriesByCategory: build.query<CategoryDto, string>({
+            query: (id) => `${ENDPOINTS.CATEGORIES}/${id}`,
+            transformResponse: adaptSubcategoriesByCategory,
         }),
     }),
     reducerPath: 'navigationApi',
 });
 
 export const {
+    endpoints: { getCategoryList, getSubcategoriesByCategory },
     useGetCategoryListQuery,
     useGetSubcategoriesByCategoryQuery,
-    endpoints: { getCategoryList, getSubcategoriesByCategory },
 } = navigationApi;

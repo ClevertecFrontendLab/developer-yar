@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import { FC } from 'react';
 
-import { Breadcrumbs as BreadcrumbsWrapper } from '~/entities/navigation';
+import { Breadcrumbs as BaseBreadcrumbs } from '~/entities/navigation';
 import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
 
 type BreadcrumbsMobileProps = {
@@ -19,7 +19,7 @@ export const BreadcrumbsMobile: FC<BreadcrumbsMobileProps> = ({ onLinkClick }) =
 
     return (
         <Box data-test-id={DATA_TEST_ATTRIBUTES.BREADCRUMBS} onClick={handleClick}>
-            <BreadcrumbsWrapper />
+            <BaseBreadcrumbs />
         </Box>
     );
 };

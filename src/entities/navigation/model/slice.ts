@@ -1,7 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-import { generateId } from '~/shared/lib';
-
 import { initialState } from './init';
 import type { Breadcrumb } from './types';
 
@@ -11,9 +9,9 @@ const breadcrumbsSlice = createSlice({
     reducers: {
         setBreadcrumbs: (_, action: PayloadAction<Breadcrumb[]>) => [
             ...initialState,
-            ...action.payload.map((item) => ({
+            ...action.payload.map((item, index) => ({
                 ...item,
-                id: generateId(),
+                id: (index + 1).toString(),
             })),
         ],
     },

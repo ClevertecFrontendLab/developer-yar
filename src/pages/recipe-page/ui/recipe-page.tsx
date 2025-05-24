@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { useParams } from 'react-router';
 
 import { useRecipeById } from '~/entities/recipe';
-import { useAppStatusSync } from '~/shared/model';
+import { useApiStatusSync } from '~/shared/model';
 import { NewRecipes } from '~/widgets/new-recipes';
 
 import { CookingSteps } from './cooking-steps';
@@ -18,12 +18,12 @@ const RecipePage: FC = () => {
 
     const {
         data: recipe,
-        isSuccess: isRecipeSuccess,
-        isLoading: isRecipeLoading,
         isError: isRecipeError,
+        isLoading: isRecipeLoading,
+        isSuccess: isRecipeSuccess,
     } = useRecipeById(id);
 
-    useAppStatusSync(isRecipeLoading, isRecipeError);
+    useApiStatusSync(isRecipeLoading, isRecipeError);
 
     if (isRecipeSuccess && recipe) {
         return (

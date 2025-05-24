@@ -3,8 +3,8 @@ import { FC, useMemo } from 'react';
 import { useParams } from 'react-router';
 
 import { useCategoryList, useSubcategoriesByCategory } from '~/entities/navigation';
-import { useFoundRecipes } from '~/features/recipe-search';
-import { useAppStatusSync } from '~/shared/model';
+import { useFoundRecipes } from '~/features/recipe-refinement';
+import { useApiStatusSync } from '~/shared/model';
 import { PageDescription } from '~/shared/ui/page-description';
 import { PageTitle } from '~/shared/ui/page-title';
 import { CategoryTabs } from '~/widgets/category-tabs';
@@ -19,8 +19,8 @@ const RecipesPage: FC = () => {
     const { category } = useParams();
     const {
         data: categories,
-        isLoading: isCategoriesLoading,
         isError: isCategoriesError,
+        isLoading: isCategoriesLoading,
         isSuccess: isCategoriesSuccess,
     } = useCategoryList();
 
@@ -31,18 +31,18 @@ const RecipesPage: FC = () => {
 
     const {
         data: subcategories,
-        isLoading: isSubcategoriesLoading,
         isError: isSubcategoriesError,
+        isLoading: isSubcategoriesLoading,
         isSuccess: isSubcategoriesSuccess,
     } = useSubcategoriesByCategory(currentCategory?.id);
 
-    const { recipes, isRecipesLoading, isRecipesError, isRecipesSuccess, searchQuery, mode } =
+    const { isRecipesError, isRecipesLoading, isRecipesSuccess, mode, recipes, searchQuery } =
         useFoundRecipes();
 
     const isLoading = isCategoriesLoading || isSubcategoriesLoading || isRecipesLoading;
     const isError = isCategoriesError || isSubcategoriesError || isRecipesError;
 
-    useAppStatusSync(isLoading, isError);
+    useApiStatusSync(isLoading, isError);
 
     if (
         isCategoriesSuccess &&

@@ -1,8 +1,8 @@
 import { Box, Flex } from '@chakra-ui/react';
 import { FC } from 'react';
 
-import { useFoundRecipes } from '~/features/recipe-search/';
-import { useAppStatusSync } from '~/shared/model';
+import { useFoundRecipes } from '~/features/recipe-refinement';
+import { useApiStatusSync } from '~/shared/model';
 import { PageTitle } from '~/shared/ui/page-title';
 import { FoundRecipes } from '~/widgets/found-recipes';
 import { NewRecipes } from '~/widgets/new-recipes';
@@ -15,10 +15,10 @@ import { homePageStyles as styles } from './home-page.styles';
 import { TheJuiciest } from './the-juiciest';
 
 const HomePage: FC = () => {
-    const { recipes, isRecipesLoading, isRecipesError, isRecipesSuccess, searchQuery, mode } =
+    const { isRecipesError, isRecipesLoading, isRecipesSuccess, mode, recipes, searchQuery } =
         useFoundRecipes();
 
-    useAppStatusSync(isRecipesLoading, isRecipesError);
+    useApiStatusSync(isRecipesLoading, isRecipesError);
 
     return (
         <>

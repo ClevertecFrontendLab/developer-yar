@@ -18,9 +18,9 @@ export const MenuTree: FC = memo(() => {
             >
                 {menu.map((item) => (
                     <SubmenuTree
-                        key={item.id}
                         icon={item.icon}
                         id={item.id}
+                        key={item.id}
                         submenu={item.submenu}
                         title={item.title}
                         url={item.url}

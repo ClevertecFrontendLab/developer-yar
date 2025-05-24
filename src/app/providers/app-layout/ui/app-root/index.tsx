@@ -3,8 +3,6 @@ import { FC, PropsWithChildren } from 'react';
 
 import { appRootStyles as styles } from './index.styles';
 
-type AppRootProps = PropsWithChildren;
-
-export const AppRoot: FC<AppRootProps> = ({ children }) => (
+export const AppRoot: FC<PropsWithChildren> = ({ children }) => (
     <Box {...styles.container}>{children}</Box>
 );

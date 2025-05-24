@@ -4,7 +4,7 @@ import { FC } from 'react';
 
 import { Breadcrumbs, MenuTree } from '~/entities/navigation';
 import { UserCard, UserStats } from '~/entities/user';
-import { LogOut } from '~/features/log-out';
+import { LogOutButton } from '~/features/auth-log-out';
 import { DATA_TEST_ATTRIBUTES, mockCurrentUser } from '~/shared/consts';
 import { getDisplayForBreakpoints, useToggleMenu } from '~/shared/lib';
 import { InfoPanel } from '~/shared/ui/info-panel';
@@ -64,7 +64,7 @@ export const Header: FC = () => {
                             <Box {...styles.menuListWrapper}>{isOpen && <MenuTree />}</Box>
                             <Box {...styles.infoPanelWrapper}>
                                 <InfoPanel>
-                                    <LogOut />
+                                    <LogOutButton />
                                 </InfoPanel>
                             </Box>
                         </Stack>

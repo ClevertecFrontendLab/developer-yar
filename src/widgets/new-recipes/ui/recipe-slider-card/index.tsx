@@ -23,7 +23,7 @@ type RecipeSliderCardProps = {
 };
 
 export const RecipeSliderCard: FC<RecipeSliderCardProps> = memo(
-    ({ title, description, image, categories, bookmarks = 0, likes = 0 }) => {
+    ({ bookmarks = 0, categories, description, image, likes = 0, title }) => {
         const headingLines = useBreakpointValue({ base: 2, xl: 1 });
 
         return (

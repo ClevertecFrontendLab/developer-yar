@@ -61,10 +61,10 @@ export const Ingredients: FC<IngredientsProps> = memo(({ ingredients, recipePort
                 <Tbody>
                     {ingredients.map((ingredient, index) => (
                         <IngredientRow
-                            key={ingredient.title}
                             currentPortions={currentPortions}
                             dataTestId={`ingredient-quantity-${index}`}
                             ingredient={ingredient}
+                            key={ingredient.title}
                             recipePortions={recipePortions}
                             variant={index % 2 === 1 ? 'white' : 'gray'}
                         />

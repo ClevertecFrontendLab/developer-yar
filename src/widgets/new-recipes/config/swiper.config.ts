@@ -18,5 +18,5 @@ export const swiperConfig: SwiperOptions = {
         prevEl: '.swiper-button-prev',
     },
     slidesPerView: 'auto',
-    speed: 50,
+    speed: 500,
 };

@@ -1,7 +1,11 @@
 import { AppStatus } from './types';
 
 export const initialState: AppStatus = {
-    errorMessage: null,
+    errorAlignment: 'center',
+    errorMessage: {
+        description: '',
+        title: '',
+    },
     errorType: null,
     isLoading: false,
 };

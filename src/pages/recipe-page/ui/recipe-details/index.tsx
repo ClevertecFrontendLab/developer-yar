@@ -4,8 +4,8 @@ import { FC, memo } from 'react';
 import { Category } from '~/entities/navigation';
 import { RecipeStats } from '~/entities/recipe';
 import { RecipeCategories } from '~/entities/recipe';
-import { AddRecipeToFavoritesButton } from '~/features/add-recipe-to-favorites';
-import { LikeRecipeButton } from '~/features/like-recipe';
+import { AddToFavoritesButton } from '~/features/recipe-favorites';
+import { RecipeLikesButton } from '~/features/recipe-likes';
 import { AlarmIcon } from '~/shared/ui/icons';
 import { PageTitle } from '~/shared/ui/page-title';
 import { Tag } from '~/shared/ui/tag';
@@ -45,8 +45,8 @@ export const RecipeDetails: FC<RecipeDetailsProps> = memo(
                         {time} минут
                     </Tag>
                     <Flex {...styles.actionButtons}>
-                        <LikeRecipeButton />
-                        <AddRecipeToFavoritesButton variant='primary' />
+                        <RecipeLikesButton />
+                        <AddToFavoritesButton variant='primary' />
                     </Flex>
                 </Flex>
             </Flex>

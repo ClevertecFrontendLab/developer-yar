@@ -2,7 +2,7 @@ import { Avatar, Flex, Stack, Text } from '@chakra-ui/react';
 import { FC, memo } from 'react';
 
 import { User } from '~/entities/user';
-import { FollowAuthorButton } from '~/features/follow-author';
+import { AuthorFollowButton } from '~/features/author-follow';
 import { FollowersBadge } from '~/shared/ui/badges';
 
 import { authorStyles as styles } from './index.styles';
@@ -23,7 +23,7 @@ export const RecipeAuthor: FC<RecipeAuthorProps> = memo(({ author }) => (
                 </Stack>
             </Flex>
             <Flex {...styles.authorMeta}>
-                <FollowAuthorButton />
+                <AuthorFollowButton />
                 <FollowersBadge value={125} />
             </Flex>
         </Stack>

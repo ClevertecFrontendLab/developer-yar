@@ -32,6 +32,16 @@ const sizes = {
     minPageWidth: '20rem',
 };
 
+const gridLayout = {
+    gap: { '2xl': 6, base: 3, md: 4 },
+    gridTemplateColumns: {
+        '3xl': 'repeat(2,1fr)',
+        base: '1fr',
+        md: 'repeat(2,1fr)',
+        xl: '1fr',
+    },
+};
+
 const pageLayout = {
     flexDirection: 'column',
     gap: { base: 8, xl: 10 },
@@ -58,19 +68,9 @@ const subtleOutlineHover = {
 };
 
 export const layerStyles = {
-    gridLayout: {
-        gap: { '2xl': 6, base: 3, md: 4 },
-        gridTemplateColumns: {
-            '3xl': 'repeat(2,1fr)',
-            base: '1fr',
-            md: 'repeat(2,1fr)',
-            xl: '1fr',
-        },
-    },
+    gridLayout,
     pageLayout,
-
     subtleOutline,
-
     subtleOutlineHover,
 };
 

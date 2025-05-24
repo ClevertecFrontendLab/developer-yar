@@ -1,28 +1,37 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { initialState } from './init';
-import { ErrorType } from './types';
+import { AppErrorAlignment, AppErrorMessage, AppErrorType } from './types';
 
 const appStatusSlice = createSlice({
     initialState,
     name: 'appStatus',
     reducers: {
-        clearError: (state) => {
+        hideError: (state) => {
             state.errorType = null;
-            state.errorMessage = null;
+            state.errorMessage = initialState.errorMessage;
+            state.errorAlignment = initialState.errorAlignment;
         },
-
-        setError: (state, action: PayloadAction<{ message: string; type: ErrorType }>) => {
-            state.errorType = action.payload.type;
-            state.errorMessage = action.payload.message;
+        setLoading: (state, { payload }: PayloadAction<boolean>) => {
+            state.isLoading = payload;
         },
-
-        setLoading: (state, action: PayloadAction<boolean>) => {
-            state.isLoading = action.payload;
+        showError: (
+            state,
+            {
+                payload,
+            }: PayloadAction<{
+                alignment?: AppErrorAlignment;
+                message: AppErrorMessage;
+                type?: AppErrorType;
+            }>,
+        ) => {
+            state.errorType = payload.type ?? 'server';
+            state.errorMessage = payload.message;
+            state.errorAlignment = payload.alignment ?? 'center';
         },
     },
 });
 
-export const { setLoading, setError, clearError } = appStatusSlice.actions;
+export const { hideError, setLoading, showError } = appStatusSlice.actions;
 
 export const appStatusReducer = appStatusSlice.reducer;

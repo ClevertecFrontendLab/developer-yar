@@ -8,7 +8,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { useRecipes } from '~/entities/recipe';
 import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
 import { getDisplayForBreakpoints } from '~/shared/lib';
-import { useAppStatusSync } from '~/shared/model';
+import { useApiStatusSync } from '~/shared/model';
 import { SectionTitle } from '~/shared/ui/section-title';
 
 import { swiperConfig } from '../config/swiper.config';
@@ -25,12 +25,12 @@ export const NewRecipes: FC = () => {
 
     const {
         data: recipes,
-        isLoading: isRecipesLoading,
         isError: isRecipesError,
+        isLoading: isRecipesLoading,
         isSuccess: isRecipesSuccess,
     } = useRecipes({ limit: 10, sortBy: 'createdAt', sortOrder: 'DESC' });
 
-    useAppStatusSync(isRecipesLoading, isRecipesError);
+    useApiStatusSync(isRecipesLoading, isRecipesError);
 
     if (isRecipesSuccess && recipes)
         return (

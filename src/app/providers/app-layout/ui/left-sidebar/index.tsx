@@ -2,7 +2,7 @@ import { Box, Flex, useBreakpointValue } from '@chakra-ui/react';
 import { FC, memo } from 'react';
 
 import { MenuTree } from '~/entities/navigation';
-import { LogOut } from '~/features/log-out';
+import { LogOutButton } from '~/features/auth-log-out';
 import { getDisplayForBreakpoints } from '~/shared/lib';
 import { InfoPanel } from '~/shared/ui/info-panel';
 
@@ -20,7 +20,7 @@ export const LeftSidebar: FC = memo(() => {
             <Box {...styles.navigationWrapper}>{isDesktop && <MenuTree />}</Box>
             <Box {...styles.infoPanelWrapper}>
                 <InfoPanel>
-                    <LogOut />
+                    <LogOutButton />
                 </InfoPanel>
             </Box>
         </Flex>

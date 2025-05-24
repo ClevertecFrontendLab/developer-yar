@@ -1,35 +1,33 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 
+import { createBaseQuery, ENDPOINTS } from '~/shared/api';
 import { queryWithParams } from '~/shared/lib';
 
-import {
-    ApiRecipe,
-    ApiRecipeItem,
-    GetAllRecipesQueryParams,
-    GetRecipesBySubcategoryIdArgs,
-} from './types';
+import { RecipeDto } from '../dto/recipe.dto';
+import { RecipeItemDto } from '../dto/recipe-item.dto';
+import { GetAllRecipesQueryParams, GetRecipesBySubcategoryIdArgs } from './types';
 
 export const recipesApi = createApi({
-    baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_DATA_API_URL }),
+    baseQuery: createBaseQuery(),
     endpoints: (builder) => ({
-        getAllRecipes: builder.query<ApiRecipe, GetAllRecipesQueryParams>({
+        getAllRecipes: builder.query<RecipeDto, GetAllRecipesQueryParams>({
             query: (params: GetAllRecipesQueryParams) =>
-                queryWithParams({ params, url: '/recipe' }),
+                queryWithParams({ params, url: ENDPOINTS.RECIPES }),
         }),
-        getRecipeById: builder.query<ApiRecipeItem, string>({
-            query: (id: string) => `/recipe/${id}`,
+        getRecipeById: builder.query<RecipeItemDto, string>({
+            query: (id: string) => `${ENDPOINTS.RECIPES}/${id}`,
         }),
-        getRecipesBySubcategoryId: builder.query<ApiRecipe, GetRecipesBySubcategoryIdArgs>({
+        getRecipesBySubcategoryId: builder.query<RecipeDto, GetRecipesBySubcategoryIdArgs>({
             query: ({ id, params }: GetRecipesBySubcategoryIdArgs) =>
-                queryWithParams({ params, url: `/recipe/category/${id}` }),
+                queryWithParams({ params, url: `${ENDPOINTS.RECIPES_BY_SUBCATEGORY}/${id}` }),
         }),
     }),
     reducerPath: 'recipesApi',
 });
 
 export const {
+    endpoints: { getAllRecipes, getRecipeById, getRecipesBySubcategoryId },
     useGetAllRecipesQuery,
-    useGetRecipesBySubcategoryIdQuery,
     useGetRecipeByIdQuery,
-    endpoints: { getAllRecipes, getRecipesBySubcategoryId, getRecipeById },
+    useGetRecipesBySubcategoryIdQuery,
 } = recipesApi;
