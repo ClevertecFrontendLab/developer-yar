@@ -5,8 +5,8 @@ import { DropdownPreviewStyles as styles } from '../index.styles';
 
 type SingleDropdownPreviewProps = {
     item: string;
-    placeholder?: string;
     shouldShowPlaceholder: boolean;
+    placeholder?: string;
 };
 
 export const SingleDropdownPreview: FC<SingleDropdownPreviewProps> = ({

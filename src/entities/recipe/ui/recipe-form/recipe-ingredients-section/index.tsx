@@ -3,17 +3,17 @@ import { Grid, GridItem, Input, Stack, Text } from '@chakra-ui/react';
 import { FC, useCallback } from 'react';
 import { Control, Controller, FieldErrors } from 'react-hook-form';
 
-import { Ingredient } from '~/entities/recipe';
 import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
 import { getDisplayForBreakpoints, getErrorOutline } from '~/shared/lib';
 import { AddIcon, AddSmallIcon } from '~/shared/ui/icons';
 
+import { Ingredient } from '../../../model/types';
 import { RecipeFormData } from '../../../model/types';
 import { RecipeTextLabel } from '../recipe-text-label';
-import { ingredientsSectionStyles as styles } from './index.styles';
+import { recipeIngredientsSectionStyles as styles } from './index.styles';
 import { MeasureUnitsMenu } from './measure-units-menu';
 
-type IngredientsSectionProps = {
+type RecipeIngredientsSectionProps = {
     append: (ingredient: Ingredient) => void;
     control: Control<RecipeFormData>;
     errors: FieldErrors<RecipeFormData>;
@@ -23,7 +23,7 @@ type IngredientsSectionProps = {
 
 const shownFromMdBreakpoint = getDisplayForBreakpoints({ display: 'grid', from: 'md' });
 
-export const IngredientsSection: FC<IngredientsSectionProps> = ({
+export const RecipeIngredientsSection: FC<RecipeIngredientsSectionProps> = ({
     control,
     errors,
     fields,
@@ -35,20 +35,20 @@ export const IngredientsSection: FC<IngredientsSectionProps> = ({
     }, [append]);
 
     return (
-        <Stack {...styles.ingredientsContainer}>
+        <Stack {...styles.recipeIngredientsContainer}>
             <RecipeTextLabel>
                 Добавьте ингредиенты рецепта, нажав на кнопку
                 <AddSmallIcon {...styles.addSmallIcon} />
             </RecipeTextLabel>
 
-            <Grid {...styles.ingredientsLabelContainer} {...shownFromMdBreakpoint}>
+            <Grid {...styles.recipeIngredientsLabelContainer} {...shownFromMdBreakpoint}>
                 <Text {...styles.ingredientLabel}>Ингредиенты</Text>
                 <Text {...styles.ingredientLabel}>Количество</Text>
                 <Text {...styles.ingredientLabel}>Единица измерения</Text>
             </Grid>
 
             {fields.map((field, index) => (
-                <Grid key={field.id} {...styles.ingredientsTableGrid}>
+                <Grid key={field.id} {...styles.recipeIngredientsTableGrid}>
                     <GridItem {...styles.ingredientInput}>
                         <Controller
                             control={control}
@@ -57,7 +57,7 @@ export const IngredientsSection: FC<IngredientsSectionProps> = ({
                                 <Input
                                     placeholder='Ингредиент'
                                     {...field}
-                                    {...styles.ingredientsTableInput}
+                                    {...styles.recipeIngredientsTableInput}
                                     {...getErrorOutline(
                                         Boolean(errors.ingredients?.[index]?.title),
                                     )}
@@ -76,7 +76,7 @@ export const IngredientsSection: FC<IngredientsSectionProps> = ({
                                     placeholder='100'
                                     value={field.value}
                                     onChange={(e) => field.onChange(+e.target.value)}
-                                    {...styles.ingredientsTableInput}
+                                    {...styles.recipeIngredientsTableInput}
                                     {...getErrorOutline(
                                         Boolean(errors.ingredients?.[index]?.count),
                                     )}
@@ -95,7 +95,7 @@ export const IngredientsSection: FC<IngredientsSectionProps> = ({
                                     index={index}
                                     isInvalid={Boolean(errors.ingredients?.[index]?.measureUnit)}
                                     value={field.value}
-                                    onChange={(val) => field.onChange(val)}
+                                    onChange={(value) => field.onChange(value)}
                                 />
                             )}
                         />

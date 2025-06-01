@@ -4,15 +4,15 @@ import { FC, memo } from 'react';
 import { Step } from '~/entities/recipe';
 import { Tag } from '~/shared/ui/tag';
 
-import { cookingStepStyles as styles } from './index.styles';
+import { RecipeCookingStepstyles as styles } from './index.styles';
 
-type CookingStepProps = {
+type RecipeCookingStepProps = {
     step: Step;
 };
 
-export const CookingStep: FC<CookingStepProps> = memo(
+export const RecipeCookingStep: FC<RecipeCookingStepProps> = memo(
     ({ step: { description, image, stepNumber } }) => (
-        <Grid {...styles.cookingStep(Boolean(image))}>
+        <Grid {...styles.recipeRecipeCookingStep(Boolean(image))}>
             {image && <Image alt={`Шаг ${stepNumber}`} src={image} {...styles.image} />}
             <Stack {...styles.content}>
                 <Tag>Шаг {stepNumber}</Tag>

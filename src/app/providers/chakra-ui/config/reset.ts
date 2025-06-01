@@ -33,10 +33,10 @@ export const componentsWithDefaultStyles = {
     Drawer: {
         baseStyle: {
             dialog: {
-                zIndex: '9999',
+                zIndex: 'tooltip',
             },
             dialogContainer: {
-                zIndex: '9999',
+                zIndex: 'tooltip',
             },
         },
     },

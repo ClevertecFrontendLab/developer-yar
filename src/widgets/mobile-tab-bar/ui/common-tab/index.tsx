@@ -5,8 +5,8 @@ import { commonTabStyles as styles } from './index.styles';
 
 type CommonTabProps = {
     children: ReactNode;
-    isActiveTab?: boolean;
     text: string;
+    isActiveTab?: boolean;
 };
 
 export const CommonTab: FC<CommonTabProps> = ({ children, isActiveTab, text }) => (

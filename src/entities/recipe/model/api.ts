@@ -4,7 +4,7 @@ import { createBaseQuery, ENDPOINTS } from '~/shared/api';
 import { buildAbsoluteUrl, queryWithParams } from '~/shared/lib';
 
 import { RecipeDto } from '../dto/recipe.dto';
-import { RecipeCreationDto } from '../dto/recipe-creation.dto';
+import { RecipeFormDto } from '../dto/recipe-form.dto';
 import { RecipeItemDto } from '../dto/recipe-item.dto';
 import { mapUploadedFileFromDto } from '../mappers/map-uploaded-file-from-dto';
 import {
@@ -16,10 +16,40 @@ import {
 
 export const recipesApi = createApi({
     baseQuery: createBaseQuery(),
-    reducerPath: 'recipesApi',
-    tagTypes: ['RecipesList', 'Recipe'],
-
     endpoints: (builder) => ({
+        bookmarkRecipe: builder.mutation<void, string>({
+            invalidatesTags: (_result, _error, id) => [{ id, type: 'Recipe' }, 'RecipesList'],
+            query: (id) => ({
+                method: 'POST',
+                url: buildAbsoluteUrl(ENDPOINTS.RECIPES, id, ENDPOINTS.BOOKMARK_RECIPE),
+            }),
+        }),
+
+        deleteRecipe: builder.mutation<void, string>({
+            invalidatesTags: ['RecipesList'],
+            query: (id) => ({
+                method: 'DELETE',
+                url: buildAbsoluteUrl(ENDPOINTS.DELETE_RECIPE, id),
+            }),
+        }),
+
+        draftRecipe: builder.mutation<void, RecipeFormDto>({
+            query: (data) => ({
+                body: data,
+                method: 'POST',
+                url: ENDPOINTS.DRAFT_RECIPE,
+            }),
+        }),
+
+        editRecipe: builder.mutation<RecipeItemDto, EditRecipeArgs>({
+            invalidatesTags: (_result, _error, { id }) => [{ id, type: 'Recipe' }, 'RecipesList'],
+            query: ({ id, data }) => ({
+                body: data,
+                method: 'PATCH',
+                url: buildAbsoluteUrl(ENDPOINTS.EDIT_RECIPE, id),
+            }),
+        }),
+
         getAllRecipes: builder.query<RecipeDto, GetAllRecipesQueryParams>({
             providesTags: ['RecipesList'],
             query: (params: GetAllRecipesQueryParams) =>
@@ -27,7 +57,7 @@ export const recipesApi = createApi({
         }),
 
         getRecipeById: builder.query<RecipeItemDto, string>({
-            providesTags: (_result, _error, id) => [{ type: 'Recipe', id }],
+            providesTags: (_result, _error, id) => [{ id, type: 'Recipe' }],
             query: (id: string) => buildAbsoluteUrl(ENDPOINTS.RECIPES, id),
         }),
 
@@ -40,53 +70,20 @@ export const recipesApi = createApi({
                 }),
         }),
 
-        draftRecipe: builder.mutation<void, RecipeCreationDto>({
-            query: (data) => ({
-                body: data,
+        likeRecipe: builder.mutation<void, string>({
+            invalidatesTags: (_result, _error, id) => [{ id, type: 'Recipe' }, 'RecipesList'],
+            query: (id) => ({
                 method: 'POST',
-                url: ENDPOINTS.DRAFT_RECIPE,
+                url: buildAbsoluteUrl('recipe', id, ENDPOINTS.LIKE_RECIPE),
             }),
         }),
 
-        publishRecipe: builder.mutation<RecipeItemDto, RecipeCreationDto>({
+        publishRecipe: builder.mutation<RecipeItemDto, RecipeFormDto>({
             invalidatesTags: ['RecipesList'],
             query: (data) => ({
                 body: data,
                 method: 'POST',
                 url: ENDPOINTS.PUBLISH_RECIPE,
-            }),
-        }),
-
-        editRecipe: builder.mutation<RecipeItemDto, EditRecipeArgs>({
-            invalidatesTags: (_result, _error, { id }) => [{ type: 'Recipe', id }, 'RecipesList'],
-            query: ({ id, data }) => ({
-                body: data,
-                method: 'PATCH',
-                url: buildAbsoluteUrl(ENDPOINTS.EDIT_RECIPE, id),
-            }),
-        }),
-
-        deleteRecipe: builder.mutation<void, string>({
-            invalidatesTags: ['RecipesList'],
-            query: (id) => ({
-                method: 'DELETE',
-                url: buildAbsoluteUrl(ENDPOINTS.DELETE_RECIPE, id),
-            }),
-        }),
-
-        bookmarkRecipe: builder.mutation<void, string>({
-            invalidatesTags: (_result, _error, id) => [{ type: 'Recipe', id }, 'RecipesList'],
-            query: (id) => ({
-                method: 'POST',
-                url: buildAbsoluteUrl(ENDPOINTS.RECIPES, id, ENDPOINTS.BOOKMARK_RECIPE),
-            }),
-        }),
-
-        likeRecipe: builder.mutation<void, string>({
-            invalidatesTags: (_result, _error, id) => [{ type: 'Recipe', id }, 'RecipesList'],
-            query: (id) => ({
-                method: 'POST',
-                url: buildAbsoluteUrl('recipe', id, ENDPOINTS.LIKE_RECIPE),
             }),
         }),
 
@@ -104,6 +101,9 @@ export const recipesApi = createApi({
             transformResponse: mapUploadedFileFromDto,
         }),
     }),
+    reducerPath: 'recipesApi',
+
+    tagTypes: ['RecipesList', 'Recipe'],
 });
 
 export const {

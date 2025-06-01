@@ -26,7 +26,7 @@ export const AppLayout: FC = () => {
     const hideSidebarPatterns = [ROUTES.NEW_RECIPE, ROUTES.EDIT_RECIPE];
 
     const shouldShowRightSidebar = !hideSidebarPatterns.some(
-        (pattern) => matchPath({ path: pattern, end: true }, pathname) !== null,
+        (pattern) => matchPath({ end: true, path: pattern }, pathname) !== null,
     );
 
     return (

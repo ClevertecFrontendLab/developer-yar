@@ -1,12 +1,12 @@
 import { ButtonProps, IconProps, StackProps } from '@chakra-ui/react';
 
-type CookingStepsStyleProps = {
+type RecipeCookingStepsStyleProps = {
+    RecipeCookingSteps: StackProps;
     addNewStepButton: ButtonProps;
     addNewStepButtonIcon: IconProps;
-    cookingSteps: StackProps;
 };
 
-export const cookingStepsStyles: CookingStepsStyleProps = {
+export const RecipeCookingStepsStyles: RecipeCookingStepsStyleProps = {
     addNewStepButton: {
         alignSelf: 'end',
         borderColor: 'blackAlpha.600',
@@ -25,7 +25,7 @@ export const cookingStepsStyles: CookingStepsStyleProps = {
     addNewStepButtonIcon: {
         boxSize: 3.5,
     },
-    cookingSteps: {
+    RecipeCookingSteps: {
         gap: 4,
     },
 };

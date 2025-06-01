@@ -1,9 +1,9 @@
 import { FC, PropsWithChildren, useEffect } from 'react';
 
 type AutoCloseProps = {
-    autoCloseDelayMs?: number;
     isOpen: boolean;
     onClose: () => void;
+    autoCloseDelayMs?: number;
 } & PropsWithChildren;
 
 export const AutoClose: FC<AutoCloseProps> = ({

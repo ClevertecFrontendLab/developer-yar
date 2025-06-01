@@ -7,11 +7,11 @@ import { getRecipeOwnership } from '~/features/recipe-ownership';
 import { useApiStatusSync } from '~/shared/model';
 import { NewRecipes } from '~/widgets/new-recipes';
 
-import { CookingSteps } from './cooking-steps';
-import { Ingredients } from './ingredients';
-import { NutritionValue } from './nutrition-value';
 import { RecipeAuthor } from './recipe-author';
+import { RecipeCookingSteps } from './recipe-cooking-steps';
 import { RecipeDetails } from './recipe-details';
+import { RecipeIngredients } from './recipe-ingredients';
+import { RecipeNutritionValue } from './recipe-nutrition-value';
 import { recipePageStyles as styles } from './recipe-page.styles';
 
 const RecipePage: FC = () => {
@@ -44,16 +44,16 @@ const RecipePage: FC = () => {
                         title={recipe.title}
                     />
 
-                    <Box {...styles.nutritionValueWrapper}>
-                        <NutritionValue nutritionValue={recipe.nutritionValue} />
+                    <Box {...styles.recipeNutritionValueWrapper}>
+                        <RecipeNutritionValue recipeNutritionValue={recipe.nutritionValue} />
                     </Box>
 
                     <Stack {...styles.recipeContentWrapper}>
-                        <Ingredients
+                        <RecipeIngredients
                             ingredients={recipe.ingredients}
-                            recipePortions={recipe.portions}
+                            portions={recipe.portions}
                         />
-                        <CookingSteps steps={recipe.steps} />
+                        <RecipeCookingSteps steps={recipe.steps} />
                         <RecipeAuthor author={recipe.author} />
                     </Stack>
 

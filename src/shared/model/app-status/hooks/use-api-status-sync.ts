@@ -3,20 +3,13 @@ import { useEffect, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { selectErrorInfo } from '../selectors';
 import { hideError, setLoading, showError, showSuccess } from '../slice';
-import { AppErrorMessage, AppErrorType, AppMessageAlignment } from '../types';
-
-type ErrorStatus = {
-    alignment?: AppMessageAlignment;
-    isError?: boolean;
-    message?: AppErrorMessage;
-    type?: AppErrorType;
-};
-
-type SuccessStatus = {
-    alignment?: AppMessageAlignment;
-    isSuccess?: boolean;
-    message?: string;
-};
+import {
+    AppErrorMessage,
+    AppErrorType,
+    AppMessageAlignment,
+    ErrorStatus,
+    SuccessStatus,
+} from '../types';
 
 const DEFAULT_ERROR_STATUS: Required<ErrorStatus> = {
     alignment: 'center',
@@ -40,8 +33,16 @@ export const useApiStatusSync = (
     rawSuccess: SuccessStatus = DEFAULT_SUCCESS_STATUS,
 ) => {
     const error = useMemo(
-        () => rawError,
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        () => ({
+            alignment: rawError.alignment,
+            isError: rawError.isError ?? false,
+            message: {
+                title: rawError.message?.title ?? DEFAULT_ERROR_STATUS.message.title,
+                description:
+                    rawError.message?.description ?? DEFAULT_ERROR_STATUS.message.description,
+            },
+            type: rawError.type,
+        }),
         [
             rawError.isError,
             rawError.message?.title,
@@ -52,8 +53,11 @@ export const useApiStatusSync = (
     );
 
     const success = useMemo(
-        () => rawSuccess,
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        () => ({
+            alignment: rawSuccess.alignment,
+            isSuccess: rawSuccess.isSuccess,
+            message: rawSuccess.message,
+        }),
         [rawSuccess.isSuccess, rawSuccess.message, rawSuccess.alignment],
     );
 

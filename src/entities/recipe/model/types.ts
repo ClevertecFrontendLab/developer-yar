@@ -2,7 +2,7 @@ import { Category, Subcategory } from '~/entities/navigation/@x/recipe';
 import { User } from '~/entities/user/@x/recipe';
 import { InferFormData } from '~/shared/model';
 
-import { RecipeCreationDto } from '../dto/recipe-creation.dto';
+import { RecipeFormDto } from '../dto/recipe-form.dto';
 import { baseSchema } from './schema';
 
 export type UploadedFile = string;
@@ -11,7 +11,7 @@ export type RecipeFormData = InferFormData<typeof baseSchema>;
 export type RecipeFormFiledName = keyof InferFormData<typeof baseSchema>;
 
 export type EditRecipeArgs = {
-    data: RecipeCreationDto;
+    data: RecipeFormDto;
     id: string;
 };
 
@@ -50,21 +50,21 @@ export type RecipeItem = {
     categories: Category[];
     date: string;
     description: string;
-    garnish?: string;
     id: string;
     image: string;
     ingredients: Ingredient[];
     likes: number;
-    meat?: string;
     nutritionValue: NutritionValue;
     portions: number;
-    recommendedBy?: User;
     steps: Step[];
     subcategories: Subcategory[];
     time: number;
     title: string;
     url: string;
     views: number;
+    garnish?: string;
+    meat?: string;
+    recommendedBy?: User;
 };
 
 export type RecipeMeta = {
@@ -89,8 +89,8 @@ export type Ingredient = {
 
 export type Step = {
     description: string;
-    image?: string | null;
     stepNumber: number;
+    image?: string | null;
 };
 
 export type TagColor = 'yellow' | 'green';

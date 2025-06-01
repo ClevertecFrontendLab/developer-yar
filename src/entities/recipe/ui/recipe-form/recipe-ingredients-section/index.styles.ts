@@ -7,7 +7,7 @@ import {
     TextProps,
 } from '@chakra-ui/react';
 
-type IngredientsSectionStyleProps = {
+type RecipeIngredientsSectionStyleProps = {
     addIngredientButton: GridItemProps;
     addIngredientIcon: IconProps;
     addSmallIcon: IconProps;
@@ -16,14 +16,14 @@ type IngredientsSectionStyleProps = {
     deleteIngredientIcon: IconProps;
     ingredientInput: GridItemProps;
     ingredientLabel: TextProps;
-    ingredientsContainer: StackProps;
-    ingredientsLabelContainer: GridProps;
-    ingredientsTableGrid: GridProps;
-    ingredientsTableInput: InputProps;
     measureUnitInput: GridItemProps;
+    recipeIngredientsContainer: StackProps;
+    recipeIngredientsLabelContainer: GridProps;
+    recipeIngredientsTableGrid: GridProps;
+    recipeIngredientsTableInput: InputProps;
 };
 
-export const ingredientsSectionStyles: IngredientsSectionStyleProps = {
+export const recipeIngredientsSectionStyles: RecipeIngredientsSectionStyleProps = {
     addIngredientButton: {},
     addIngredientIcon: {
         boxSize: 8,
@@ -52,15 +52,16 @@ export const ingredientsSectionStyles: IngredientsSectionStyleProps = {
         lineHeight: '4',
         px: 4,
     },
-    ingredientsContainer: {
+    measureUnitInput: { area: 'measureUnit' },
+    recipeIngredientsContainer: {
         gap: 4,
     },
-    ingredientsLabelContainer: {
+
+    recipeIngredientsLabelContainer: {
         gap: { base: 4, xl: 6 },
         gridTemplateColumns: '0.45fr 0.2fr 0.3fr',
     },
-
-    ingredientsTableGrid: {
+    recipeIngredientsTableGrid: {
         alignItems: 'center',
         columnGap: 4,
 
@@ -74,7 +75,7 @@ export const ingredientsSectionStyles: IngredientsSectionStyleProps = {
             md: '1fr 80px 215px 32px',
         },
     },
-    ingredientsTableInput: {
+    recipeIngredientsTableInput: {
         borderColor: 'gray.300',
         borderRadius: 'base',
         borderStyle: 'solid',
@@ -86,5 +87,4 @@ export const ingredientsSectionStyles: IngredientsSectionStyleProps = {
         lineHeight: '6',
         px: 4,
     },
-    measureUnitInput: { area: 'measureUnit' },
 };

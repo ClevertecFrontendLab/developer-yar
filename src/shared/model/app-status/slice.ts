@@ -25,8 +25,8 @@ const appStatusSlice = createSlice({
             {
                 payload,
             }: PayloadAction<{
-                alignment?: AppMessageAlignment;
                 message: AppErrorMessage;
+                alignment?: AppMessageAlignment;
                 type?: AppErrorType;
             }>,
         ) => {
@@ -39,8 +39,8 @@ const appStatusSlice = createSlice({
             {
                 payload,
             }: PayloadAction<{
-                alignment?: AppMessageAlignment;
                 message: string;
+                alignment?: AppMessageAlignment;
             }>,
         ) => {
             state.isSuccess = true;

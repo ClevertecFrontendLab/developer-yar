@@ -7,7 +7,6 @@ export type RecipeItemDto = {
     categoriesIds: string[];
     createdAt: string;
     description: string;
-    garnish?: string;
     image: string;
     ingredients: {
         count: string | number;
@@ -15,7 +14,6 @@ export type RecipeItemDto = {
         title: string;
     }[];
     likes: number;
-    meat?: string;
     nutritionValue: {
         calories: number;
         carbohydrates: number;
@@ -28,4 +26,6 @@ export type RecipeItemDto = {
     time: number;
     title: string;
     views: number;
+    garnish?: string;
+    meat?: string;
 };

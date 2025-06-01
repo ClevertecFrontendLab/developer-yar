@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { SubmitHandler, useFieldArray } from 'react-hook-form';
+import { useEffect, useMemo, useState } from 'react';
+import { ControllerRenderProps, Path, SubmitHandler, useFieldArray } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 
 import { ApiError, ERRORS, isApiError } from '~/shared/api';
@@ -15,6 +15,22 @@ import {
 import { draftSchema, publishSchema } from '../model/schema';
 import { RecipeFormData, RecipeItem, UploadedFile } from '../model/types';
 import { useRecipeById } from './use-recipe-by-id';
+
+const mapErrorToMessage = (error: ApiError, isDraft: boolean): AppErrorMessage | undefined => {
+    switch (error.status) {
+        case ERRORS.CONFLICT:
+            return { description: 'Рецепт с таким названием уже существует', title: 'Ошибка' };
+        case ERRORS.INTERNAL_SERVER_ERRROR:
+            return {
+                description: isDraft
+                    ? 'Не удалось сохранить черновик рецепта'
+                    : 'Попробуйте пока сохранить в черновик.',
+                title: 'Ошибка сервера',
+            };
+        default:
+            return undefined;
+    }
+};
 
 export const useRecipeForm = (recipe?: RecipeItem) => {
     const isEditMode = Boolean(recipe);
@@ -79,7 +95,7 @@ export const useRecipeForm = (recipe?: RecipeItem) => {
         { isError: isPublishError, isLoading: isPublishLoading, isSuccess: isPublishSuccess },
     ] = usePublishRecipeMutation();
 
-    const [createdRecipeId, setCreatedRecipeId] = useState<string>('');
+    const [createdRecipeId, setCreatedRecipeId] = useState('');
     const { data: createdRecipe } = useRecipeById(createdRecipeId);
 
     useEffect(() => {
@@ -90,26 +106,11 @@ export const useRecipeForm = (recipe?: RecipeItem) => {
 
     const [errorMessage, setErrorMessage] = useState<AppErrorMessage>();
 
-    const mapErrorToMessage = (error: ApiError, isDraft: boolean): AppErrorMessage | undefined => {
-        switch (error.status) {
-            case ERRORS.CONFLICT:
-                return { description: 'Рецепт с таким названием уже существует', title: 'Ошибка' };
-            case ERRORS.INTERNAL_SERVER_ERRROR:
-                return {
-                    description: isDraft
-                        ? 'Не удалось сохранить черновик рецепта'
-                        : 'Попробуйте пока сохранить в черновик.',
-                    title: 'Ошибка сервера',
-                };
-            default:
-                return undefined;
-        }
-    };
-
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     const onSubmitDraft: SubmitHandler<RecipeFormData> = async (data) => {
         const dto = adaptRecipeToDto(data);
+
         try {
             await draftRecipe(dto).unwrap();
             setIsSubmitted(true);
@@ -123,17 +124,17 @@ export const useRecipeForm = (recipe?: RecipeItem) => {
     const onSubmitPublish: SubmitHandler<RecipeFormData> = async (data) => {
         const parsed = publishSchema.safeParse(data);
         if (!parsed.success) {
-            Object.keys(errors).forEach((field) => setError(field, {}));
+            Object.keys(errors).forEach((field) => setError(field as Path<RecipeFormData>, {}));
 
             parsed.error.errors.forEach((err) => {
-                setError(err.path.join('.'), {
-                    message: err.message,
-                    type: 'manual',
-                });
+                const name = err.path.join('.') as Path<RecipeFormData>;
+                setError(name, { message: err.message, type: 'manual' });
             });
             return;
         }
+
         const dto = adaptRecipeToDto(data);
+
         try {
             const { _id } = isEditMode
                 ? await editRecipe({ data: dto, id: recipe!.id }).unwrap()
@@ -160,6 +161,11 @@ export const useRecipeForm = (recipe?: RecipeItem) => {
         await onSubmitPublish(data);
     };
 
+    const successMessage = useMemo(() => {
+        if (isDraftSuccess) return 'Черновик успешно сохранен';
+        else if (isPublishSuccess || isEditSuccess) return 'Рецепт успешно опубликован';
+    }, [isDraftSuccess, isPublishSuccess, isEditSuccess]);
+
     useApiStatusSync(
         isDraftLoading || isEditLoading || isPublishLoading,
         {
@@ -168,19 +174,26 @@ export const useRecipeForm = (recipe?: RecipeItem) => {
         },
         {
             isSuccess: isDraftSuccess || isEditSuccess || isPublishSuccess,
-            message: isDraftSuccess
-                ? 'Черновик успешно сохранен'
-                : isPublishSuccess || isEditSuccess
-                  ? 'Рецепт успешно опубликован'
-                  : '',
+            message: successMessage,
         },
     );
+
+    const handleCheckboxChange = (
+        id: string,
+        field: ControllerRenderProps<RecipeFormData, 'subcategories'>,
+    ) =>
+        field.onChange(
+            field.value.includes(id)
+                ? field.value.filter((fieldId: string) => fieldId !== id)
+                : [...field.value, id],
+        );
 
     return {
         appendIngredient,
         appendStep,
         control,
         errors,
+        handleCheckboxChange,
         handleFileDelete,
         handleFileSave,
         handleSubmit,

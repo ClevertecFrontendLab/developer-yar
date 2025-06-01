@@ -7,7 +7,7 @@ type IngredientStyleProps = {
     tableThead: TableHeadProps;
 };
 
-export const ingredientsStyles: IngredientStyleProps = {
+export const recipeIngredientsStyles: IngredientStyleProps = {
     headerPortionsCell: {
         color: 'lime.600',
         fontSize: 'xs',

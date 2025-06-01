@@ -8,6 +8,7 @@ export const RecipeCreationForm: FC = () => {
         appendStep,
         control,
         errors,
+        handleCheckboxChange,
         handleFileDelete,
         handleFileSave,
         ingredients,
@@ -29,6 +30,7 @@ export const RecipeCreationForm: FC = () => {
                 appendStep={appendStep}
                 control={control}
                 errors={errors}
+                handleCheckboxChange={handleCheckboxChange}
                 handleFileDelete={handleFileDelete}
                 handleFileSave={handleFileSave}
                 ingredients={ingredients}

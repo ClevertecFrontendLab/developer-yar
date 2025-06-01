@@ -10,9 +10,9 @@ import { RecipeDataTestAttributesContext } from '../../../../contexts/recipe/con
 import { RecipeFormData, UploadedFile } from '../../../../model/types';
 import { RecipeImageUploadPreview } from '../../recipe-image-upload-preview';
 import { RecipeTextarea } from '../../recipe-textarea';
-import { cookingStepStyles as styles } from './index.styles';
+import { RecipeCookingStepstyles as styles } from './index.styles';
 
-type CookingStepProps = {
+type RecipeCookingStepProps = {
     control: Control<RecipeFormData>;
     errors: FieldErrors<RecipeFormData>;
     fieldId: string;
@@ -21,7 +21,7 @@ type CookingStepProps = {
     setValue: UseFormSetValue<RecipeFormData>;
 };
 
-export const CookingStep: FC<CookingStepProps> = ({
+export const RecipeCookingStep: FC<RecipeCookingStepProps> = ({
     index,
     fieldId,
     control,
@@ -38,33 +38,33 @@ export const CookingStep: FC<CookingStepProps> = ({
     };
 
     return (
-        <Grid key={fieldId} {...styles.cookingStep}>
+        <Grid key={fieldId} {...styles.recipeRecipeCookingStep}>
             <Controller
                 control={control}
                 name={`steps.${index}.image`}
                 render={({ field }) => (
                     <RecipeDataTestAttributesContext.Provider
                         value={{
-                            recipeStepsImageBlock: `${DATA_TEST_ATTRIBUTES.RECIPE_STEPS_IMAGE_BLOCK}-${index}`,
-                            recipeStepsImageBlockInputFile: `${DATA_TEST_ATTRIBUTES.RECIPE_STEPS_IMAGE_BLOCK}-${index}-input-file`,
-                            recipeStepsImageBlockPreviewImage: `${DATA_TEST_ATTRIBUTES.RECIPE_STEPS_IMAGE_BLOCK}-${index}-preview-image`,
+                            recipeImageBlock: `${DATA_TEST_ATTRIBUTES.RECIPE_STEPS_IMAGE_BLOCK}-${index}`,
+                            recipeImageBlockInputFile: `${DATA_TEST_ATTRIBUTES.RECIPE_STEPS_IMAGE_BLOCK}-${index}-input-file`,
+                            recipeImageBlockPreviewImage: `${DATA_TEST_ATTRIBUTES.RECIPE_STEPS_IMAGE_BLOCK}-${index}-preview-image`,
                         }}
                     >
                         <RecipeImageUploadPreview
                             imageSrc={field.value}
                             onFileDelete={handleFileDelete}
                             onFileSave={handleFileSave}
-                            {...styles.cookingStepImage}
+                            {...styles.recipeRecipeCookingStepImage}
                         />
                     </RecipeDataTestAttributesContext.Provider>
                 )}
             />
-            <Stack {...styles.cookingStepText}>
-                <Flex {...styles.cookingStepHeader}>
-                    <Tag {...styles.cookingStepTag}>Шаг {index + 1}</Tag>
+            <Stack {...styles.recipeRecipeCookingStepText}>
+                <Flex {...styles.recipeRecipeCookingStepHeader}>
+                    <Tag {...styles.recipeRecipeCookingStepTag}>Шаг {index + 1}</Tag>
                     {index > 0 && (
                         <DeleteIcon
-                            {...styles.cookingStepDeleteIcon}
+                            {...styles.recipeRecipeCookingStepDeleteIcon}
                             data-test-id={`${DATA_TEST_ATTRIBUTES.RECIPE_STEPS_REMOVE_BUTTON}-${index}`}
                             onClick={() => remove(index)}
                         />
@@ -78,7 +78,7 @@ export const CookingStep: FC<CookingStepProps> = ({
                             placeholder='Шаг'
                             value={field.value}
                             onChange={(e) => field.onChange(e.target.value)}
-                            {...styles.cookingStepDescription}
+                            {...styles.recipeRecipeCookingStepDescription}
                             {...getErrorOutline(Boolean(errors.steps?.[index]?.description))}
                             data-test-id={`${DATA_TEST_ATTRIBUTES.RECIPE_STEPS_DESCRIPTION}-${index}`}
                         />

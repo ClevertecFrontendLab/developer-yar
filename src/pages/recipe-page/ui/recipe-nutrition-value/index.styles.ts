@@ -1,12 +1,12 @@
 import { FlexProps, StackProps, TextProps } from '@chakra-ui/react';
 
-export type NutritionValueStyleProps = {
+export type RecipeNutritionValueStyleProps = {
     descriptionText: TextProps;
     nutritionIndicators: FlexProps;
-    nutritionValue: StackProps;
+    recipeNutritionValue: StackProps;
 };
 
-export const nutritionValueStyles: NutritionValueStyleProps = {
+export const recipeNutritionValueStyles: RecipeNutritionValueStyleProps = {
     descriptionText: {
         color: 'blackAlpha.800',
     },
@@ -15,7 +15,7 @@ export const nutritionValueStyles: NutritionValueStyleProps = {
         gap: { '2xl': 6, base: 3 },
         justifyContent: 'stretch',
     },
-    nutritionValue: {
+    recipeNutritionValue: {
         gap: { base: 3, md: 5 },
     },
 };

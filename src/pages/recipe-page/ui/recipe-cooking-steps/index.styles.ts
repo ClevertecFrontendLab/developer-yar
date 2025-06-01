@@ -1,12 +1,12 @@
 import { HeadingProps, StackProps } from '@chakra-ui/react';
 
-type CookingStepsStyleProps = {
-    cookingSteps: StackProps;
+type RecipeCookingStepsStyleProps = {
+    RecipeCookingSteps: StackProps;
     title: HeadingProps;
 };
 
-export const cookingStepsStyles: CookingStepsStyleProps = {
-    cookingSteps: {
+export const RecipeCookingStepsStyles: RecipeCookingStepsStyleProps = {
+    RecipeCookingSteps: {
         gap: 5,
     },
     title: {

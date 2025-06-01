@@ -17,16 +17,16 @@ import { FC, memo, useState } from 'react';
 import { Ingredient } from '~/entities/recipe';
 import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
 
-import { ingredientsStyles as styles } from './index.styles';
+import { recipeIngredientsStyles as styles } from './index.styles';
 import { IngredientRow } from './ingredient-row';
 
-type IngredientsProps = {
+type RecipeIngredientsProps = {
     ingredients: Ingredient[];
-    recipePortions: number;
+    portions: number;
 };
 
-export const Ingredients: FC<IngredientsProps> = memo(({ ingredients, recipePortions }) => {
-    const [currentPortions, setCurrentPortions] = useState(recipePortions);
+export const RecipeIngredients: FC<RecipeIngredientsProps> = memo(({ ingredients, portions }) => {
+    const [currentPortions, setCurrentPortions] = useState(portions);
 
     const handlePortionChange = (_: string, valueAsNumber: number): void => {
         setCurrentPortions(valueAsNumber);
@@ -64,7 +64,7 @@ export const Ingredients: FC<IngredientsProps> = memo(({ ingredients, recipePort
                             data-test-id={`${DATA_TEST_ATTRIBUTES.INGREDIENT_QUANTITY}-${index}`}
                             ingredient={ingredient}
                             key={ingredient.title}
-                            recipePortions={recipePortions}
+                            recipePortions={portions}
                             variant={index % 2 === 1 ? 'white' : 'gray'}
                         />
                     ))}

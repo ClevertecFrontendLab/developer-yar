@@ -1,13 +1,13 @@
 import { GridProps, ImageProps, StackProps, TextProps } from '@chakra-ui/react';
 
-type CookingStepStyleProps = {
+type RecipeCookingStepStyleProps = {
     content: StackProps;
-    cookingStep: (hasImage: boolean) => GridProps;
     description: TextProps;
     image: ImageProps;
+    recipeRecipeCookingStep: (hasImage: boolean) => GridProps;
 };
 
-export const cookingStepStyles: CookingStepStyleProps = {
+export const RecipeCookingStepstyles: RecipeCookingStepStyleProps = {
     content: {
         alignItems: 'flex-start',
         gap: { base: 3, xl: 4 },
@@ -16,15 +16,6 @@ export const cookingStepStyles: CookingStepStyleProps = {
         px: { base: 2, xl: 6 },
         py: { base: 1, xl: 5 },
     },
-    cookingStep: (hasImage: boolean): GridProps => ({
-        templateColumns: hasImage
-            ? {
-                  base: '0.48fr 0.52fr',
-                  md: '0.26fr 0.74fr',
-                  xl: '0.52fr 0.48fr',
-              }
-            : '1fr',
-    }),
     description: {
         color: 'black',
         fontSize: 'md',
@@ -37,4 +28,13 @@ export const cookingStepStyles: CookingStepStyleProps = {
         minH: { base: 32, xl: '244px' },
         objectFit: 'cover',
     },
+    recipeRecipeCookingStep: (hasImage: boolean): GridProps => ({
+        templateColumns: hasImage
+            ? {
+                  base: '0.48fr 0.52fr',
+                  md: '0.26fr 0.74fr',
+                  xl: '0.52fr 0.48fr',
+              }
+            : '1fr',
+    }),
 };

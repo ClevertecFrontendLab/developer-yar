@@ -5,11 +5,11 @@ import { MultipleDropdownPreview } from './multiple-dropdown-preview';
 import { SingleDropdownPreview } from './single-dropdown-preview';
 
 export type DropdownPreviewProps = {
-    crop?: boolean;
     items: string | DropdownPreviewItem[];
+    shouldShowPlaceholder: boolean;
+    crop?: boolean;
     mode?: 'single' | 'multiple';
     placeholder?: string;
-    shouldShowPlaceholder: boolean;
 };
 
 export const DropdownPreview: FC<DropdownPreviewProps> = ({

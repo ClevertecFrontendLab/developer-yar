@@ -2,7 +2,6 @@ import { useDisclosure } from '@chakra-ui/react';
 import { FC } from 'react';
 
 import { useGetMeasureUnitsQuery } from '~/entities/measure-unit';
-import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
 import { getErrorOutline } from '~/shared/lib';
 import { useApiStatusSync } from '~/shared/model';
 import { Checkbox } from '~/shared/ui/checkbox';
@@ -13,6 +12,8 @@ import {
     DropdownPreview,
     DropdownToggleButton,
 } from '~/shared/ui/dropdown';
+
+import { CustomMeasureUnitsMenu } from './custom-measure-unit-menu';
 
 type MeasureUnitsMenuProps = {
     index: number;
@@ -41,19 +42,12 @@ export const MeasureUnitsMenu: FC<MeasureUnitsMenuProps> = ({
     if (isMeasureUnitsSuccess && measureUnits)
         return (
             <>
-                <select
-                    data-test-id={`${DATA_TEST_ATTRIBUTES.RECIPE_INGREDIENTS_MEASURE_UNIT}-${index}`}
-                    style={{ opacity: '0', position: 'absolute', zIndex: 99999999 }}
+                <CustomMeasureUnitsMenu
+                    index={index}
+                    measureUnits={measureUnits}
                     value={value}
-                    onChange={(e) => onChange(e.target.value)}
-                >
-                    {measureUnits.map((unit) => (
-                        <option key={unit.id} value={unit.title}>
-                            {unit.title}
-                        </option>
-                    ))}
-                </select>
-
+                    onChange={onChange}
+                />
                 <Dropdown isOpen={isOpen} onClose={onClose}>
                     <DropdownToggleButton
                         isOpen={isOpen}

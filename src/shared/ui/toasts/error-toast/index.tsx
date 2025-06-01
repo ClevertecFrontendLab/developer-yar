@@ -11,9 +11,9 @@ import {
 } from '~/shared/ui/alert';
 
 type ErrorToastProps = {
-    description?: string;
     onClose: () => void;
     title: string;
+    description?: string;
 };
 
 export const ErrorToast: FC<ErrorToastProps> = ({ description, onClose, title }) => (

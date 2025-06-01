@@ -17,7 +17,7 @@ import {
 } from '~/shared/ui/modal';
 
 import recipeUnsavedWraningImage from '../../assets/recipe-unsaved-warning-image.svg';
-import { useUnsavedChangesWarning } from '../../hooks/use-block-leave';
+import { useUnsavedChangesWarning } from '../../hooks/use-unsaved-changes-warning';
 
 type RecipeUnsavedWarningModalProps = {
     onSaveDraft: () => Promise<boolean>;

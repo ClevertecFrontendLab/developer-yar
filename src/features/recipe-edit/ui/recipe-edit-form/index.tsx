@@ -17,6 +17,7 @@ export const RecipeEditForm: FC<RecipeEditFormProps> = ({ recipe }) => {
         appendStep,
         control,
         errors,
+        handleCheckboxChange,
         handleFileDelete,
         handleFileSave,
         ingredients,
@@ -38,6 +39,7 @@ export const RecipeEditForm: FC<RecipeEditFormProps> = ({ recipe }) => {
                 appendStep={appendStep}
                 control={control}
                 errors={errors}
+                handleCheckboxChange={handleCheckboxChange}
                 handleFileDelete={handleFileDelete}
                 handleFileSave={handleFileSave}
                 ingredients={ingredients}
