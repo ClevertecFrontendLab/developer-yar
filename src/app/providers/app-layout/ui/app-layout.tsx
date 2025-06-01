@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Navigate } from 'react-router';
+import { matchPath, Navigate, useLocation } from 'react-router';
 
 import { useAuthStatus } from '~/features/auth-token-validation';
 import { useHandleRedirectError } from '~/shared/model';
@@ -16,11 +16,18 @@ import { RightSidebar } from './right-sidebar';
 export const AppLayout: FC = () => {
     useHandleRedirectError();
 
-    useAuthStatus();
-
     const { isAuthenticated } = useAuthStatus();
+    const { pathname } = useLocation();
 
-    if (!isAuthenticated) return <Navigate replace to={ROUTES.AUTH_SIGN_IN} />;
+    if (!isAuthenticated) {
+        return <Navigate replace to={ROUTES.AUTH_SIGN_IN} />;
+    }
+
+    const hideSidebarPatterns = [ROUTES.NEW_RECIPE, ROUTES.EDIT_RECIPE];
+
+    const shouldShowRightSidebar = !hideSidebarPatterns.some(
+        (pattern) => matchPath({ path: pattern, end: true }, pathname) !== null,
+    );
 
     return (
         <AppRoot>
@@ -29,7 +36,7 @@ export const AppLayout: FC = () => {
             <Main>
                 <LeftSidebar />
                 <Content />
-                <RightSidebar />
+                {shouldShowRightSidebar && <RightSidebar />}
             </Main>
 
             <MobileTabBar />

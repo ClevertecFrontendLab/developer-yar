@@ -7,5 +7,6 @@ type OverlayStyleProps = {
 export const overlayStyles: OverlayStyleProps = {
     overlay: {
         layerStyle: 'overlay',
+        zIndex: 'tooltip',
     },
 };

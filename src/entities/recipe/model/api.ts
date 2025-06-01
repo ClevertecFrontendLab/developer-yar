@@ -16,21 +16,30 @@ import {
 
 export const recipesApi = createApi({
     baseQuery: createBaseQuery(),
+    reducerPath: 'recipesApi',
+    tagTypes: ['RecipesList', 'Recipe'],
+
     endpoints: (builder) => ({
-        bookmarkRecipe: builder.mutation<void, string>({
-            invalidatesTags: (_result, _error, id) => [{ id, type: 'Recipes' }, 'Recipes'],
-            query: (id) => ({
-                method: 'POST',
-                url: buildAbsoluteUrl(ENDPOINTS.RECIPES, id, ENDPOINTS.BOOKMARK_RECIPE),
-            }),
+        getAllRecipes: builder.query<RecipeDto, GetAllRecipesQueryParams>({
+            providesTags: ['RecipesList'],
+            query: (params: GetAllRecipesQueryParams) =>
+                queryWithParams({ params, url: ENDPOINTS.RECIPES }),
         }),
-        deleteRecipe: builder.mutation<void, string>({
-            invalidatesTags: (_result, _error, id) => [{ id, type: 'Recipes' }, 'Recipes'],
-            query: (id) => ({
-                method: 'DELETE',
-                url: buildAbsoluteUrl(ENDPOINTS.DELETE_RECIPE, id),
-            }),
+
+        getRecipeById: builder.query<RecipeItemDto, string>({
+            providesTags: (_result, _error, id) => [{ type: 'Recipe', id }],
+            query: (id: string) => buildAbsoluteUrl(ENDPOINTS.RECIPES, id),
         }),
+
+        getRecipesBySubcategoryId: builder.query<RecipeDto, GetRecipesBySubcategoryIdArgs>({
+            providesTags: ['RecipesList'],
+            query: ({ id, params }: GetRecipesBySubcategoryIdArgs) =>
+                queryWithParams({
+                    params,
+                    url: buildAbsoluteUrl(ENDPOINTS.RECIPES_BY_SUBCATEGORY, id),
+                }),
+        }),
+
         draftRecipe: builder.mutation<void, RecipeCreationDto>({
             query: (data) => ({
                 body: data,
@@ -38,46 +47,49 @@ export const recipesApi = createApi({
                 url: ENDPOINTS.DRAFT_RECIPE,
             }),
         }),
-        editRecipe: builder.mutation<void, EditRecipeArgs>({
-            invalidatesTags: (_result, _error, { id }) => [{ id: id, type: 'Recipes' }, 'Recipes'],
-            query: ({ id, data }) => ({
-                body: data,
-                method: 'PATCH',
-                url: buildAbsoluteUrl(ENDPOINTS.EDIT_RECIPE, id),
-            }),
-        }),
-        getAllRecipes: builder.query<RecipeDto, GetAllRecipesQueryParams>({
-            providesTags: ['Recipes'],
-            query: (params: GetAllRecipesQueryParams) =>
-                queryWithParams({ params, url: ENDPOINTS.RECIPES }),
-        }),
-        getRecipeById: builder.query<RecipeItemDto, string>({
-            providesTags: (_result, _error, id) => [{ id, type: 'Recipes' }],
-            query: (id: string) => buildAbsoluteUrl(ENDPOINTS.RECIPES, id),
-        }),
-        getRecipesBySubcategoryId: builder.query<RecipeDto, GetRecipesBySubcategoryIdArgs>({
-            providesTags: ['Recipes'],
-            query: ({ id, params }: GetRecipesBySubcategoryIdArgs) =>
-                queryWithParams({
-                    params,
-                    url: buildAbsoluteUrl(ENDPOINTS.RECIPES_BY_SUBCATEGORY, id),
-                }),
-        }),
-        likeRecipe: builder.mutation<void, string>({
-            invalidatesTags: (_result, _error, id) => [{ id, type: 'Recipes' }, 'Recipes'],
-            query: (id) => ({
-                method: 'POST',
-                url: buildAbsoluteUrl('recipe', id, ENDPOINTS.LIKE_RECIPE),
-            }),
-        }),
+
         publishRecipe: builder.mutation<RecipeItemDto, RecipeCreationDto>({
-            invalidatesTags: ['Recipes'],
+            invalidatesTags: ['RecipesList'],
             query: (data) => ({
                 body: data,
                 method: 'POST',
                 url: ENDPOINTS.PUBLISH_RECIPE,
             }),
         }),
+
+        editRecipe: builder.mutation<RecipeItemDto, EditRecipeArgs>({
+            invalidatesTags: (_result, _error, { id }) => [{ type: 'Recipe', id }, 'RecipesList'],
+            query: ({ id, data }) => ({
+                body: data,
+                method: 'PATCH',
+                url: buildAbsoluteUrl(ENDPOINTS.EDIT_RECIPE, id),
+            }),
+        }),
+
+        deleteRecipe: builder.mutation<void, string>({
+            invalidatesTags: ['RecipesList'],
+            query: (id) => ({
+                method: 'DELETE',
+                url: buildAbsoluteUrl(ENDPOINTS.DELETE_RECIPE, id),
+            }),
+        }),
+
+        bookmarkRecipe: builder.mutation<void, string>({
+            invalidatesTags: (_result, _error, id) => [{ type: 'Recipe', id }, 'RecipesList'],
+            query: (id) => ({
+                method: 'POST',
+                url: buildAbsoluteUrl(ENDPOINTS.RECIPES, id, ENDPOINTS.BOOKMARK_RECIPE),
+            }),
+        }),
+
+        likeRecipe: builder.mutation<void, string>({
+            invalidatesTags: (_result, _error, id) => [{ type: 'Recipe', id }, 'RecipesList'],
+            query: (id) => ({
+                method: 'POST',
+                url: buildAbsoluteUrl('recipe', id, ENDPOINTS.LIKE_RECIPE),
+            }),
+        }),
+
         uploadImage: builder.mutation<UploadedFile, File>({
             query: (file) => {
                 const formData = new FormData();
@@ -92,8 +104,6 @@ export const recipesApi = createApi({
             transformResponse: mapUploadedFileFromDto,
         }),
     }),
-    reducerPath: 'recipesApi',
-    tagTypes: ['Recipes'],
 });
 
 export const {

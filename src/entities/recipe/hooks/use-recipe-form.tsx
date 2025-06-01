@@ -83,7 +83,7 @@ export const useRecipeForm = (recipe?: RecipeItem) => {
     const { data: createdRecipe } = useRecipeById(createdRecipeId);
 
     useEffect(() => {
-        if (!isEditMode && createdRecipe?.url) {
+        if (createdRecipe?.url) {
             navigate(createdRecipe.url);
         }
     }, [createdRecipe, isEditMode, navigate]);
@@ -135,12 +135,11 @@ export const useRecipeForm = (recipe?: RecipeItem) => {
         }
         const dto = adaptRecipeToDto(data);
         try {
-            if (isEditMode) {
-                await editRecipe({ data: dto, id: recipe!.id }).unwrap();
-            } else {
-                const result = await publishRecipe(dto).unwrap();
-                setCreatedRecipeId(result._id);
-            }
+            const { _id } = isEditMode
+                ? await editRecipe({ data: dto, id: recipe!.id }).unwrap()
+                : await publishRecipe(dto).unwrap();
+            setCreatedRecipeId(_id);
+
             setIsSubmitted(true);
         } catch (e) {
             if (isApiError(e)) {
