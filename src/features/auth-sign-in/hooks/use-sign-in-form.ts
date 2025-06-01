@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { FieldError } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 
-import { useAuthForm } from '~/entities/auth';
 import { ApiError, ERRORS, isApiError } from '~/shared/api';
+import { useZodForm } from '~/shared/lib';
 import { AppErrorMessage, useApiStatusSync } from '~/shared/model';
 import { ROUTES } from '~/shared/routes';
 
@@ -28,7 +28,7 @@ const mapErrorToMessage = (error: ApiError) => {
 
 export const useSignInForm = () => {
     const { clearErrors, errors, handleSubmit, register, trimField, watch } =
-        useAuthForm(signInSchema);
+        useZodForm(signInSchema);
 
     const [signIn, { isError, isLoading }] = useSignInMutation();
 
@@ -57,8 +57,10 @@ export const useSignInForm = () => {
         }
     };
 
-    useApiStatusSync(isLoading, isError, errorMessage, {
+    useApiStatusSync(isLoading, {
         alignment: showNetworkError ? 'center' : 'left',
+        isError: isError,
+        message: errorMessage,
         type: 'auth',
     });
 

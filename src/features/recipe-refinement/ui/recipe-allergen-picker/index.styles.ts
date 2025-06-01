@@ -28,6 +28,7 @@ export type RecipeAllergenPickerStyleProps = {
 export const recipeAllergenPickerBaseStyles: RecipeAllergenPickerStyleProps = {
     addIcon: {
         boxSize: 3,
+        color: 'lime.600',
     },
     dropdownToggleButton: {},
     popoverAddAllergen: {
@@ -68,7 +69,8 @@ export const recipeAllergenPickerBaseStyles: RecipeAllergenPickerStyleProps = {
         boxSize: 10,
     },
     recipeAllergenPickerContainer: {
-        alignItems: 'start',
+        align: 'start',
+        justify: 'end',
         width: 'full',
         zIndex: 'docked',
     },
@@ -123,9 +125,7 @@ export const recipeAllergenPickerVariants: RecipeAllergenPickerVariants = {
             minH: 'auto',
         },
         toggleButton: {
-            minW: '269px',
             py: '9px',
-            w: 'full',
         },
     },
     recipeAllergenFilter: {
@@ -137,9 +137,9 @@ export const recipeAllergenPickerVariants: RecipeAllergenPickerVariants = {
             minH: 10,
         },
         toggleButton: {
-            minW: '269px',
+            maxW: '269px',
             py: 0,
-            w: '269px',
+            w: 'full',
         },
     },
 };

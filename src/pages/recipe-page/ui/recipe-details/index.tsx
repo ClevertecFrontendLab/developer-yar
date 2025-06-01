@@ -4,8 +4,10 @@ import { FC, memo } from 'react';
 import { Category } from '~/entities/navigation';
 import { RecipeStats } from '~/entities/recipe';
 import { RecipeCategories } from '~/entities/recipe';
-import { AddToFavoritesButton } from '~/features/recipe-favorites';
-import { RecipeLikesButton } from '~/features/recipe-likes';
+import { RecipeBookmarkButton } from '~/features/recipe-bookmark';
+import { RecipeDelete } from '~/features/recipe-delete';
+import { RecipeEditButton } from '~/features/recipe-edit';
+import { RecipeLikeButton } from '~/features/recipe-like';
 import { AlarmIcon } from '~/shared/ui/icons';
 import { PageTitle } from '~/shared/ui/page-title';
 import { Tag } from '~/shared/ui/tag';
@@ -16,14 +18,16 @@ type RecipeDetailsProps = {
     bookmarks: number;
     categories: Category[];
     description: string;
+    id: string;
     image: string;
+    isAuthor: boolean;
     likes: number;
     time: number;
     title: string;
 };
 
 export const RecipeDetails: FC<RecipeDetailsProps> = memo(
-    ({ bookmarks, categories, description, image, likes, time, title }) => (
+    ({ id, bookmarks, categories, description, image, likes, time, title, isAuthor }) => (
         <Grid {...styles.wrapper}>
             <Image src={image} {...styles.image} />
 
@@ -44,9 +48,19 @@ export const RecipeDetails: FC<RecipeDetailsProps> = memo(
                     <Tag icon={<AlarmIcon {...styles.alarmIcon} />} variant='gray'>
                         {time} минут
                     </Tag>
+
                     <Flex {...styles.actionButtons}>
-                        <RecipeLikesButton />
-                        <AddToFavoritesButton variant='primary' />
+                        {isAuthor ? (
+                            <>
+                                <RecipeDelete recipeId={id} />
+                                <RecipeEditButton />
+                            </>
+                        ) : (
+                            <>
+                                <RecipeLikeButton recipeId={id} />
+                                <RecipeBookmarkButton recipeId={id} variant='primary' />
+                            </>
+                        )}
                     </Flex>
                 </Flex>
             </Flex>

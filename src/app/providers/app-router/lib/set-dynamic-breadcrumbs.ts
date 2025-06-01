@@ -6,7 +6,7 @@ import {
     Subcategory,
 } from '~/entities/navigation';
 import { getRecipeByIdQuery } from '~/entities/recipe';
-import { buildUrl } from '~/shared/lib';
+import { buildAbsoluteUrl } from '~/shared/lib';
 
 import { Params } from '../model/types';
 import { assertParamsExist } from './asserts-params-exist';
@@ -31,8 +31,6 @@ function findCategory(categories: Category[], categorySlug: string): Category {
 }
 
 function findSubcategory(subcategories: Subcategory[], subcategorySlug: string): Subcategory {
-    console.log(subcategories.map((subcategory) => subcategory.slug));
-    console.log(subcategorySlug);
     const subcategory = subcategories.find(
         ({ slug }) => slug === (typeof Cypress !== 'undefined' ? 'snacks' : subcategorySlug),
     );
@@ -80,7 +78,7 @@ export const setRecipe = async (params: Params) => {
 
     const breadcrumbs = categoryAndSubcategoryBreadcumbs.concat({
         title: recipe.title,
-        url: buildUrl([params.category, params.subcategory, params.id], true),
+        url: buildAbsoluteUrl(params.category, params.subcategory, params.id),
     });
 
     return breadcrumbs;

@@ -11,7 +11,9 @@ import {
 import { setFetching } from '../model/slice';
 import { useSearchParams } from './use-search-params';
 
-export const useFoundRecipes = (rawParams = {}) => {
+const DEFAULT_PARAMS = {};
+
+export const useFoundRecipes = (rawParams = DEFAULT_PARAMS) => {
     const dispatch = useAppDispatch();
 
     const searchQuery = useAppSelector(selectSearchQuery);

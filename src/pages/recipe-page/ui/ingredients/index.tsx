@@ -15,6 +15,7 @@ import {
 import { FC, memo, useState } from 'react';
 
 import { Ingredient } from '~/entities/recipe';
+import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
 
 import { ingredientsStyles as styles } from './index.styles';
 import { IngredientRow } from './ingredient-row';
@@ -45,9 +46,7 @@ export const Ingredients: FC<IngredientsProps> = memo(({ ingredients, recipePort
                                     min={1}
                                     value={currentPortions}
                                     onChange={handlePortionChange}
-                                    {...styles.portionsInput}
                                 >
-                                    {' '}
                                     <NumberInputField />
                                     <NumberInputStepper>
                                         <NumberIncrementStepper data-test-id='increment-stepper' />
@@ -62,7 +61,7 @@ export const Ingredients: FC<IngredientsProps> = memo(({ ingredients, recipePort
                     {ingredients.map((ingredient, index) => (
                         <IngredientRow
                             currentPortions={currentPortions}
-                            dataTestId={`ingredient-quantity-${index}`}
+                            data-test-id={`${DATA_TEST_ATTRIBUTES.INGREDIENT_QUANTITY}-${index}`}
                             ingredient={ingredient}
                             key={ingredient.title}
                             recipePortions={recipePortions}

@@ -7,6 +7,9 @@ import { SignInDataDto } from '../dto/sign-in-data.dto';
 export const signInApi = createApi({
     baseQuery: createBaseQuery(),
     endpoints: (builder) => ({
+        checkAuth: builder.query<unknown, void>({
+            query: () => ENDPOINTS.CHECK_AUTH,
+        }),
         signIn: builder.mutation<unknown, SignInDataDto>({
             query: (body) => ({
                 body,
@@ -18,4 +21,4 @@ export const signInApi = createApi({
     reducerPath: 'signInApi',
 });
 
-export const { useSignInMutation } = signInApi;
+export const { useSignInMutation, useCheckAuthQuery, useLazyCheckAuthQuery } = signInApi;

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { initialState } from './init';
-import { AppErrorAlignment, AppErrorMessage, AppErrorType } from './types';
+import { AppErrorMessage, AppErrorType, AppMessageAlignment } from './types';
 
 const appStatusSlice = createSlice({
     initialState,
@@ -12,6 +12,11 @@ const appStatusSlice = createSlice({
             state.errorMessage = initialState.errorMessage;
             state.errorAlignment = initialState.errorAlignment;
         },
+        hideSuccess: (state) => {
+            state.isSuccess = initialState.isSuccess;
+            state.successMessage = initialState.successMessage;
+            state.successAlignment = initialState.successAlignment;
+        },
         setLoading: (state, { payload }: PayloadAction<boolean>) => {
             state.isLoading = payload;
         },
@@ -20,7 +25,7 @@ const appStatusSlice = createSlice({
             {
                 payload,
             }: PayloadAction<{
-                alignment?: AppErrorAlignment;
+                alignment?: AppMessageAlignment;
                 message: AppErrorMessage;
                 type?: AppErrorType;
             }>,
@@ -29,9 +34,23 @@ const appStatusSlice = createSlice({
             state.errorMessage = payload.message;
             state.errorAlignment = payload.alignment ?? 'center';
         },
+        showSuccess: (
+            state,
+            {
+                payload,
+            }: PayloadAction<{
+                alignment?: AppMessageAlignment;
+                message: string;
+            }>,
+        ) => {
+            state.isSuccess = true;
+            state.successMessage = payload.message;
+            state.successAlignment = payload.alignment ?? 'center';
+        },
     },
 });
 
-export const { hideError, setLoading, showError } = appStatusSlice.actions;
+export const { hideError, setLoading, showError, showSuccess, hideSuccess } =
+    appStatusSlice.actions;
 
 export const appStatusReducer = appStatusSlice.reducer;

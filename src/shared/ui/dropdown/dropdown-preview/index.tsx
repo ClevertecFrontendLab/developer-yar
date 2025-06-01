@@ -1,37 +1,35 @@
-import { Text, Wrap, WrapItem } from '@chakra-ui/react';
 import { FC } from 'react';
 
-import { SelectedItemTag } from '~/shared/ui/selected-item-tag';
+import { DropdownPreviewItem } from './index.types';
+import { MultipleDropdownPreview } from './multiple-dropdown-preview';
+import { SingleDropdownPreview } from './single-dropdown-preview';
 
-import { DropdownPreviewStyles as styles } from './index.styles';
-
-type DropdownPreviewItem = {
-    id: number | string;
-    title: string;
-};
-
-type DropdownPreviewProps = {
-    items: DropdownPreviewItem[];
+export type DropdownPreviewProps = {
+    crop?: boolean;
+    items: string | DropdownPreviewItem[];
+    mode?: 'single' | 'multiple';
     placeholder?: string;
     shouldShowPlaceholder: boolean;
 };
 
 export const DropdownPreview: FC<DropdownPreviewProps> = ({
+    mode = 'multiple',
+    crop,
     items,
-    placeholder = 'Выберите из списка...',
+    placeholder,
     shouldShowPlaceholder,
-}) => (
-    <Wrap {...styles.tags}>
-        {shouldShowPlaceholder ? (
-            <Text noOfLines={1} {...styles.default}>
-                {placeholder}
-            </Text>
-        ) : (
-            items.map((item) => (
-                <WrapItem key={item.id}>
-                    <SelectedItemTag> {item.title}</SelectedItemTag>
-                </WrapItem>
-            ))
-        )}
-    </Wrap>
-);
+}) =>
+    mode === 'single' ? (
+        <SingleDropdownPreview
+            item={typeof items === 'string' ? items : ''}
+            placeholder={placeholder}
+            shouldShowPlaceholder={shouldShowPlaceholder}
+        />
+    ) : (
+        <MultipleDropdownPreview
+            crop={crop}
+            items={Array.isArray(items) ? items : []}
+            placeholder={placeholder}
+            shouldShowPlaceholder={shouldShowPlaceholder}
+        />
+    );

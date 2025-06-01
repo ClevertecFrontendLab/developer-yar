@@ -1,9 +1,9 @@
 export { sharedAuthFields } from './consts/shared-auth-fields';
 export { VERIFICATION } from './consts/verification';
-export { useAuthForm } from './hooks/use-auth-form';
-export { useVerificationNotification } from './hooks/use-verification-notification';
+export { getVerificationStatus } from './lib/get-verification-status';
+export { removeVerificationStatus } from './lib/remove-verification-status';
 export { validationSchemas, validationUtils } from './lib/validation-schemas';
-export type { FieldConfig, InferFormData } from './model/types';
+export type { FieldConfig } from './model/types';
 export { AuthButton } from './ui/auth-button';
 export { AuthControl } from './ui/auth-control';
 export { AuthControls } from './ui/auth-controls';
@@ -12,4 +12,3 @@ export { AuthField } from './ui/auth-field';
 export { AuthForm } from './ui/auth-form';
 export { AuthInput } from './ui/auth-input';
 export { AuthLabel } from './ui/auth-label';
-export { SuccessNotification } from './ui/success-notification';

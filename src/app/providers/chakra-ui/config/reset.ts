@@ -30,6 +30,16 @@ export const componentsWithDefaultStyles = {
             variant: 'unstyled',
         },
     }),
+    Drawer: {
+        baseStyle: {
+            dialog: {
+                zIndex: '9999',
+            },
+            dialogContainer: {
+                zIndex: '9999',
+            },
+        },
+    },
     IconButton: defineStyleConfig({
         defaultProps: {
             variant: 'unstyled',
@@ -43,6 +53,23 @@ export const componentsWithDefaultStyles = {
     NumberInput: defineStyleConfig({
         defaultProps: {
             variant: 'unstyled',
+        },
+        variants: {
+            unstyled: {
+                field: {
+                    bgColor: 'white',
+                    borderColor: 'gray.200',
+                    borderStyle: 'solid',
+                    borderWidth: '1px',
+                    color: 'black',
+                    fontSize: 'md',
+                    fontWeight: 'normal',
+                    h: 10,
+                    lineHeight: '6',
+                    px: 4,
+                    width: '90px',
+                },
+            },
         },
     }),
     PinInput: defineStyleConfig({
@@ -60,4 +87,9 @@ export const componentsWithDefaultStyles = {
             variant: 'unstyled',
         },
     },
+    Textarea: defineStyleConfig({
+        defaultProps: {
+            variant: 'unstyled',
+        },
+    }),
 };

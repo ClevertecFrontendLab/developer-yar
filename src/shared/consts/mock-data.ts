@@ -7,9 +7,9 @@ import {
 
 export const mockCurrentUser = {
     avatar: mockCurrentUserImage,
-    fullName: 'Екатерина Константинопольская',
+    fullName: 'Сергей Разумов',
     id: '1',
-    username: '@bake_and_pie',
+    username: '@serge25',
 };
 
 export const mockUser1 = {

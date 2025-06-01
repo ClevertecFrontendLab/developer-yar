@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import { useAuthForm } from '~/entities/auth';
 import { ApiError, ERRORS, isApiError } from '~/shared/api';
-import { useApiStatusSync } from '~/shared/model';
-import { AppErrorMessage } from '~/shared/model';
+import { useZodForm } from '~/shared/lib';
+import { AppErrorMessage, useApiStatusSync } from '~/shared/model';
 import { ROUTES } from '~/shared/routes';
 
 import { ACCOUNT_FIELDS } from '../consts/fields';
@@ -32,7 +31,7 @@ const mapErrorToMessage = (error: ApiError) => {
 
 export const useSignUpAccountForm = () => {
     const { dirtyFields, errors, handleSubmit, register, trimField } =
-        useAuthForm(signUpAccountSchema);
+        useZodForm(signUpAccountSchema);
 
     const [isVerificationModalOpen, setIsVerificationModalOpen] = useState(false);
 
@@ -66,7 +65,12 @@ export const useSignUpAccountForm = () => {
         setProgress((prev) => ({ ...prev, account: personalProgress }));
     }, [personalProgress, setProgress]);
 
-    useApiStatusSync(isLoading, isError, errorMessage, { alignment: 'left', type: 'auth' });
+    useApiStatusSync(isLoading, {
+        alignment: 'left',
+        isError: isError,
+        message: errorMessage,
+        type: 'auth',
+    });
 
     const closeVerificationModal = () => {
         navigate(ROUTES.AUTH_SIGN_IN, { replace: true });

@@ -30,7 +30,7 @@ export const NewRecipes: FC = () => {
         isSuccess: isRecipesSuccess,
     } = useRecipes({ limit: 10, sortBy: 'createdAt', sortOrder: 'DESC' });
 
-    useApiStatusSync(isRecipesLoading, isRecipesError);
+    useApiStatusSync(isRecipesLoading, { isError: isRecipesError });
 
     if (isRecipesSuccess && recipes)
         return (

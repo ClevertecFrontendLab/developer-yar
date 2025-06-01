@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { useParams } from 'react-router';
 
 import { useRecipeById } from '~/entities/recipe';
+import { getRecipeOwnership } from '~/features/recipe-ownership';
 import { useApiStatusSync } from '~/shared/model';
 import { NewRecipes } from '~/widgets/new-recipes';
 
@@ -23,7 +24,9 @@ const RecipePage: FC = () => {
         isSuccess: isRecipeSuccess,
     } = useRecipeById(id);
 
-    useApiStatusSync(isRecipeLoading, isRecipeError);
+    const isAuthor = recipe?.author?.id ? getRecipeOwnership(recipe.author.id) : false;
+
+    useApiStatusSync(isRecipeLoading, { isError: isRecipeError });
 
     if (isRecipeSuccess && recipe) {
         return (
@@ -33,7 +36,9 @@ const RecipePage: FC = () => {
                         bookmarks={recipe.bookmarks}
                         categories={recipe.categories}
                         description={recipe.description}
+                        id={recipe.id}
                         image={recipe.image}
+                        isAuthor={isAuthor}
                         likes={recipe.likes}
                         time={recipe.time}
                         title={recipe.title}

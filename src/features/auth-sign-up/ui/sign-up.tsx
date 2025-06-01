@@ -4,11 +4,9 @@ import { AuthPersonalDataForm } from './auth-personal-data-form';
 import { AuthVerificationErrorModal } from './auth-verification-error-modal';
 
 export const SignUp = () => (
-    <>
-        <SignUpProvider>
-            <AuthPersonalDataForm />
-            <AuthAccountDataForm />
-            <AuthVerificationErrorModal />
-        </SignUpProvider>
-    </>
+    <SignUpProvider>
+        <AuthPersonalDataForm />
+        <AuthAccountDataForm />
+        <AuthVerificationErrorModal />
+    </SignUpProvider>
 );

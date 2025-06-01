@@ -6,14 +6,6 @@ type OverlayStyleProps = {
 
 export const overlayStyles: OverlayStyleProps = {
     overlay: {
-        backdropFilter: 'blur(4px)',
-        background: 'blackAlpha.300',
-        h: 'full',
-        inset: 0,
-        minH: '100vh',
-        overflow: 'hidden',
-        pointerEvents: 'none',
-        pos: 'absolute',
-        zIndex: 'overlay',
+        layerStyle: 'overlay',
     },
 };

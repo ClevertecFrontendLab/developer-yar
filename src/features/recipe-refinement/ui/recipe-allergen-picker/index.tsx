@@ -128,7 +128,7 @@ export const RecipeAllergenPicker: FC<RecipeAllergenPickerProps> = ({
                     onClick={onToggle}
                     {...recipeAllergenPickerBaseStyles.dropdownToggleButton}
                     {...variantStyles.toggleButton}
-                    dataTestId={
+                    data-test-id={
                         variant === 'recipeAllergenFilter'
                             ? DATA_TEST_ATTRIBUTES.ALLERGEN_MENU_BUTTON
                             : DATA_TEST_ATTRIBUTES.ALLERGEN_MENU_BUTTON_FILTER

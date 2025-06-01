@@ -11,24 +11,19 @@ import {
     AuthLabel,
 } from '~/entities/auth';
 import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
+import { useApiStatusSync } from '~/shared/model';
 
 import { useSignInForm } from '../hooks/use-sign-in-form';
-import { AuthResetToast } from './auth-reset-toast';
+import { useSuccessVerification } from '../hooks/use-success-verification';
 import { AuthSignInErrorModal } from './auth-sign-in-error-modal';
-import { AuthVerificationToast } from './auth-verification-toast';
 import { signInStyles as styles } from './sign-in.styles';
 
 type SignInProps = {
-    handleResetClose: () => void;
     isResetSuccessful: boolean;
     onForgotPasswordClick: () => void;
 };
 
-export const SignIn: FC<SignInProps> = ({
-    handleResetClose,
-    isResetSuccessful,
-    onForgotPasswordClick,
-}) => {
+export const SignIn: FC<SignInProps> = ({ isResetSuccessful, onForgotPasswordClick }) => {
     const {
         closeNetworkError,
         errors,
@@ -39,6 +34,14 @@ export const SignIn: FC<SignInProps> = ({
         showNetworkError,
         trimField,
     } = useSignInForm();
+
+    useSuccessVerification();
+
+    useApiStatusSync(false, undefined, {
+        alignment: 'left',
+        isSuccess: Boolean(isResetSuccessful),
+        message: 'Восстановление данных успешно',
+    });
 
     return (
         <>
@@ -89,8 +92,6 @@ export const SignIn: FC<SignInProps> = ({
                     </Text>
                 </Stack>
             </AuthForm>
-            <AuthVerificationToast />
-            <AuthResetToast isOpen={isResetSuccessful} onClose={handleResetClose} />
             <AuthSignInErrorModal
                 isOpen={showNetworkError}
                 retrySignIn={handleRetry}

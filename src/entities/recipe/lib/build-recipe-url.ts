@@ -1,5 +1,5 @@
 import { Category } from '~/entities/navigation/@x/recipe';
-import { buildUrl } from '~/shared/lib';
+import { buildAbsoluteUrl } from '~/shared/lib';
 import { ROUTES } from '~/shared/routes';
 
 export const buildRecipeUrl = (recipeId: string, subcategoryId: string, categories: Category[]) => {
@@ -11,5 +11,5 @@ export const buildRecipeUrl = (recipeId: string, subcategoryId: string, categori
 
     if (!category || !subcategory) return ROUTES.NOT_FOUND;
 
-    return buildUrl([category.slug, subcategory.slug, recipeId], true);
+    return buildAbsoluteUrl(category.slug, subcategory.slug, recipeId);
 };

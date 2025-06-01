@@ -2,8 +2,8 @@ import { Grid } from '@chakra-ui/react';
 import { FC, memo } from 'react';
 
 import { RecipeGalleryCard, useRecipesBySubcategoryId } from '~/entities/recipe';
+import { RecipeBookmarkButton } from '~/features/recipe-bookmark';
 import { RecipeCookingButton } from '~/features/recipe-cooking';
-import { AddToFavoritesButton } from '~/features/recipe-favorites';
 import { useApiStatusSync } from '~/shared/model';
 
 import { subcategoryPanelStyles as styles } from './index.styles';
@@ -18,7 +18,7 @@ export const SubcategoryPanel: FC<SubcategoryPanelProps> = memo(({ subcategoryId
         isSuccess: isRecipesSuccess,
     } = useRecipesBySubcategoryId(subcategoryId);
 
-    useApiStatusSync(isRecipesLoading, isRecipesError);
+    useApiStatusSync(isRecipesLoading, { isError: isRecipesError });
 
     if (isRecipesSuccess && recipes)
         return (
@@ -35,7 +35,7 @@ export const SubcategoryPanel: FC<SubcategoryPanelProps> = memo(({ subcategoryId
                         recommendedBy={recipe.recommendedBy}
                         title={recipe.title}
                     >
-                        <AddToFavoritesButton variant='secondary' />
+                        <RecipeBookmarkButton recipeId={recipe.id} variant='secondary' />
                         <RecipeCookingButton id={recipe.id} url={recipe.url} />
                     </RecipeGalleryCard>
                 ))}

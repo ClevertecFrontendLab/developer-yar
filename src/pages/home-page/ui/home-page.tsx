@@ -18,7 +18,7 @@ const HomePage: FC = () => {
     const { isRecipesError, isRecipesLoading, isRecipesSuccess, mode, recipes, searchQuery } =
         useFoundRecipes();
 
-    useApiStatusSync(isRecipesLoading, isRecipesError);
+    useApiStatusSync(isRecipesLoading, { isError: isRecipesError });
 
     return (
         <>

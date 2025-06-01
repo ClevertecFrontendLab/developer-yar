@@ -1,6 +1,5 @@
 import { FC } from 'react';
 
-import { useVerificationNotification } from '~/entities/auth';
 import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
 import { ROUTES } from '~/shared/routes';
 import {
@@ -19,6 +18,7 @@ import {
 } from '~/shared/ui/modal';
 
 import authVerificationErrorImage from '../../assets/auth-verify-error-image.svg';
+import { useVerificationNotification } from '../../hooks/use-verification-notification';
 
 export const AuthVerificationErrorModal: FC = () => {
     const { isOpen, onClose } = useVerificationNotification(false);

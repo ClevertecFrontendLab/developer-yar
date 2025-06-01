@@ -3,8 +3,8 @@ import { FC, memo, useMemo } from 'react';
 
 import { RecipeGalleryCard } from '~/entities/recipe';
 import { RecipeItem } from '~/entities/recipe/model/types';
+import { RecipeBookmarkButton } from '~/features/recipe-bookmark';
 import { RecipeCookingButton } from '~/features/recipe-cooking';
-import { AddToFavoritesButton } from '~/features/recipe-favorites';
 
 import { foundRecipesStyles as styles } from './found-recipes.styles';
 
@@ -70,7 +70,7 @@ export const FoundRecipes: FC<RecipesProps> = memo(({ recipes, searchQuery }) =>
                         </Text>
                     }
                 >
-                    <AddToFavoritesButton variant='secondary' />
+                    <RecipeBookmarkButton recipeId={recipe.id} variant='secondary' />
                     <RecipeCookingButton id={index.toString()} url={recipe.url} />
                 </RecipeGalleryCard>
             ))}

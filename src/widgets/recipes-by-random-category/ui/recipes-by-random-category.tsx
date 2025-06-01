@@ -1,17 +1,16 @@
 import { Grid, GridItem, Text } from '@chakra-ui/react';
-import { FC, useEffect, useState } from 'react';
+import { FC, useMemo } from 'react';
 
-import { Category, Subcategory, useCategoryList } from '~/entities/navigation';
+import { useCategoryList } from '~/entities/navigation';
 import { useRecipesBySubcategoryId } from '~/entities/recipe';
 import { RecipeCookingButton } from '~/features/recipe-cooking';
 import { useApiStatusSync } from '~/shared/model';
 import { SectionTitle } from '~/shared/ui/section-title';
 
+import { getRandomNumber } from '../lib/get-random-number';
 import { RecipeCategoryPrimaryCard } from './recipe-category-primary-card';
 import { RecipeCategorySecondaryCard } from './recipe-category-secondary-card';
 import { recipesByCategoryStyles as styles } from './recipes-by-random-category.styles';
-
-const getRandomNumber = (to: number) => Math.floor(Math.random() * to);
 
 export const RecipesByRandomCategory: FC = () => {
     const {
@@ -20,18 +19,19 @@ export const RecipesByRandomCategory: FC = () => {
         isLoading: isCategoriesLoading,
         isSuccess: isCategoriesSuccess,
     } = useCategoryList();
-    const [randomCategory, setRandomCategory] = useState<Category | null>(null);
-    const [randomSubcategory, setRandomSubcategory] = useState<Subcategory | null>(null);
 
-    useEffect(() => {
-        if (isCategoriesSuccess && categories.length > 0 && randomSubcategory === null) {
-            const category = categories[getRandomNumber(categories.length)];
-            const subcategories = category.submenu;
-            const subcat = subcategories[getRandomNumber(subcategories.length)];
-            setRandomCategory(category);
-            setRandomSubcategory(subcat);
+    const { randomCategory, randomSubcategory } = useMemo(() => {
+        if (isCategoriesSuccess && categories && categories.length > 0) {
+            const randomCategory = categories[getRandomNumber(categories.length)];
+            const subcategories = randomCategory.submenu;
+            if (subcategories && subcategories.length > 0) {
+                const randomSubcategory = subcategories[getRandomNumber(subcategories.length)];
+                return { randomCategory, randomSubcategory };
+            }
+            return { randomCategory, randomSubcategory: null };
         }
-    }, [categories, isCategoriesSuccess, randomSubcategory]);
+        return { randomCategory: null, randomSubcategory: null };
+    }, [isCategoriesSuccess, categories]);
 
     const {
         data: recipes,
@@ -45,7 +45,7 @@ export const RecipesByRandomCategory: FC = () => {
     const isLoading = isCategoriesLoading || isRecipesLoading;
     const isError = isCategoriesError || isRecipesError;
 
-    useApiStatusSync(isLoading, isError);
+    useApiStatusSync(isLoading, { isError });
 
     if (isCategoriesSuccess && isRecipesSuccess && randomCategory && recipes)
         return (

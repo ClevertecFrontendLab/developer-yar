@@ -112,7 +112,7 @@ export const RecipeFilter: FC = () => {
                     <DrawerBody {...styles.filterBodyContainer}>
                         <FilterRecipeMenu
                             action={toggleCategorySelected}
-                            dataTestId={DATA_TEST_ATTRIBUTES.FILTER_BY_CATEGORY_BUTTON}
+                            id={DATA_TEST_ATTRIBUTES.FILTER_BY_CATEGORY_BUTTON}
                             items={allCategories}
                             title='Категория'
                         />

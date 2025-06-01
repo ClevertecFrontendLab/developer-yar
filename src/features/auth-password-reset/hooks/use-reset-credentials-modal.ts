@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { useAuthForm } from '~/entities/auth';
 import { ApiError, ERRORS, isApiError } from '~/shared/api';
+import { useZodForm } from '~/shared/lib';
 import { AppErrorMessage, useApiStatusSync } from '~/shared/model';
 
 import { mapResetCredentialsDataToDto } from '../mappers/map-reset-credentials-data-to-dto';
@@ -27,7 +27,7 @@ const mapErrorToMessage = (error: ApiError) => {
 };
 
 export const useResetCredentialsModal = () => {
-    const { errors, handleSubmit, register, trimField } = useAuthForm(
+    const { errors, handleSubmit, register, trimField } = useZodForm(
         schemas.resetCredentialsSchema,
     );
 
@@ -57,7 +57,8 @@ export const useResetCredentialsModal = () => {
             }
         }
     };
-    useApiStatusSync(isLoading, isError, errorMessage, { type: 'auth' });
+
+    useApiStatusSync(isLoading, { isError, message: errorMessage, type: 'auth' });
 
     const onSubmit = handleSubmit(onSubmitCallback);
     return {

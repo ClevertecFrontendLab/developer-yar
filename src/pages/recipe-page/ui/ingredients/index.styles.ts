@@ -1,10 +1,9 @@
-import { FlexProps, NumberInputProps, TableCellProps, TableHeadProps } from '@chakra-ui/react';
+import { FlexProps, TableCellProps, TableHeadProps } from '@chakra-ui/react';
 
 type IngredientStyleProps = {
     headerPortionsCell: TableCellProps;
     headerTitle: TableCellProps;
     portionsFlexContainer: FlexProps;
-    portionsInput: NumberInputProps;
     tableThead: TableHeadProps;
 };
 
@@ -35,13 +34,6 @@ export const ingredientsStyles: IngredientStyleProps = {
         align: 'center',
         gap: 4,
         justify: 'flex-end',
-    },
-    portionsInput: {
-        color: 'black',
-        fontSize: 'md',
-        fontWeight: 'normal',
-        lineHeight: '6',
-        width: '90px',
     },
     tableThead: {
         w: 'full',

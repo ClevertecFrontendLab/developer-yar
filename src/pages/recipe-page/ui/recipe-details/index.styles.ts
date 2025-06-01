@@ -23,7 +23,7 @@ type RecipeDetailsStyleProps = {
 };
 
 export const recipeDetailsStyles: RecipeDetailsStyleProps = {
-    actionButtons: { gap: 3, wrap: 'wrap' },
+    actionButtons: { gap: 4, wrap: 'wrap' },
     alarmIcon: { boxSize: 4 },
     bottomRow: {
         alignItems: { base: 'flex-start', md: 'flex-end' },
@@ -77,15 +77,10 @@ export const recipeDetailsStyles: RecipeDetailsStyleProps = {
     wrapper: {
         gap: { base: 4, xl: 6 },
         templateColumns: {
-            // xl: '0.4124fr 0.5876fr',
-            '2xl': '0.4139fr 0.5861fr',
-
+            '2xl': '0.4fr 0.6fr',
             base: '1fr',
-
-            md: '0.3258fr 0.6742fr',
-
-            xl: '0.5fr 0.5fr',
+            md: '0.32fr 0.68fr',
+            xl: '0.4fr 0.6fr',
         },
-        // minH: { md: '224px', xl: '410px' },
     },
 };

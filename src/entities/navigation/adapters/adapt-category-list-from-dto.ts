@@ -1,4 +1,4 @@
-import { buildUrl } from '~/shared/lib';
+import { buildRelativeUrl } from '~/shared/lib';
 
 import { CategoryDto } from '../dto/category.dto';
 import { Category } from '../model/types';
@@ -9,10 +9,10 @@ export const adaptCategoryListFromDto = (api: CategoryDto[]): Category[] =>
         .filter((data) => data.subCategories)
         .map(({ _id, category, description, icon, subCategories, title }) => ({
             description,
-            icon: buildUrl([import.meta.env.VITE_IMAGES_API_URL, icon]),
+            icon: buildRelativeUrl(import.meta.env.VITE_IMAGES_API_URL, icon),
             id: _id,
             slug: category,
             submenu: adaptSubcategoriesFromDto(category, subCategories),
             title,
-            url: buildUrl([category, subCategories[0].category]),
+            url: buildRelativeUrl(category, subCategories[0].category),
         }));

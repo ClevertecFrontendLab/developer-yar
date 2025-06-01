@@ -4,11 +4,27 @@ export type AppErrorMessage = {
     title: string;
 };
 
-export type AppErrorAlignment = 'left' | 'center' | 'right';
+export type AppMessageAlignment = 'left' | 'center' | 'right';
 
 export type AppStatus = {
-    errorAlignment: AppErrorAlignment;
+    errorAlignment: AppMessageAlignment;
     errorMessage: AppErrorMessage;
     errorType: AppErrorType | null;
     isLoading: boolean;
+    isSuccess: boolean;
+    successAlignment: AppMessageAlignment;
+    successMessage: string;
+};
+
+export type ErrorStatus = {
+    alignment?: AppMessageAlignment;
+    isError?: boolean;
+    message?: AppErrorMessage;
+    type?: AppErrorType;
+};
+
+export type SuccessStatus = {
+    alignment?: AppMessageAlignment;
+    isSuccess?: boolean;
+    message?: string;
 };

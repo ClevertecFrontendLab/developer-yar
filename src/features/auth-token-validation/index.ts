@@ -1,2 +1,3 @@
+export { useAuthStatus } from './hooks/use-auth-status';
 export { tokenValidationApi } from './model/api';
-export { withAuthGuard } from './ui/with-auth-guard';
+export { useLazyValidateTokenQuery } from './model/api';

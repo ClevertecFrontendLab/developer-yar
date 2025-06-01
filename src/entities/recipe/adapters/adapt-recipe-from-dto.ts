@@ -1,6 +1,6 @@
 import { Category } from '~/entities/navigation/@x/recipe';
 import { User } from '~/entities/user/@x/recipe';
-import { buildUrl } from '~/shared/lib';
+import { buildRelativeUrl } from '~/shared/lib';
 
 import { RecipeItemDto } from '../dto/recipe-item.dto';
 import { buildRecipeUrl } from '../lib/build-recipe-url';
@@ -13,14 +13,14 @@ export const adaptRecipeFromDto = (
     author: User,
     categories: Category[],
 ): RecipeItem => ({
-    author: author,
+    author: { ...author, id: recipe.authorId },
     bookmarks: recipe.bookmarks,
     categories: getCategories(recipe, categories),
     date: recipe.createdAt,
     description: recipe.description,
     garnish: recipe?.garnish,
     id: recipe._id,
-    image: buildUrl([import.meta.env.VITE_IMAGES_API_URL, recipe.image]),
+    image: buildRelativeUrl(import.meta.env.VITE_IMAGES_API_URL, recipe.image),
     ingredients: recipe.ingredients.map((ingredient) => ({
         ...ingredient,
         count: typeof ingredient.count === 'string' ? parseInt(ingredient.count) : ingredient.count,
