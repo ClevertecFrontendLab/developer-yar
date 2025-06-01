@@ -1,6 +1,6 @@
 import { Ingredient, Step } from '../model/types';
 
-export type RecipeCreationDto = {
+export type RecipeCreationDto = Partial<{
     categoriesIds: string[];
     description: string;
     image?: string;
@@ -9,4 +9,4 @@ export type RecipeCreationDto = {
     steps: Step[];
     time: number;
     title: string;
-};
+}>;

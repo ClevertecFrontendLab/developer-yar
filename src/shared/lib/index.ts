@@ -4,6 +4,7 @@ export { getDisplayForBreakpoints } from './helpers/get-display-for-breakpoints'
 export { getErrorOutline } from './helpers/get-error-outline';
 export { getUniqueArray } from './helpers/get-unique-array';
 export { queryWithParams } from './helpers/query-with-params';
+export { removeDefaultValues } from './helpers/remove-default-values';
 export { useLockScroll } from './hooks/use-lock-scroll';
 export { useScrollOnNavigate } from './hooks/use-scroll-on-navigate';
 export { useToggleMenu } from './hooks/use-toggle-menu';

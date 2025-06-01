@@ -34,7 +34,7 @@ export const useZodForm = <T extends z.ZodTypeAny>(
     type FormData = InferFormData<T>;
 
     const {
-        formState: { errors, dirtyFields, touchedFields, isSubmitSuccessful, isDirty },
+        formState: { errors, dirtyFields, touchedFields, isDirty },
         setValue,
         ...rest
     } = useForm<FormData>({
@@ -60,7 +60,6 @@ export const useZodForm = <T extends z.ZodTypeAny>(
         dirtyFields,
         errors,
         isDirty,
-        isSubmitSuccessful,
         setValidatedValue,
         setValue,
         touchedFields,
