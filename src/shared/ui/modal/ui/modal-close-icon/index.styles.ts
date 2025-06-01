@@ -11,5 +11,6 @@ export const modalCloseIconStyles: ModalCloseIconStyleProps = {
         pos: 'absolute',
         right: 6,
         top: 6,
+        zIndex: 'tooltip',
     },
 };

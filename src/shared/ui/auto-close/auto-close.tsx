@@ -7,7 +7,7 @@ type AutoCloseProps = {
 } & PropsWithChildren;
 
 export const AutoClose: FC<AutoCloseProps> = ({
-    autoCloseDelayMs = 15000,
+    autoCloseDelayMs = 30000,
     children,
     isOpen,
     onClose,

@@ -42,7 +42,7 @@ const RecipesPage: FC = () => {
     const isLoading = isCategoriesLoading || isSubcategoriesLoading || isRecipesLoading;
     const isError = isCategoriesError || isSubcategoriesError || isRecipesError;
 
-    useApiStatusSync(isLoading, isError);
+    useApiStatusSync(isLoading, { isError });
 
     if (
         isCategoriesSuccess &&

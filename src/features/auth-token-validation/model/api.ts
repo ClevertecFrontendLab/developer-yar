@@ -7,6 +7,9 @@ import { ValidateTokenResponse } from './types';
 export const tokenValidationApi = createApi({
     baseQuery: createBaseQuery(),
     endpoints: (builder) => ({
+        refreshToken: builder.query<ValidateTokenResponse, void>({
+            query: () => ENDPOINTS.REFRESH_TOKEN,
+        }),
         validateToken: builder.query<ValidateTokenResponse, void>({
             query: () => ENDPOINTS.VALIDATE_TOKEN,
         }),
@@ -14,4 +17,4 @@ export const tokenValidationApi = createApi({
     reducerPath: 'tokenValidationApi',
 });
 
-export const { useValidateTokenQuery } = tokenValidationApi;
+export const { useLazyValidateTokenQuery, useLazyRefreshTokenQuery } = tokenValidationApi;

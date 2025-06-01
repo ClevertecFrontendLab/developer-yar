@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { useAuthForm } from '~/entities/auth';
 import { ApiError, ERRORS, isApiError } from '~/shared/api';
+import { useZodForm } from '~/shared/lib';
 import { AppErrorMessage, useApiStatusSync } from '~/shared/model';
 
 import { STEPS } from '../consts/steps';
@@ -33,7 +33,7 @@ const mapErrorToMessage = (error: ApiError) => {
 };
 
 export const useEmailVerificationModal = () => {
-    const { errors, handleSubmit, register, reset, trimField } = useAuthForm(
+    const { errors, handleSubmit, register, reset, trimField } = useZodForm(
         schemas.emailVerificationSchema,
     );
 
@@ -60,7 +60,7 @@ export const useEmailVerificationModal = () => {
         }
     };
 
-    useApiStatusSync(isLoading, isError, errorMessage, { type: 'auth' });
+    useApiStatusSync(isLoading, { isError: isError, message: errorMessage, type: 'auth' });
 
     const onSubmit = handleSubmit(onSubmitCallback);
 

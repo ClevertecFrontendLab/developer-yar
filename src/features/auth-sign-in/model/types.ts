@@ -1,4 +1,4 @@
-import { InferFormData } from '~/entities/auth';
+import { InferFormData } from '~/shared/model';
 
 import { signInSchema } from './schemas';
 

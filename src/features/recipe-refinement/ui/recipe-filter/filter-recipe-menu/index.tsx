@@ -14,7 +14,7 @@ import {
 import { FilterRecipeControlProps } from '../index.types';
 
 export const FilterRecipeMenu: FC<FilterRecipeControlProps> = memo(
-    ({ action, dataTestId, items, title }) => {
+    ({ action, id, items, title }) => {
         const { isOpen, onClose, onToggle } = useDisclosure();
 
         const dispatch = useAppDispatch();
@@ -30,11 +30,7 @@ export const FilterRecipeMenu: FC<FilterRecipeControlProps> = memo(
 
         return (
             <Dropdown isOpen={isOpen} onClose={onClose}>
-                <DropdownToggleButton
-                    dataTestId={dataTestId ? dataTestId : ''}
-                    isOpen={isOpen}
-                    onClick={onToggle}
-                >
+                <DropdownToggleButton data-test-id={id} isOpen={isOpen} onClick={onToggle}>
                     <DropdownPreview
                         items={selectedItemTags}
                         placeholder={title}

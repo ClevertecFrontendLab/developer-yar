@@ -42,6 +42,18 @@ const gridLayout = {
     },
 };
 
+const overlay = {
+    backdropFilter: 'blur(4px)',
+    background: 'blackAlpha.300',
+    h: 'full',
+    inset: 0,
+    minH: '100vh',
+    overflow: 'hidden',
+    pointerEvents: 'none',
+    pos: 'absolute',
+    zIndex: 'overlay',
+};
+
 const pageLayout = {
     flexDirection: 'column',
     gap: { base: 8, xl: 10 },
@@ -69,6 +81,7 @@ const subtleOutlineHover = {
 
 export const layerStyles = {
     gridLayout,
+    overlay,
     pageLayout,
     subtleOutline,
     subtleOutlineHover,
@@ -76,11 +89,11 @@ export const layerStyles = {
 
 const colors = {
     lime: {
+        50: '#ffffd3',
         100: '#eaffc7',
         150: '#d7ff94',
         300: '#c4ff61',
         400: '#b1ff2e',
-        50: '#ffffd3',
         600: '#2db100',
         700: '#207e00',
         800: '#134b00',

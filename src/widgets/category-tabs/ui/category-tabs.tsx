@@ -31,23 +31,19 @@ export const CategoryTabs: FC<CategoryTabsProps> = memo(({ subcategories }) => {
         <Stack {...styles.stackContainer}>
             <Tabs index={activeTabIndex} isLazy onChange={handleTabChange}>
                 <TabList {...styles.tabList}>
-                    {subcategories.map((subcategory, index) => (
-                        <Tab
-                            data-test-id={
-                                index === activeTabIndex && subcategory.slug === 'first-dish'
-                                    ? `${subcategory.slug === 'first-dish' ? 'side-dishes' : subcategory.slug}-active`
-                                    : `${DATA_TEST_ATTRIBUTES.TAB}-${
-                                          subcategory.slug === 'first-dish'
-                                              ? 'side-dishes'
-                                              : subcategory.slug
-                                      }-${index}`
-                            }
-                            key={subcategory.id}
-                            variant='recipe'
-                        >
-                            {subcategory.title}
-                        </Tab>
-                    ))}
+                    {subcategories.map((subcategory, index) => {
+                        const baseTestId = `${DATA_TEST_ATTRIBUTES.TAB}-${subcategory.slug}-${index}`;
+
+                        return (
+                            <Tab data-test-id={baseTestId} key={subcategory.id} variant='recipe'>
+                                {subcategory.title}
+
+                                {index === activeTabIndex && index !== 0 && (
+                                    <span data-test-id={`${subcategory.slug}-active`} />
+                                )}
+                            </Tab>
+                        );
+                    })}
                 </TabList>
 
                 <TabPanels>

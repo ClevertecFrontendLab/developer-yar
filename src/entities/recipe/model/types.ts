@@ -1,5 +1,19 @@
 import { Category, Subcategory } from '~/entities/navigation/@x/recipe';
 import { User } from '~/entities/user/@x/recipe';
+import { InferFormData } from '~/shared/model';
+
+import { RecipeCreationDto } from '../dto/recipe-creation.dto';
+import { baseSchema } from './schema';
+
+export type UploadedFile = string;
+
+export type RecipeFormData = InferFormData<typeof baseSchema>;
+export type RecipeFormFiledName = keyof InferFormData<typeof baseSchema>;
+
+export type EditRecipeArgs = {
+    data: RecipeCreationDto;
+    id: string;
+};
 
 export type GetAllRecipesQueryParams = Partial<{
     allergens: string;
@@ -75,7 +89,7 @@ export type Ingredient = {
 
 export type Step = {
     description: string;
-    image?: string;
+    image?: string | null;
     stepNumber: number;
 };
 

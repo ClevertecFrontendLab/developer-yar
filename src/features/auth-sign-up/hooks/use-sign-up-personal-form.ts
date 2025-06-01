@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useAuthForm } from '~/entities/auth';
+import { useZodForm } from '~/shared/lib';
 
 import { PERSONAL_FIELDS } from '../consts/fields';
 import { personalDataFieldSet as fields } from '../consts/sign-up-fields';
@@ -11,7 +11,7 @@ import { useSignUpContext } from './use-sign-up-context';
 
 export const useSignUpPersonalForm = () => {
     const { dirtyFields, errors, handleSubmit, register, trimField } =
-        useAuthForm(signUpPersonalSchema);
+        useZodForm(signUpPersonalSchema);
 
     const { setFormDataPersonal, setProgress, setStep, step } = useSignUpContext();
 

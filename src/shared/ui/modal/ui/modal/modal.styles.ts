@@ -11,5 +11,6 @@ export const modalStyles: ModalStyleProps = {
         pos: 'fixed',
         top: '0',
         w: '100vw',
+        zIndex: 'modal',
     },
 };

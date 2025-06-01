@@ -1,5 +1,6 @@
 export { Modal } from './ui/modal/modal';
 export { ModalBody } from './ui/modal-body';
+export { ModalButton } from './ui/modal-button';
 export { ModalCloseIcon } from './ui/modal-close-icon';
 export { ModalContent } from './ui/modal-content';
 export { ModalContentGroup } from './ui/modal-content-group';

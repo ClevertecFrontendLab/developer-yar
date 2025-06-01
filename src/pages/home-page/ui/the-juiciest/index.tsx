@@ -24,7 +24,7 @@ export const TheJuiciest: FC = () => {
         sortOrder: 'DESC',
     });
 
-    useApiStatusSync(isRecipesLoading, isRecipesError);
+    useApiStatusSync(isRecipesLoading, { isError: isRecipesError });
 
     if (isRecipesSuccess && recipes)
         return (

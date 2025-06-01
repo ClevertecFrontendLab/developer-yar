@@ -3,7 +3,6 @@ export { ENDPOINTS } from './endpoints';
 export { ERRORS } from './errors';
 export { getAccessToken } from './get-access-token';
 export { isApiError } from './is-api-error';
-export { isNetworkError } from './is-network-error';
 export { removeAccessToken } from './remove-access-token';
 export { saveAccessToken } from './save-access-token';
 export { TOKEN } from './token';

@@ -5,13 +5,11 @@ import { FC } from 'react';
 import { dropdownToggleButtonStyles as styles } from './index.styles';
 
 type DropdownToggleButtonProps = {
-    dataTestId: string;
     isOpen: boolean;
 } & ButtonProps;
 
 export const DropdownToggleButton: FC<DropdownToggleButtonProps> = ({
     children,
-    dataTestId,
     isOpen,
     ...props
 }) => (
@@ -20,7 +18,6 @@ export const DropdownToggleButton: FC<DropdownToggleButtonProps> = ({
             rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
             {...props}
             {...styles.dropdownToggleButton(isOpen)}
-            data-test-id={dataTestId}
         >
             {children}
         </Button>

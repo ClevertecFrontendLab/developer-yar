@@ -8,4 +8,7 @@ export const initialState: AppStatus = {
     },
     errorType: null,
     isLoading: false,
+    isSuccess: false,
+    successAlignment: 'center',
+    successMessage: '',
 };

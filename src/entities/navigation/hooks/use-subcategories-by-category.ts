@@ -8,7 +8,7 @@ export const useSubcategoriesByCategory = (id?: string) => {
 
     const { data, ...rest } = useGetSubcategoriesByCategoryQuery(id ?? '', { skip });
     const subcategories = useMemo(
-        () => (data?.subCategories ? adaptSubcategoriesByCategoryFromDto(data) : {}),
+        () => (data ? adaptSubcategoriesByCategoryFromDto(data) : []),
         [data],
     );
     return { data: subcategories, ...rest };

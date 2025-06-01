@@ -34,6 +34,7 @@ export const enum DATA_TEST_ATTRIBUTES {
     FOOTER = 'footer',
     HAMBURGER_ICON = 'hamburger-icon',
     HEADER = 'header',
+    INGREDIENT_QUANTITY = 'ingredient-quantity',
     JUICIEST_LINK = 'juiciest-link',
     JUICIEST_LINK_MOBILE = 'juiciest-link-mobile',
     LOADER_SEARCH_BLOCK = 'loader-search-block',
@@ -51,7 +52,6 @@ export const enum DATA_TEST_ATTRIBUTES {
     SIGN_IN_FORGOT_PASSWORD = 'forgot-password',
     SIGN_IN_ERROR_MODAL = 'sign-in-error-modal',
     SIGN_IN_RETRY_BUTTON = 'repeat-button',
-
     SIGN_UP_FORM = 'sign-up-form',
     SIGN_UP_PROGRESS = 'sign-up-progress',
     SIGN_UP_SUBMIT_BUTTON = SUBMIT_BUTTON,
@@ -63,17 +63,48 @@ export const enum DATA_TEST_ATTRIBUTES {
     SIGN_UP_CONFIRM_PASSWORD_INPUT = CONFIRM_PASSWORD_INPUT,
     SIGN_UP_VERIFY_NOTICE_MODAL = 'sign-up-success-modal',
     SIGN_UP_VERIFY_ERROR_MODAL = 'email-verification-failed-modal',
-
     EMAIL_VERIFICATION_MODAL = 'send-email-modal',
     EMAIL_VERIFICATION_INPUT = EMAIL_INPUT,
     EMAIL_VERIFICATION_SUBMIT_BUTTON = SUBMIT_BUTTON,
-
     OTP_CODE_VERIFICATION_MODAL = 'verification-code-modal',
     OTP_CODE_VERIFICATION_INPUT = 'verification-code-input',
-
     RESET_CREDENTIALS_MODAL = 'reset-credentials-modal',
     RESET_CREDENTIALS_LOGIN_INPUT = LOGIN_INPUT,
     RESET_CREDENTIALS_PASSWORD_INPUT = PASSWORD_INPUT,
     RESET_CREDENTIALS_CONFIRM_PASSWORD_INPUT = CONFIRM_PASSWORD_INPUT,
     RESET_CREDENTIALS_SUBMIT_BUTTON = SUBMIT_BUTTON,
+
+    RECIPE_IMAGE_BLOCK = 'recipe-image-block',
+    RECIPE_IMAGE_BLOCK_INPUT_FILE = 'recipe-image-block-input-file',
+    INPUT_FILE = 'input-file',
+    RECIPE_CATEGORIES = 'recipe-categories',
+    RECIPE_TITLE = 'recipe-title',
+    RECIPE_DESCRIPTION = 'recipe-description',
+    RECIPE_PORTIONS = 'recipe-portions',
+    RECIPE_TIME = 'recipe-time',
+    RECIPE_INGREDIENTS_TITLE = 'recipe-ingredients-title',
+    RECIPE_INGREDIENTS_COUNT = 'recipe-ingredients-count',
+    RECIPE_INGREDIENTS_MEASURE_UNIT = 'recipe-ingredients-measureUnit',
+    RECIPE_STEPS_IMAGE_BLOCK = 'recipe-steps-image-block',
+    RECIPE_STEPS_DESCRIPTION = 'recipe-steps-description',
+    RECIPE_STEPS_REMOVE_BUTTON = 'recipe-steps-remove-button',
+    RECIPE_SAVE_DRAFT_BUTTON = 'recipe-save-draft-button',
+    RECIPE_PUBLISH_RECIPE_BUTTON = 'recipe-publish-recipe-button',
+    RECIPE_INGREDIENTS_REMOVE = 'recipe-ingredients-remove-ingredients',
+    RECIPE_INGREDIENTS_ADD = 'recipe-ingredients-add-ingredients',
+
+    RECIPE_IMAGE_BLOCK_PREVIEW_IMAGE = 'recipe-image-block-preview-image',
+
+    RECIPE_IMAGE_MODAL = 'recipe-image-modal',
+    RECIPE_IMAGE_MODAL_IMAGE_BLOCK = 'recipe-image-modal-image-block',
+
+    RECIPE_IMAGE_MODAL_PREVIEW_IMAGE = 'recipe-image-modal-preview-image',
+
+    RECIPE_ADD_BUTTON = 'add-recipe-button',
+    RECIPE_FORM = 'recipe-form',
+
+    RECIPE_PREVENTIVE_MODAL = 'recipe-preventive-modal',
+    RECIPE_DELETE_BUTTON = 'recipe-delete-button',
+
+    HEADER_LOGO = 'header-logo',
 }

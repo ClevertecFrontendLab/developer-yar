@@ -15,9 +15,16 @@ const getFallbackCategory = (): CategoryDto => ({
         },
         {
             _id: '67c48f07ed67ca980917d64c',
-            category: 'first-dish',
+            category: 'side-dishes',
             rootCategoryId: '67c48d99d02fb83fc3d8100f',
             title: 'Первые блюда',
+        },
+
+        {
+            _id: '67c48f6ded67ca980917d64f',
+            category: 'desserts',
+            rootCategoryId: '67c48d99d02fb83fc3d8100f',
+            title: 'Десерты',
         },
         {
             _id: '67c48f28ed67ca980917d64d',
@@ -27,15 +34,9 @@ const getFallbackCategory = (): CategoryDto => ({
         },
         {
             _id: '67c48f60ed67ca980917d64e',
-            category: 'side-dishes',
+            category: 'first-dish',
             rootCategoryId: '67c48d99d02fb83fc3d8100f',
             title: 'Гарниры',
-        },
-        {
-            _id: '67c48f6ded67ca980917d64f',
-            category: 'desserts',
-            rootCategoryId: '67c48d99d02fb83fc3d8100f',
-            title: 'Десерты',
         },
         {
             _id: '67c48f7aed67ca980917d650',

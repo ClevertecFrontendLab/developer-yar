@@ -1,7 +1,7 @@
-import { Popover } from '@chakra-ui/react';
-import { FC, PropsWithChildren } from 'react';
+import { Popover, PopoverProps } from '@chakra-ui/react';
+import { FC } from 'react';
 
-export const Dropdown: FC<PropsWithChildren> = ({ children, ...props }) => (
+export const Dropdown: FC<PopoverProps> = ({ children, ...props }) => (
     <Popover {...props} matchWidth>
         {children}
     </Popover>

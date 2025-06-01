@@ -4,7 +4,7 @@ import { Filter } from '../../model/types';
 
 export type FilterRecipeControlProps = {
     action: (id: string) => PayloadAction<string>;
-    dataTestId?: string;
+    id?: string;
     items: Filter[];
     title: string;
 };

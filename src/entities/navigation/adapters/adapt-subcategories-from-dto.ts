@@ -1,4 +1,4 @@
-import { buildUrl } from '~/shared/lib';
+import { buildRelativeUrl } from '~/shared/lib';
 
 import { SubcategoryDto } from '../dto/subcategory.dto';
 import { Subcategory } from '../model/types';
@@ -12,5 +12,5 @@ export const adaptSubcategoriesFromDto = (
         rootId,
         slug: subcategory,
         title,
-        url: buildUrl([rootCategory, subcategory]),
+        url: buildRelativeUrl(rootCategory, subcategory),
     }));
