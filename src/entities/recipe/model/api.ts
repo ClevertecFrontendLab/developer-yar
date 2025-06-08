@@ -6,6 +6,7 @@ import { buildAbsoluteUrl, queryWithParams } from '~/shared/lib';
 import { RecipeDto } from '../dto/recipe.dto';
 import { RecipeFormDto } from '../dto/recipe-form.dto';
 import { RecipeItemDto } from '../dto/recipe-item.dto';
+import { RecipesByUserDto } from '../dto/recipes-by-user.dto';
 import { mapUploadedFileFromDto } from '../mappers/map-uploaded-file-from-dto';
 import {
     EditRecipeArgs,
@@ -70,6 +71,11 @@ export const recipesApi = createApi({
                 }),
         }),
 
+        getRecipesByUserId: builder.query<RecipesByUserDto, string>({
+            providesTags: ['RecipesList'],
+            query: (id: string) => buildAbsoluteUrl(ENDPOINTS.RECIPES_BY_USER, id),
+        }),
+
         likeRecipe: builder.mutation<void, string>({
             invalidatesTags: (_result, _error, id) => [{ id, type: 'Recipe' }, 'RecipesList'],
             query: (id) => ({
@@ -111,6 +117,7 @@ export const {
     useGetAllRecipesQuery,
     useGetRecipeByIdQuery,
     useGetRecipesBySubcategoryIdQuery,
+    useGetRecipesByUserIdQuery,
     useUploadImageMutation,
     usePublishRecipeMutation,
     useDraftRecipeMutation,

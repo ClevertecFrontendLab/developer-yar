@@ -8,7 +8,7 @@ export const alertCloseButtonStyles: AlertCloseButtonStyleProps = {
     closeButton: {
         boxSize: 'auto',
         color: 'white',
-        position: 'absolute',
+        pos: 'absolute',
         right: 3,
         top: 3,
     },

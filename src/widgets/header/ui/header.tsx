@@ -3,12 +3,13 @@ import { Box, Flex, IconButton, Slide, Stack } from '@chakra-ui/react';
 import { FC } from 'react';
 
 import { Breadcrumbs, MenuTree } from '~/entities/navigation';
-import { UserCard, UserStats } from '~/entities/user';
+import { UserStats } from '~/entities/user';
 import { LogOutButton } from '~/features/auth-log-out';
 import { DATA_TEST_ATTRIBUTES, mockCurrentUser } from '~/shared/consts';
 import { getDisplayForBreakpoints, useToggleMenu } from '~/shared/lib';
 import { InfoPanel } from '~/shared/ui/info-panel';
 import { Logotype } from '~/shared/ui/logotype';
+import { ProfileCard } from '~/shared/ui/profile-card';
 
 import { BreadcrumbsMobile } from './breadcrumbs-mobile';
 import { headerStyles as styles } from './header.styles';
@@ -35,7 +36,7 @@ export const Header: FC = () => {
                 </Box>
 
                 <Box {...shownFromXlBreakpoint} {...styles.profileBox}>
-                    <UserCard {...mockCurrentUser} />
+                    <ProfileCard {...mockCurrentUser} />
                 </Box>
 
                 <Box {...shownToLgBreakpoint} {...styles.mobileUserStats(isOpen)}>
@@ -50,7 +51,13 @@ export const Header: FC = () => {
                                 ? DATA_TEST_ATTRIBUTES.CLOSE_ICON
                                 : DATA_TEST_ATTRIBUTES.HAMBURGER_ICON
                         }
-                        icon={isOpen ? <CloseIcon boxSize={3} /> : <HamburgerIcon boxSize={6} />}
+                        icon={
+                            isOpen ? (
+                                <CloseIcon {...styles.closeMenuIcon} />
+                            ) : (
+                                <HamburgerIcon {...styles.openMenuIcon} />
+                            )
+                        }
                         onClick={onToggle}
                         {...styles.burgerButton}
                     />

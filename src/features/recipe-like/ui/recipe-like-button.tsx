@@ -14,13 +14,12 @@ type RecipeLikeButtonProps = {
 export const RecipeLikeButton: FC<RecipeLikeButtonProps> = ({ recipeId }) => {
     const [likeRecipe, { isLoading, isError }] = useLikeRecipeMutation();
 
-    const handleLike = () => {
-        likeRecipe(recipeId).unwrap();
+    const handleLike = async () => {
+        await likeRecipe(recipeId).unwrap();
     };
 
     useApiStatusSync(isLoading, {
         isError,
-        message: { description: 'Попробуйте немного позже', title: 'Ошибка сервера' },
     });
 
     return (

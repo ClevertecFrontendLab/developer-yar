@@ -1,5 +1,5 @@
+import { Note } from '~/entities/blogger/@x/recipe';
 import { Category, Subcategory } from '~/entities/navigation/@x/recipe';
-import { User } from '~/entities/user/@x/recipe';
 import { InferFormData } from '~/shared/model';
 
 import { RecipeFormDto } from '../dto/recipe-form.dto';
@@ -45,7 +45,7 @@ export type Recipe = {
 };
 
 export type RecipeItem = {
-    author: User;
+    authorId: string;
     bookmarks: number;
     categories: Category[];
     date: string;
@@ -64,7 +64,7 @@ export type RecipeItem = {
     views: number;
     garnish?: string;
     meat?: string;
-    recommendedBy?: User;
+    recommendedBy?: unknown;
 };
 
 export type RecipeMeta = {
@@ -72,6 +72,11 @@ export type RecipeMeta = {
     page: number;
     total: number;
     totalPages: number;
+};
+
+export type RecipesByUser = {
+    notes: Note[];
+    recipes: RecipeItem[];
 };
 
 export type NutritionValue = {

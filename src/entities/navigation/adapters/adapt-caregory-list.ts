@@ -1,3 +1,5 @@
+import { hasItems } from '~/shared/lib';
+
 import { CategoryDto } from '../dto/category.dto';
 
 const getFallbackCategoryList = (): CategoryDto[] => [
@@ -802,7 +804,7 @@ const getFallbackCategoryList = (): CategoryDto[] => [
 const isTestEnv = () => typeof window !== 'undefined' && 'Cypress' in window;
 
 const isEmptyObject = (obj: unknown): obj is object =>
-    obj != null && typeof obj === 'object' && Object.keys(obj).length === 0;
+    obj != null && typeof obj === 'object' && !hasItems(Object.keys(obj));
 
 export const adaptCategoryList = (data: CategoryDto[]): CategoryDto[] => {
     if (isEmptyObject(data) && isTestEnv()) {

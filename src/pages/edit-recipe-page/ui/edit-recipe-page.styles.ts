@@ -8,7 +8,7 @@ type EditRecipePageStyleProps = {
 };
 
 const baseEditRecipePageStyles = {
-    margin: 'auto',
+    m: 'auto',
     w: 'full',
 };
 

@@ -6,7 +6,7 @@ type TabStyleProps = {
     [key in TabVariant]: TabProps;
 };
 
-const commonTab: TabProps = { color: 'lime.800', fontWeight: 'medium', position: 'relative' };
+const commonTab: TabProps = { color: 'lime.800', fontWeight: 'medium', pos: 'relative' };
 
 export const tabStyles: TabStyleProps = {
     auth: {

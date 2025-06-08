@@ -1,10 +1,10 @@
 import { removeDefaultValues } from '~/shared/lib';
 
-import { RecipeCreationDto } from '../dto/recipe-creation.dto';
+import { RecipeFormDto } from '../dto/recipe-form.dto';
 import { RecipeFormData } from '../model/types';
 
-export const adaptRecipeToDto = (recipe: RecipeFormData): RecipeCreationDto =>
-    removeDefaultValues<RecipeCreationDto>({
+export const adaptRecipeToDto = (recipe: RecipeFormData): RecipeFormDto =>
+    removeDefaultValues<RecipeFormDto>({
         categoriesIds: recipe.subcategories,
         description: recipe.description,
         image: recipe.image?.replace(`${import.meta.env.VITE_IMAGES_API_URL}/`, ''),

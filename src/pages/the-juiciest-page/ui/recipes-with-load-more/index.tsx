@@ -2,7 +2,6 @@ import { FC, useEffect, useState } from 'react';
 
 import { RecipeItem } from '~/entities/recipe';
 import { useFoundRecipes } from '~/features/recipe-refinement';
-import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
 import { useApiStatusSync } from '~/shared/model';
 import { LoadMoreButton } from '~/shared/ui/load-more-button';
 import { FoundRecipes } from '~/widgets/found-recipes';
@@ -43,7 +42,6 @@ export const RecipesWithLoadMore: FC = () => {
                 )}
                 {page < meta.totalPages && (
                     <LoadMoreButton
-                        data-test-id={DATA_TEST_ATTRIBUTES.LOAD_MORE_BUTTON}
                         disabled={isRecipesFetching}
                         isFetching={isRecipesFetching}
                         onClick={() => {

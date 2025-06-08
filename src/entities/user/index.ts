@@ -1,3 +1,2 @@
-export type { User } from './model/user';
-export { UserCard } from './ui/user-card';
+export type { User } from './model/types';
 export { UserStats } from './ui/user-stats';

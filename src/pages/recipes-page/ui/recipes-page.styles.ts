@@ -10,7 +10,7 @@ export const recipesPageStyles: RecipesPageStyleProps = {
         layerStyle: 'pageLayout',
     },
     pageHeroBox: {
-        margin: 'auto',
+        m: 'auto',
         maxW: { '2xl': '898px', base: 'full', xl: '696px' },
         pb: { base: 4, xl: 0 },
         w: 'full',

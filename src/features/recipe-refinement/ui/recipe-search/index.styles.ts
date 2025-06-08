@@ -56,8 +56,8 @@ export const recipeSearchStyles: RecipeSearchStyleProps = {
         h: { base: 8, xl: 12 },
         outline: '1px solid',
         outlineColor: 'blackAlpha.600',
-        paddingInlineEnd: isQueryNotEmpty ? 8 : 16,
-        paddingInlineStart: { base: 3, xl: 4 },
+        pl: { base: 3, xl: 4 },
+        pr: isQueryNotEmpty ? 8 : 16,
     }),
     inputButtons: {
         gap: 1,

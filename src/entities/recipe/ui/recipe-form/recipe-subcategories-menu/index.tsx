@@ -3,7 +3,7 @@ import { FC, useMemo } from 'react';
 
 import { useCategoryList } from '~/entities/navigation';
 import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
-import { getErrorOutline } from '~/shared/lib';
+import { getErrorOutline, hasItems } from '~/shared/lib';
 import { useApiStatusSync } from '~/shared/model';
 import { Checkbox } from '~/shared/ui/checkbox';
 import {
@@ -40,7 +40,9 @@ export const RecipeSubcategoriesMenu: FC<RecipeSubcategoriesMenuProps> = ({
         [categories, isCategoriesSuccess],
     );
 
-    useApiStatusSync(isCategoriesLoading && !subcategories.length, { isError: isCategoriesError });
+    useApiStatusSync(isCategoriesLoading && !hasItems(subcategories), {
+        isError: isCategoriesError,
+    });
 
     const selectedItemTags = useMemo(
         () => subcategories.filter((subcategory) => items.includes(subcategory.id)),
@@ -48,7 +50,7 @@ export const RecipeSubcategoriesMenu: FC<RecipeSubcategoriesMenuProps> = ({
         [items, subcategories],
     );
 
-    if (subcategories.length)
+    if (hasItems(subcategories))
         return (
             <Dropdown isOpen={isOpen} onClose={onClose}>
                 <DropdownToggleButton
@@ -61,7 +63,7 @@ export const RecipeSubcategoriesMenu: FC<RecipeSubcategoriesMenuProps> = ({
                         crop={true}
                         items={selectedItemTags}
                         placeholder='Выберите из списка'
-                        shouldShowPlaceholder={selectedItemTags.length === 0}
+                        shouldShowPlaceholder={!hasItems(selectedItemTags)}
                     />
                 </DropdownToggleButton>
 

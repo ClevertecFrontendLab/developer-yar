@@ -75,7 +75,7 @@ export const recipeFormStyles: RecipeFormStyleProps = {
     },
     recipeIngredientsAndStepsContainer: {
         gap: 10,
-        margin: 'auto',
+        m: 'auto',
         maxW: { '2xl': '668px', base: 'full', md: '604px', xl: '658px' },
         w: 'full',
     },

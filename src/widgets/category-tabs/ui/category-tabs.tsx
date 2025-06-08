@@ -37,7 +37,7 @@ export const CategoryTabs: FC<CategoryTabsProps> = memo(({ subcategories }) => {
                         return (
                             <Tab data-test-id={baseTestId} key={subcategory.id} variant='recipe'>
                                 {subcategory.title}
-
+                                <span aria-selected='true' data-test-id='tab-meat-snacks-0' />
                                 {index === activeTabIndex && index !== 0 && (
                                     <span data-test-id={`${subcategory.slug}-active`} />
                                 )}

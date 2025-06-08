@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { BloggersData } from '~/entities/blogger';
 import { Category } from '~/entities/navigation';
 import { RecipeItem } from '~/entities/recipe';
 
@@ -24,6 +25,9 @@ const slice = createSlice({
             state.allergens = initialState.allergens;
             state.filteringAllergens = false;
             state.isRecipeQueryActive = false;
+        },
+        setAuthorsFromQuery(state, action: PayloadAction<BloggersData>) {
+            state.filterData.authors = action.payload.followed.concat(action.payload.others);
         },
         setCategoriesFromQuery(state, action: PayloadAction<Category[]>) {
             state.filterData.categories = action.payload;
@@ -83,6 +87,7 @@ export const {
     addAllergen,
     removeAllergen,
     resetAllFilters,
+    setAuthorsFromQuery,
     setCategoriesFromQuery,
     setFetching,
     setRecipeQueryActive,

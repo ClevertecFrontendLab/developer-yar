@@ -4,10 +4,11 @@ import { FC, PropsWithChildren, ReactElement } from 'react';
 import { tagStyles as styles } from './tag.styles';
 import { TagColor } from './tag.types';
 
-type TagProps = {
-    icon?: ReactElement;
-    variant?: TagColor;
-} & PropsWithChildren;
+type TagProps = Partial<{
+    icon: ReactElement;
+    variant: TagColor;
+}> &
+    PropsWithChildren;
 
 export const Tag: FC<TagProps> = ({ children, icon, variant = 'gray' }) => (
     <Badge {...styles.badge(variant)}>

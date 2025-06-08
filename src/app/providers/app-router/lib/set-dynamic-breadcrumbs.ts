@@ -1,3 +1,4 @@
+import { getBloggerByIdQuery } from '~/entities/blogger';
 import {
     Breadcrumb,
     Category,
@@ -7,6 +8,7 @@ import {
 } from '~/entities/navigation';
 import { getRecipeByIdQuery } from '~/entities/recipe';
 import { buildAbsoluteUrl } from '~/shared/lib';
+import { ROUTES } from '~/shared/routes';
 
 import { Params } from '../model/types';
 import { assertParamsExist } from './asserts-params-exist';
@@ -40,7 +42,7 @@ function findSubcategory(subcategories: Subcategory[], subcategorySlug: string):
     return subcategory;
 }
 
-function buildBreadcrumbs(
+function buildCategorySubcategoryBreadcrumbs(
     category: Category,
     subcategory: Subcategory,
 ): Record<'title' | 'url', string>[] {
@@ -59,18 +61,18 @@ export const setCategoryAndSubcategory = async (params: Params): Promise<Breadcr
     const category = findCategory(categories, categorySlug);
     const subcategory = findSubcategory(subcategories, subcategorySlug);
 
-    const breadcrumbs = buildBreadcrumbs(category, subcategory);
+    const breadcrumbs = buildCategorySubcategoryBreadcrumbs(category, subcategory);
 
     return breadcrumbs;
 };
 
-export const setRecipe = async (params: Params) => {
+export const setRecipe = async (params: Params): Promise<Breadcrumb[]> => {
     assertParamsExist(params, ['category', 'subcategory']);
 
-    assertParamsExist(params, ['id']);
-    const id = params.id;
+    assertParamsExist(params, ['recipeId']);
+    const recipeId = params.recipeId;
 
-    const recipe = await getRecipeByIdQuery(id);
+    const recipe = await getRecipeByIdQuery(recipeId);
 
     if (!recipe) throw new Error('Recipe not found');
 
@@ -78,8 +80,29 @@ export const setRecipe = async (params: Params) => {
 
     const breadcrumbs = categoryAndSubcategoryBreadcumbs.concat({
         title: recipe.title,
-        url: buildAbsoluteUrl(params.category, params.subcategory, params.id),
+        url: buildAbsoluteUrl(params.category, params.subcategory, params.recipeId),
     });
+
+    return breadcrumbs;
+};
+
+export const setBlogger = async (params: Params): Promise<Breadcrumb[]> => {
+    const { bloggerId } = params;
+
+    const blogger = await getBloggerByIdQuery(bloggerId!);
+
+    if (!blogger) throw new Error('Blogger not found');
+
+    const breadcrumbs: Breadcrumb[] = [
+        {
+            title: 'Блоги',
+            url: ROUTES.BLOGS,
+        },
+        {
+            title: `${blogger.fullName} (${blogger.username})`,
+            url: buildAbsoluteUrl(ROUTES.BLOGS, blogger.id),
+        },
+    ];
 
     return breadcrumbs;
 };

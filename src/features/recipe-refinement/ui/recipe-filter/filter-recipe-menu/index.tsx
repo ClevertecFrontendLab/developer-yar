@@ -1,6 +1,7 @@
 import { useDisclosure } from '@chakra-ui/react';
 import { FC, memo, useCallback, useMemo } from 'react';
 
+import { hasItems } from '~/shared/lib';
 import { useAppDispatch } from '~/shared/model';
 import { Checkbox } from '~/shared/ui/checkbox';
 import {
@@ -34,7 +35,7 @@ export const FilterRecipeMenu: FC<FilterRecipeControlProps> = memo(
                     <DropdownPreview
                         items={selectedItemTags}
                         placeholder={title}
-                        shouldShowPlaceholder={selectedItemTags.length === 0}
+                        shouldShowPlaceholder={!hasItems(selectedItemTags)}
                     />
                 </DropdownToggleButton>
 

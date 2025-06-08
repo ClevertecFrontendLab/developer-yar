@@ -41,6 +41,7 @@ export const withBadgeStyles: Record<BadgeVariant, WithBadgeStyleProps> = {
             ...commonWithBadgeStyles,
             fontSize: 'xs',
             lineHeight: '4',
+            minWidth: '2ch',
         },
     },
 };
