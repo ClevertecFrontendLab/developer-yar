@@ -3,7 +3,6 @@ import { useMemo } from 'react';
 import { useCategoryList } from '~/entities/navigation/@x/recipe';
 
 import { adaptRecipesFromDto } from '../adapters/adapt-recipes-from-dto';
-import { mockRecipeAuthor } from '../consts/mock-recipe-author';
 import { useGetRecipesBySubcategoryIdQuery } from '../model/api';
 import { GetRecipesBySubcategoryIdQueryParams } from '../model/types';
 
@@ -40,7 +39,7 @@ export function useRecipesBySubcategoryId(
 
     const { data, meta } = useMemo(() => {
         if (!apiRecipes?.data || !apiCategories) return { data: [], meta: {} };
-        return adaptRecipesFromDto(apiRecipes, mockRecipeAuthor, apiCategories);
+        return adaptRecipesFromDto(apiRecipes, apiCategories);
     }, [apiRecipes, apiCategories]);
 
     return { data, isError, isFetching, isLoading, isSuccess, meta };

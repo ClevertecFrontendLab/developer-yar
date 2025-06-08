@@ -16,6 +16,6 @@ export const authOtpCodeInputStyles: AuthOtpCodeInputStyleProps = {
     }),
     container: {
         gap: 1.5,
-        margin: 'auto',
+        m: 'auto',
     },
 };

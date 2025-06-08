@@ -12,7 +12,7 @@ import {
 import { FC, useCallback, useEffect, useState } from 'react';
 
 import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
-import { generateId } from '~/shared/lib';
+import { generateId, hasItems } from '~/shared/lib';
 import { Checkbox } from '~/shared/ui/checkbox';
 import {
     Dropdown,
@@ -138,7 +138,7 @@ export const RecipeAllergenPicker: FC<RecipeAllergenPickerProps> = ({
                         items={selectedAllergens}
                         placeholder={title}
                         shouldShowPlaceholder={
-                            selectedAllergens.length === 0 || !isFilteringAllergens
+                            !hasItems(selectedAllergens) || !isFilteringAllergens
                         }
                     />
                 </DropdownToggleButton>

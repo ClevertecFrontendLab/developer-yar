@@ -1,4 +1,4 @@
-import { ButtonProps, GridItemProps, GridProps, HeadingProps } from '@chakra-ui/react';
+import { ButtonProps, GridItemProps, GridProps } from '@chakra-ui/react';
 
 type FoodBlogStyleProps = {
     authorButton: ButtonProps;
@@ -7,7 +7,6 @@ type FoodBlogStyleProps = {
     foodBlogContainer: GridItemProps;
     foodBlogGrid: GridProps;
     gridContainer: GridProps;
-    title: HeadingProps;
     titleContainer: GridItemProps;
 };
 
@@ -41,11 +40,7 @@ export const foodBlogStyles: FoodBlogStyleProps = {
         templateColumns: { base: '1fr', md: 'repeat(3,1fr)' },
     },
     gridContainer: {
-        alignItems: 'center',
-        bgColor: 'lime.300',
-        borderRadius: '2xl',
-        gap: { '2xl': 6, base: 3, xl: 4 },
-        padding: { base: 3, xl: 6 },
+        layerStyle: 'blogsLayout',
         templateAreas: {
             base: `"title"
                         "foodBlog"
@@ -53,12 +48,6 @@ export const foodBlogStyles: FoodBlogStyleProps = {
             xl: `"title . allAuthors"
                         "foodBlog foodBlog foodBlog"`,
         },
-    },
-    title: {
-        color: 'black',
-        fontSize: { '2xl': '4xl', base: '2xl', xl: '3xl' },
-        fontWeight: { '2xl': 'normal', base: 'medium' },
-        lineHeight: { '2xl': '10', base: '8', xl: '9' },
     },
     titleContainer: {
         area: 'title',

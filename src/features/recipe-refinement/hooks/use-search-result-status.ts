@@ -1,3 +1,4 @@
+import { hasItems } from '~/shared/lib';
 import { useAppSelector } from '~/shared/model';
 
 import { selectIsRecipeQueryActive } from '../model/selectors';
@@ -9,7 +10,7 @@ export const useSearchResultStatus = () => {
     const isRecipeQueryActive = useAppSelector(selectIsRecipeQueryActive);
     const status: SearchResultStatus = !isRecipeQueryActive
         ? 'idle'
-        : recipes.length > 0
+        : hasItems(recipes)
           ? 'success'
           : 'error';
     return { isRecipeQueryActive, status };

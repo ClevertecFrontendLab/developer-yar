@@ -71,7 +71,7 @@ export const recipeAllergenPickerBaseStyles: RecipeAllergenPickerStyleProps = {
     recipeAllergenPickerContainer: {
         align: 'start',
         justify: 'end',
-        width: 'full',
+        w: 'full',
         zIndex: 'docked',
     },
     removeIcon: {

@@ -3,7 +3,6 @@ import { useMemo } from 'react';
 import { useCategoryList } from '~/entities/navigation/@x/recipe';
 
 import { adaptRecipeFromDto } from '../adapters/adapt-recipe-from-dto';
-import { mockRecipeAuthor } from '../consts/mock-recipe-author';
 import { useGetRecipeByIdQuery } from '../model/api';
 
 export const useRecipeById = (id?: string) => {
@@ -32,7 +31,7 @@ export const useRecipeById = (id?: string) => {
 
     const data = useMemo(() => {
         if (!apiRecipe || !apiCategories) return null;
-        return adaptRecipeFromDto(apiRecipe, mockRecipeAuthor, apiCategories);
+        return adaptRecipeFromDto(apiRecipe, apiCategories);
     }, [apiRecipe, apiCategories]);
 
     return { data, isError, isFetching, isLoading, isSuccess };

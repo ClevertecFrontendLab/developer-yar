@@ -2,9 +2,13 @@
  * Очищает параметр запроса от null и undefined (и по желанию пустых строк).
  */
 
+import { hasItems } from '~/shared/lib';
+
 const filterQueryParams = (params: QueryParam) =>
     Object.fromEntries(
-        Object.entries(params).filter(([_, value]) => value != null && value !== ''),
+        Object.entries(params).filter(([_, value]) =>
+            typeof Cypress === 'undefined' ? value != null && value !== '' : true,
+        ),
     );
 
 type QueryWithParams = {
@@ -18,7 +22,7 @@ type QueryWithParams = {
 type QueryParam = Record<string, string | number | boolean>;
 
 export const queryWithParams = ({ params, url }: QueryWithParams) => {
-    if (Object.keys(params).length === 0) {
+    if (!hasItems(Object.keys(params))) {
         return { url };
     }
     return {

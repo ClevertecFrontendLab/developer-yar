@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-import { getUniqueArray } from '~/shared/lib';
+import { hasItems } from '~/shared/lib';
 import { RootState } from '~/shared/model';
 
 import { getGarnishTypes } from '../lib/get-garnish-types';
@@ -14,6 +14,8 @@ export const selectIsFilteringAllergens = (state: RootState) =>
 export const selectCheckedAllergens = createSelector(selectAllAllergens, (allergens) =>
     allergens.filter((allergen) => allergen.selected),
 );
+
+export const selectRawAuthors = (state: RootState) => state.recipeRefinement.filterData.authors;
 
 export const selectRawCategories = (state: RootState) =>
     state.recipeRefinement.filterData.categories;
@@ -38,17 +40,13 @@ export const selectRawRecipes = (state: RootState) => state.recipeRefinement.fil
 export const selectCheckedAuthors = (state: RootState) => state.recipeRefinement.selected.authors;
 
 export const selectAllAuthors = createSelector(
-    [selectRawRecipes, selectCheckedAuthors],
-    (rawRecipes, checkedAuthors) =>
-        getUniqueArray(
-            rawRecipes
-                .map((recipe) => recipe.author)
-                .map((author) => ({
-                    id: author.id,
-                    selected: checkedAuthors.includes(author.id),
-                    title: author.fullName,
-                })),
-        ),
+    [selectRawAuthors, selectCheckedAuthors],
+    (rawAuthors, checkedAuthors) =>
+        rawAuthors.map((author) => ({
+            id: author.id,
+            selected: checkedAuthors.includes(author.id),
+            title: author.fullName,
+        })),
 );
 
 export const selectCheckedMeatTypes = (state: RootState) =>
@@ -81,11 +79,11 @@ export const selectIsAnyFilterActive = createSelector(
         selectedGarnishTypes,
         selectedAllergens,
     ) =>
-        selectedCategories.length > 0 ||
-        selectedAuthors.length > 0 ||
-        selectedMeatTypes.length > 0 ||
-        selectedGarnishTypes.length > 0 ||
-        selectedAllergens.length > 0,
+        hasItems(selectedCategories) ||
+        hasItems(selectedAuthors) ||
+        hasItems(selectedMeatTypes) ||
+        hasItems(selectedGarnishTypes) ||
+        hasItems(selectedAllergens),
 );
 
 export const selectSearchQuery = (state: RootState) => state.recipeRefinement.query;
@@ -94,5 +92,5 @@ export const selectIsRecipeQueryActive = (state: RootState) =>
 export const selectIsFetching = (state: RootState) => state.recipeRefinement.isFetching;
 export const selectIsSearchDisabled = createSelector(
     [selectSearchQuery, selectCheckedAllergens],
-    (query, checkedAllergens) => query.length < 3 && checkedAllergens.length === 0,
+    (query, checkedAllergens) => query.length < 3 && !hasItems(checkedAllergens),
 );

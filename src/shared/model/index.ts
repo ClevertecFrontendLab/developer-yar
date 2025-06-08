@@ -18,4 +18,4 @@ export type {
 } from './app-status/types';
 export type { AppDispatch, RootState } from './redux/hooks';
 export { useAppDispatch, useAppSelector } from './redux/hooks';
-export type { InferFormData } from './types';
+export type { DecodedToken, InferFormData } from './types';

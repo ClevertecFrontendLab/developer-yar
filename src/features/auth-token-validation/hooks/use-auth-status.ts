@@ -6,7 +6,7 @@ import { useApiStatusSync } from '~/shared/model';
 import { useLazyRefreshTokenQuery, useLazyValidateTokenQuery } from '../model/api';
 
 export const useAuthStatus = () => {
-    const [isAuthenticated, setIsAuthenticated] = useState(true);
+    const [isAuth, setIsAuth] = useState(true);
 
     const [validateToken, { isLoading: isValidateTokenLoading, isError: isValidateTokenError }] =
         useLazyValidateTokenQuery();
@@ -23,19 +23,19 @@ export const useAuthStatus = () => {
             const token = getAccessToken();
 
             if (!token) {
-                setIsAuthenticated(false);
+                setIsAuth(false);
                 return;
             }
 
             try {
                 await validateToken().unwrap();
-                setIsAuthenticated(true);
+                setIsAuth(true);
             } catch {
                 try {
                     await refreshToken().unwrap();
-                    setIsAuthenticated(true);
+                    setIsAuth(true);
                 } catch {
-                    setIsAuthenticated(false);
+                    setIsAuth(false);
                 }
             }
         };
@@ -43,5 +43,5 @@ export const useAuthStatus = () => {
         checkAuth();
     }, [refreshToken, validateToken]);
 
-    return { isAuthenticated };
+    return { isAuth };
 };

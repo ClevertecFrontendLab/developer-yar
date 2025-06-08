@@ -5,7 +5,7 @@ import { createBaseQuery, ENDPOINTS } from '~/shared/api';
 import { mapMeasureUnitsFromDto } from '../mappers/map-measure-units-from-dto';
 import { MeasureUnit } from './types';
 
-export const measureUnitApi = createApi({
+export const measureUnitsApi = createApi({
     baseQuery: createBaseQuery(),
     endpoints: (build) => ({
         getMeasureUnits: build.query<MeasureUnit[], void>({
@@ -13,7 +13,7 @@ export const measureUnitApi = createApi({
             transformResponse: mapMeasureUnitsFromDto,
         }),
     }),
-    reducerPath: 'measureUnitApi',
+    reducerPath: 'measureUnitsApi',
 });
 
-export const { useGetMeasureUnitsQuery } = measureUnitApi;
+export const { useGetMeasureUnitsQuery } = measureUnitsApi;
