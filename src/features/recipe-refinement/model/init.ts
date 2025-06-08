@@ -1,3 +1,4 @@
+import { Blogger } from '~/entities/blogger';
 import { Category } from '~/entities/navigation';
 import { RecipeItem } from '~/entities/recipe';
 
@@ -6,6 +7,7 @@ import { Allergen } from './types';
 export type RecipeRefinementState = {
     allergens: Allergen[];
     filterData: {
+        authors: Blogger[];
         categories: Category[];
         recipes: RecipeItem[];
     };
@@ -34,6 +36,7 @@ export const initialState: RecipeRefinementState = {
         { custom: false, id: 8, selected: false, title: 'Шоколад' },
     ],
     filterData: {
+        authors: [],
         categories: [],
         recipes: [],
     },

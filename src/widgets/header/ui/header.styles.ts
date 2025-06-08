@@ -1,8 +1,9 @@
-import { BoxProps, FlexProps, MenuButtonProps, StackProps } from '@chakra-ui/react';
+import { BoxProps, FlexProps, IconProps, MenuButtonProps, StackProps } from '@chakra-ui/react';
 
 type HeaderStyleProps = {
     breadcrumbsBox: BoxProps;
     burgerButton: MenuButtonProps;
+    closeMenuIcon: IconProps;
     headerContainer: (withMenu: boolean) => BoxProps;
     headerContent: FlexProps;
     infoPanelWrapper: BoxProps;
@@ -10,6 +11,7 @@ type HeaderStyleProps = {
     menuListWrapper: BoxProps;
     mobileUserStats: (withMenu: boolean) => BoxProps;
     navOverlay: BoxProps;
+    openMenuIcon: IconProps;
     profileBox: BoxProps;
     slideOutMenuBox: StackProps;
 };
@@ -26,6 +28,9 @@ export const headerStyles: HeaderStyleProps = {
         boxSize: 12,
         cursor: 'pointer',
         zIndex: 'docked',
+    },
+    closeMenuIcon: {
+        boxSize: 3,
     },
     headerContainer: (withMenu) => ({
         bg: { base: withMenu ? 'white' : 'lime.50', xl: 'lime.50' },
@@ -63,6 +68,7 @@ export const headerStyles: HeaderStyleProps = {
         pos: 'fixed',
         w: 'full',
     },
+    openMenuIcon: { boxSize: 6 },
     profileBox: {
         ml: 'auto',
     },

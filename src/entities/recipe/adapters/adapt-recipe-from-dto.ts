@@ -1,5 +1,4 @@
 import { Category } from '~/entities/navigation/@x/recipe';
-import { User } from '~/entities/user/@x/recipe';
 import { buildRelativeUrl } from '~/shared/lib';
 
 import { RecipeItemDto } from '../dto/recipe-item.dto';
@@ -8,12 +7,8 @@ import { getCategories } from '../lib/get-categories';
 import { getSubcategories } from '../lib/get-subcategories';
 import { RecipeItem } from '../model/types';
 
-export const adaptRecipeFromDto = (
-    recipe: RecipeItemDto,
-    author: User,
-    categories: Category[],
-): RecipeItem => ({
-    author: { ...author, id: recipe.authorId },
+export const adaptRecipeFromDto = (recipe: RecipeItemDto, categories: Category[]): RecipeItem => ({
+    authorId: recipe.authorId,
     bookmarks: recipe.bookmarks,
     categories: getCategories(recipe, categories),
     date: recipe.createdAt,

@@ -30,7 +30,7 @@ export const alertStyles: AlertStyleProps = {
 
         return {
             bgColor: color,
-            position: 'relative',
+            pos: 'relative',
             px: 4,
             py: 3,
             status: 'error',

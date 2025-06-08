@@ -5,6 +5,7 @@ import { RecipeGalleryCard } from '~/entities/recipe';
 import { RecipeItem } from '~/entities/recipe/model/types';
 import { RecipeBookmarkButton } from '~/features/recipe-bookmark';
 import { RecipeCookingButton } from '~/features/recipe-cooking';
+import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
 
 import { recipesStyles as styles } from './recipes.styles';
 
@@ -13,7 +14,7 @@ type RecipesProps = {
 };
 
 export const Recipes: FC<RecipesProps> = memo(({ recipes }) => (
-    <Grid {...styles.container}>
+    <Grid {...styles.container} data-test-id={DATA_TEST_ATTRIBUTES.RECIPE_CARD_LIST}>
         {recipes.map((recipe, index) => (
             <RecipeGalleryCard
                 bookmarks={recipe.bookmarks}

@@ -12,11 +12,11 @@ type Display =
     | 'inline-grid'
     | '-webkit-box';
 
-type DisplayRange = {
-    display?: Display;
-    from?: Breakpoint;
-    to?: Breakpoint;
-};
+type DisplayRange = Partial<{
+    display: Display;
+    from: Breakpoint;
+    to: Breakpoint;
+}>;
 
 type ResponsiveDisplay = Partial<Record<Breakpoint, Display>>;
 

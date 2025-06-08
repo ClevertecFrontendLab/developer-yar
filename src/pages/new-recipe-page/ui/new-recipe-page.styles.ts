@@ -8,7 +8,7 @@ type NewRecipePageStyleProps = {
 };
 
 const baseNewRecipePageStyles = {
-    margin: 'auto',
+    m: 'auto',
     w: 'full',
 };
 

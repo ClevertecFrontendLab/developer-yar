@@ -4,22 +4,24 @@ import { useNavigate, useParams } from 'react-router';
 
 import { useRecipeById } from '~/entities/recipe';
 import { RecipeEditForm } from '~/features/recipe-edit';
-import { getRecipeOwnership } from '~/features/recipe-ownership';
+import { getCurrentUserId } from '~/shared/lib';
 import { useApiStatusSync } from '~/shared/model';
 
 import { editRecipePageStyles as styles } from './edit-recipe-page.styles';
 
 const EditRecipePage: FC = () => {
-    const { id } = useParams();
+    const { recipeId } = useParams();
 
     const {
         data: recipe,
         isError: isRecipeError,
         isLoading: isRecipeLoading,
         isSuccess: isRecipeSuccess,
-    } = useRecipeById(id);
+    } = useRecipeById(recipeId);
 
-    const isAuthor = recipe?.author?.id ? getRecipeOwnership(recipe.author.id) : false;
+    const currentUserId = getCurrentUserId();
+
+    const isAuthor = recipe?.authorId === currentUserId;
 
     const navigate = useNavigate();
 

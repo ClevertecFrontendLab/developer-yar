@@ -13,7 +13,7 @@ const mapErrorToMessage = (error: ApiError) => {
     switch (error.status) {
         case ERRORS.INTERNAL_SERVER_ERRROR:
             return {
-                description: 'Попробуйте немного позже',
+                description: 'Попробуйте немного позже.',
                 title: 'Ошибка сервера',
             };
         default:

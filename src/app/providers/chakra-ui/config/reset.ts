@@ -67,7 +67,7 @@ export const componentsWithDefaultStyles = {
                     h: 10,
                     lineHeight: '6',
                     px: 4,
-                    width: '90px',
+                    w: '90px',
                 },
             },
         },

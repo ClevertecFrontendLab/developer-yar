@@ -1,10 +1,16 @@
 export { buildAbsoluteUrl, buildRelativeUrl } from './helpers/build-url';
+export { decodeToken } from './helpers/decode-token';
+export { formatDate } from './helpers/format-date';
+export { formatPlural } from './helpers/format-plural';
 export { generateId } from './helpers/generate-id';
+export { getCurrentUserId } from './helpers/get-current-user-id';
 export { getDisplayForBreakpoints } from './helpers/get-display-for-breakpoints';
 export { getErrorOutline } from './helpers/get-error-outline';
 export { getUniqueArray } from './helpers/get-unique-array';
+export { hasItems } from './helpers/has-items';
 export { queryWithParams } from './helpers/query-with-params';
 export { removeDefaultValues } from './helpers/remove-default-values';
+export { useAnchorLink } from './hooks/use-anchor-link';
 export { useLockScroll } from './hooks/use-lock-scroll';
 export { useScrollOnNavigate } from './hooks/use-scroll-on-navigate';
 export { useToggleMenu } from './hooks/use-toggle-menu';

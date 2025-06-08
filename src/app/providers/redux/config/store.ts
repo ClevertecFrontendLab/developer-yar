@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { measureUnitApi } from '~/entities/measure-unit';
+import { bloggersApi } from '~/entities/blogger';
+import { measureUnitsApi } from '~/entities/measure-unit';
 import { breadcrumbsReducer, navigationApi } from '~/entities/navigation';
-import { postsApi } from '~/entities/post';
 import { recipesApi } from '~/entities/recipe';
 import { passwordResetApi } from '~/features/auth-password-reset';
 import { signInApi } from '~/features/auth-sign-in';
@@ -14,9 +14,9 @@ import { appStatusReducer } from '~/shared/model';
 export const store = configureStore({
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(
-            measureUnitApi.middleware,
+            bloggersApi.middleware,
+            measureUnitsApi.middleware,
             navigationApi.middleware,
-            postsApi.middleware,
             recipesApi.middleware,
             passwordResetApi.middleware,
             signInApi.middleware,
@@ -24,9 +24,9 @@ export const store = configureStore({
             tokenValidationApi.middleware,
         ),
     reducer: {
-        [measureUnitApi.reducerPath]: measureUnitApi.reducer,
+        [bloggersApi.reducerPath]: bloggersApi.reducer,
+        [measureUnitsApi.reducerPath]: measureUnitsApi.reducer,
         [navigationApi.reducerPath]: navigationApi.reducer,
-        [postsApi.reducerPath]: postsApi.reducer,
         [recipesApi.reducerPath]: recipesApi.reducer,
         [passwordResetApi.reducerPath]: passwordResetApi.reducer,
         [signInApi.reducerPath]: signInApi.reducer,

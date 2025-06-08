@@ -20,8 +20,12 @@ export const ErrorToast: FC<ErrorToastProps> = ({ description, onClose, title })
     <Alert status='error'>
         <AlertIcon />
         <AlertBody>
-            <AlertTitle>{title}</AlertTitle>
-            <AlertDescription>{description}</AlertDescription>
+            <AlertTitle data-test-id={DATA_TEST_ATTRIBUTES.ERROR_NOTIFICATION_TITLE}>
+                {title}
+            </AlertTitle>
+            <AlertDescription data-test-id={DATA_TEST_ATTRIBUTES.ERROR_NOTIFICATION_DESCRIPTION}>
+                {description}
+            </AlertDescription>
         </AlertBody>
         <AlertCloseButton
             data-test-id={DATA_TEST_ATTRIBUTES.CLOSE_ALERT_BUTTON}

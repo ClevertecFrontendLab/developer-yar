@@ -1,3 +1,5 @@
+import { hasItems } from '~/shared/lib';
+
 export const removeDefaultValues = <T>(object: T): Partial<T> => {
     if (Array.isArray(object)) {
         return object.map((item) => removeDefaultValues(item)) as unknown as Partial<T>;
@@ -15,7 +17,7 @@ export const removeDefaultValues = <T>(object: T): Partial<T> => {
 
             if (value && typeof value === 'object' && !(value instanceof File)) {
                 const cleaned = removeDefaultValues(value);
-                if (Object.keys(cleaned).length > 0) {
+                if (hasItems(Object.keys(cleaned))) {
                     cleanedObject[key] = cleaned;
                 }
             } else {

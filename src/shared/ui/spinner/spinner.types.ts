@@ -1,1 +1,1 @@
-export type SpinnerVariant = 'search' | 'page';
+export type SpinnerVariant = 'search' | 'page' | 'card';

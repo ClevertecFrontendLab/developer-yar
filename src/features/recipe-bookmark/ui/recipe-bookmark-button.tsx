@@ -22,13 +22,12 @@ export const RecipeBookmarkButton: FC<RecipeBookmarkButtonProps> = ({
 }) => {
     const [bookmarkRecipe, { isLoading, isError }] = useBookmarkRecipeMutation();
 
-    const handleBookmark = () => {
-        bookmarkRecipe(recipeId).unwrap();
+    const handleBookmark = async () => {
+        await bookmarkRecipe(recipeId).unwrap();
     };
 
     useApiStatusSync(isLoading, {
         isError,
-        message: { description: 'Попробуйте немного позже', title: 'Ошибка сервера' },
     });
 
     const styles = recipeBookmarkButtonVariants[variant] || recipeBookmarkButtonVariants.primary;

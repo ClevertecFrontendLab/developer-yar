@@ -7,6 +7,7 @@ import { useAppSelector } from '~/shared/model';
 import {
     selectAllCategories,
     selectCheckedAllergens,
+    selectCheckedAuthors,
     selectCheckedCategories,
     selectCheckedGarnishTypes,
     selectCheckedMeatTypes,
@@ -19,6 +20,7 @@ export const useSearchParams = (): GetAllRecipesQueryParams => {
 
     const isFilteringAllergens = useAppSelector(selectIsFilteringAllergens);
 
+    const authors = useAppSelector(selectCheckedAuthors);
     const allergens = useAppSelector(selectCheckedAllergens);
     const query = useAppSelector(selectSearchQuery);
     const meatTypes = useAppSelector(selectCheckedMeatTypes);
@@ -43,6 +45,7 @@ export const useSearchParams = (): GetAllRecipesQueryParams => {
             allergens: isFilteringAllergens
                 ? allergens.map((allergen) => allergen.title.toLowerCase()).join(',')
                 : '',
+            authors: authors.map((author) => author.toLowerCase()).join(','),
             garnish: garnishTypes.map((garnishType) => garnishType.toLowerCase()).join(','),
             meat: meatTypes.map((meatType) => meatType.toLowerCase()).join(','),
             searchString: query,
@@ -50,6 +53,14 @@ export const useSearchParams = (): GetAllRecipesQueryParams => {
             sortOrder: 'ASC',
             subcategoriesIds: subcategoriesIds,
         }),
-        [allergens, garnishTypes, isFilteringAllergens, meatTypes, query, subcategoriesIds],
+        [
+            allergens,
+            authors,
+            garnishTypes,
+            isFilteringAllergens,
+            meatTypes,
+            query,
+            subcategoriesIds,
+        ],
     );
 };

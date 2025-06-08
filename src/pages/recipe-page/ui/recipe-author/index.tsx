@@ -1,19 +1,19 @@
 import { Avatar, Flex, Stack, Text } from '@chakra-ui/react';
 import { FC, memo } from 'react';
 
-import { User } from '~/entities/user';
-import { AuthorFollowButton } from '~/features/author-follow';
+import { BloggerInfo } from '~/entities/blogger';
+import { BloggerFollowButton } from '~/features/blogger-follow';
 import { FollowersBadge } from '~/shared/ui/badges';
 
 import { authorStyles as styles } from './index.styles';
 
 type RecipeAuthorProps = {
-    author: User;
+    author: BloggerInfo;
 };
 
 export const RecipeAuthor: FC<RecipeAuthorProps> = memo(({ author }) => (
     <Flex {...styles.authorContainer}>
-        <Avatar src={author.avatar} {...styles.avatar} />
+        <Avatar name={author.fullName} {...styles.avatar} />
         <Stack {...styles.authorContentWrapper}>
             <Flex {...styles.authorTextWrapper}>
                 <Text {...styles.authorLabelText}>Автор рецепта</Text>
@@ -23,8 +23,11 @@ export const RecipeAuthor: FC<RecipeAuthorProps> = memo(({ author }) => (
                 </Stack>
             </Flex>
             <Flex {...styles.authorMeta}>
-                <AuthorFollowButton />
-                <FollowersBadge value={125} />
+                <BloggerFollowButton
+                    bloggerId={author.id}
+                    isUserFollowing={author.isUserFollowing}
+                />
+                <FollowersBadge value={author.totalFollowers} />
             </Flex>
         </Stack>
     </Flex>

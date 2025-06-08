@@ -63,7 +63,7 @@ export const authPageStyles: AuthPageStyleProps = {
         fontSize: 'xs',
         fontWeight: 'semibold',
         lineHeight: '4',
-        padding: 2.5,
+        p: 2.5,
     },
     tabList: {
         mb: 10,

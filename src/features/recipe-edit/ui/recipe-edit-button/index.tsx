@@ -9,15 +9,15 @@ import { recipeEditButtonStyles as styles } from './index.styles';
 export const RecipeEditButton: FC = () => {
     const navigate = useNavigate();
 
-    const { category, subcategory, id } = useParams<{
+    const { category, subcategory, recipeId } = useParams<{
         category: string;
-        id: string;
+        recipeId: string;
         subcategory: string;
     }>();
 
     const navigateToEditPage = () => {
-        if (category && subcategory && id)
-            navigate(buildAbsoluteUrl('edit-recipe', category, subcategory, id));
+        if (category && subcategory && recipeId)
+            navigate(buildAbsoluteUrl('edit-recipe', category, subcategory, recipeId));
     };
 
     return (

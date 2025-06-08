@@ -4,6 +4,7 @@ import { FC, useMemo } from 'react';
 import { useCategoryList } from '~/entities/navigation';
 import { useRecipesBySubcategoryId } from '~/entities/recipe';
 import { RecipeCookingButton } from '~/features/recipe-cooking';
+import { hasItems } from '~/shared/lib';
 import { useApiStatusSync } from '~/shared/model';
 import { SectionTitle } from '~/shared/ui/section-title';
 
@@ -21,10 +22,10 @@ export const RecipesByRandomCategory: FC = () => {
     } = useCategoryList();
 
     const { randomCategory, randomSubcategory } = useMemo(() => {
-        if (isCategoriesSuccess && categories && categories.length > 0) {
+        if (isCategoriesSuccess && categories && hasItems(categories)) {
             const randomCategory = categories[getRandomNumber(categories.length)];
             const subcategories = randomCategory.submenu;
-            if (subcategories && subcategories.length > 0) {
+            if (subcategories && hasItems(subcategories)) {
                 const randomSubcategory = subcategories[getRandomNumber(subcategories.length)];
                 return { randomCategory, randomSubcategory };
             }
@@ -47,7 +48,7 @@ export const RecipesByRandomCategory: FC = () => {
 
     useApiStatusSync(isLoading, { isError });
 
-    if (isCategoriesSuccess && isRecipesSuccess && randomCategory && recipes)
+    if (isCategoriesSuccess && isRecipesSuccess && randomCategory && recipes.length)
         return (
             <Grid {...styles.gridContainer}>
                 <GridItem {...styles.titleContainer}>
