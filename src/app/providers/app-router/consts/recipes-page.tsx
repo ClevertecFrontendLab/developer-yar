@@ -1,19 +1,12 @@
-import { redirect, type RouteObject } from 'react-router';
+import { type RouteObject } from 'react-router';
 
 import { RecipesPage } from '~/pages/recipes-page';
 import { ROUTES } from '~/shared/routes';
 
-import { setCategoryAndSubcategory } from '../lib/set-dynamic-breadcrumbs';
+import { recipesPageloader } from '../lib/loaders/recipes-page-loader';
 
 export const recipesPage: RouteObject = {
     element: <RecipesPage />,
-    loader: async ({ params }) => {
-        try {
-            const breadcrumbs = await setCategoryAndSubcategory(params);
-            return { breadcrumbs };
-        } catch {
-            return redirect(ROUTES.NOT_FOUND);
-        }
-    },
+    loader: recipesPageloader,
     path: ROUTES.RECIPES,
 };

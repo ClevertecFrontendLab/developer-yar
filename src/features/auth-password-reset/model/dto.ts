@@ -1,4 +1,4 @@
-export type ResetCredentialsDto = {
+export type ResetCredentialsApi = {
     email: string;
     login: string;
     password: string;

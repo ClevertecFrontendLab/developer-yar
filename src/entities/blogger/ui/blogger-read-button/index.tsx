@@ -22,7 +22,7 @@ export const BloggerReadButton: FC<BloggerReadButtonProps> = ({ bloggerId, varia
 
     return (
         <Button
-            {...styles.bloggerReadButton(variant)}
+            {...styles(variant)}
             data-test-id={DATA_TEST_ATTRIBUTES.BLOGS_CARD_NOTES_BUTTON}
             onClick={handleNavigateToBlogger}
         >

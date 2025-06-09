@@ -1,11 +1,9 @@
-import { useMemo } from 'react';
-
 import { useCategoryList } from '~/entities/navigation/@x/blogger';
 
 import { useGetRecipesByUserIdQuery } from '../../recipe/model/api';
-import { adaptRecipesByUserIdFromDto } from '../adapters/adapt-recipes-by-user-id-from-dto';
+import { adaptRecipesByUserIdFromApi } from '../adapters/adapt-recipes-by-user-id-from-api';
 
-export function useRecipesByUserId(id: string) {
+export const useRecipesByUserId = (id: string) => {
     const skip = !id;
 
     const {
@@ -21,13 +19,10 @@ export function useRecipesByUserId(id: string) {
     const isFetching = recipesState.isFetching || categoriesState.isFetching;
     const isSuccess = recipesState.isSuccess && categoriesState.isSuccess;
 
-    const result = useMemo(() => {
-        if (!recipes?.notes || !recipes?.recipes || !categories) {
-            return { notes: [], recipes: [] };
-        } else {
-            return adaptRecipesByUserIdFromDto(recipes, categories);
-        }
-    }, [recipes, categories]);
+    const result =
+        !recipes?.notes || !recipes?.recipes || !categories
+            ? { notes: [], recipes: [] }
+            : adaptRecipesByUserIdFromApi(recipes, categories);
 
     return { ...result, isError, isFetching, isLoading, isSuccess, refetchRecipesByUserId };
-}
+};

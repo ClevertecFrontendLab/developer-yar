@@ -26,11 +26,11 @@ type CSSDisplayProperty = {
 
 const allBreakpoints: Breakpoint[] = Object.keys(theme.breakpoints) as Breakpoint[];
 
-export function getDisplayForBreakpoints({
+export const getDisplayForBreakpoints = ({
     display = 'flex',
     from = allBreakpoints[0],
     to = allBreakpoints[allBreakpoints.length - 1],
-}: DisplayRange): CSSDisplayProperty {
+}: DisplayRange): CSSDisplayProperty => {
     const fromIndex = allBreakpoints.indexOf(from);
     const toIndex = allBreakpoints.indexOf(to);
 
@@ -45,4 +45,4 @@ export function getDisplayForBreakpoints({
     return {
         display: displayMap,
     };
-}
+};

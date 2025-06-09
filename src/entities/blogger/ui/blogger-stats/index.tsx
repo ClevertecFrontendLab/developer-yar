@@ -12,7 +12,7 @@ type BloggerStatsProps = {
 };
 
 export const BloggerStats: FC<BloggerStatsProps> = ({ bookmarks, followers }) => (
-    <Flex {...styles.badges}>
+    <Flex {...styles}>
         <Box data-test-id={DATA_TEST_ATTRIBUTES.BLOGGER_FOLLOWERS_BOOKMARKS}>
             <BookmarksBadge value={bookmarks} />
         </Box>

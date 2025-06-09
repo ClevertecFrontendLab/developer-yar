@@ -2,7 +2,7 @@ import { Note } from '~/entities/blogger/@x/recipe';
 import { Category, Subcategory } from '~/entities/navigation/@x/recipe';
 import { InferFormData } from '~/shared/model';
 
-import { RecipeFormDto } from '../dto/recipe-form.dto';
+import { RecipeFormApi } from '../api/recipe-form.api';
 import { baseSchema } from './schema';
 
 export type UploadedFile = string;
@@ -11,7 +11,7 @@ export type RecipeFormData = InferFormData<typeof baseSchema>;
 export type RecipeFormFiledName = keyof InferFormData<typeof baseSchema>;
 
 export type EditRecipeArgs = {
-    data: RecipeFormDto;
+    data: RecipeFormApi;
     id: string;
 };
 

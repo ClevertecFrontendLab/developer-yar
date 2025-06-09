@@ -1,6 +1,6 @@
 import { store } from '~/app/providers/redux';
 
-import { adaptCategoryListFromDto } from '../adapters/adapt-category-list-from-dto';
+import { adaptCategoryListFromApi } from '../adapters/adapt-category-list-from-api';
 import { getCategoryList } from '../model/api';
 
 export const getCategoryListQuery = async () => {
@@ -12,5 +12,5 @@ export const getCategoryListQuery = async () => {
 
     if (!categories) throw new Error('Failed to load categories');
 
-    return adaptCategoryListFromDto(categories);
+    return adaptCategoryListFromApi(categories);
 };

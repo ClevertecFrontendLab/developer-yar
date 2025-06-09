@@ -6,7 +6,7 @@ import { ApiError, ERRORS, isApiError } from '~/shared/api';
 import { useZodForm } from '~/shared/lib';
 import { AppErrorMessage, useApiStatusSync } from '~/shared/model';
 
-import { adaptRecipeToDto } from '../adapters/adapt-recipe-to-dto';
+import { adaptRecipeToApi } from '../adapters/adapt-recipe-to-api';
 import {
     useDraftRecipeMutation,
     useEditRecipeMutation,
@@ -109,7 +109,7 @@ export const useRecipeForm = (recipe?: RecipeItem) => {
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     const onSubmitDraft: SubmitHandler<RecipeFormData> = async (data) => {
-        const dto = adaptRecipeToDto(data);
+        const dto = adaptRecipeToApi(data);
 
         try {
             await draftRecipe(dto).unwrap();
@@ -133,7 +133,7 @@ export const useRecipeForm = (recipe?: RecipeItem) => {
             return;
         }
 
-        const dto = adaptRecipeToDto(data);
+        const dto = adaptRecipeToApi(data);
 
         try {
             const { _id } = isEditMode

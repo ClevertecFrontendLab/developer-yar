@@ -3,9 +3,9 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { createBaseQuery, ENDPOINTS } from '~/shared/api';
 import { buildRelativeUrl, queryWithParams } from '~/shared/lib';
 
-import { BloggerFollowDto } from '../dto/blogger-follow.dto';
-import { mapBloggerInfoFromDto } from '../mappers/map-blogger-info-from-dto';
-import { mapBloggersFromDto } from '../mappers/map-bloggers-from-dto';
+import { BloggerFollowApi } from '../api/blogger-follow.api';
+import { mapBloggerInfoFromApi } from '../mappers/map-blogger-info-from-api';
+import { mapBloggersFromApi } from '../mappers/map-bloggers-from-api';
 import {
     BloggerInfo,
     BloggersData,
@@ -16,7 +16,7 @@ import {
 export const bloggersApi = createApi({
     baseQuery: createBaseQuery(),
     endpoints: (builder) => ({
-        followBlogger: builder.mutation<void, BloggerFollowDto>({
+        followBlogger: builder.mutation<void, BloggerFollowApi>({
             invalidatesTags: (_result, _error, dto) => [
                 { id: dto.toUserId, type: 'BloggerInfo' },
                 'BloggersList',
@@ -31,7 +31,7 @@ export const bloggersApi = createApi({
             providesTags: ['BloggersList'],
             query: (params: GetAllBloggersQueryParams) =>
                 queryWithParams({ params, url: ENDPOINTS.BLOGGERS }),
-            transformResponse: mapBloggersFromDto,
+            transformResponse: mapBloggersFromApi,
         }),
         getBloggerById: builder.query<BloggerInfo, GetBloggerByIdQueryParams>({
             providesTags: (_result, _error, params) => [
@@ -42,7 +42,7 @@ export const bloggersApi = createApi({
                     params: { currentUserId },
                     url: buildRelativeUrl(ENDPOINTS.BLOGGERS, bloggerId),
                 }),
-            transformResponse: mapBloggerInfoFromDto,
+            transformResponse: mapBloggerInfoFromApi,
         }),
     }),
     reducerPath: 'bloggersApi',
