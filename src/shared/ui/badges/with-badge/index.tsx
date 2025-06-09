@@ -11,8 +11,6 @@ export type WithBadgeProps = {
 
 export const withBadge = (Component: FC<IconProps>): FC<WithBadgeProps> => {
     const WithBadgeComponent: FC<WithBadgeProps> = ({ value, variant = 'small' }) => {
-        if (value <= 0) return null;
-
         const styles = withBadgeStyles[variant];
 
         return (
