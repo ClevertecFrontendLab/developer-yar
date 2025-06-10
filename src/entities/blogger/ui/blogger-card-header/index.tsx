@@ -20,10 +20,7 @@ export const BloggerCardHeader: FC<BloggerCardHeaderProps> = memo(({ newRecipesC
     ]);
 
     return (
-        <Box
-            {...styles.newRecipesCountContainer}
-            data-test-id={DATA_TEST_ATTRIBUTES.BLOGS_CARD_NEW_RECIPES_BADGE}
-        >
+        <Box {...styles} data-test-id={DATA_TEST_ATTRIBUTES.BLOGS_CARD_NEW_RECIPES_BADGE}>
             <Tag>{formattedNewRecipesCount}</Tag>
         </Box>
     );

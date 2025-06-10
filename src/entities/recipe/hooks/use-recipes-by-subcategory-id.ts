@@ -2,16 +2,16 @@ import { useMemo } from 'react';
 
 import { useCategoryList } from '~/entities/navigation/@x/recipe';
 
-import { adaptRecipesFromDto } from '../adapters/adapt-recipes-from-dto';
+import { adaptRecipesFromApi } from '../adapters/adapt-recipes-from-api';
 import { useGetRecipesBySubcategoryIdQuery } from '../model/api';
 import { GetRecipesBySubcategoryIdQueryParams } from '../model/types';
 
 const DEFAULT_PARAMS = {};
 
-export function useRecipesBySubcategoryId(
+export const useRecipesBySubcategoryId = (
     id?: string,
     rawParams: GetRecipesBySubcategoryIdQueryParams = DEFAULT_PARAMS,
-) {
+) => {
     const skip = !id;
 
     const params = useMemo(() => rawParams, [rawParams]);
@@ -37,10 +37,10 @@ export function useRecipesBySubcategoryId(
     const isFetching = isApiRecipesFetching || isApiCategoriesFetching;
     const isSuccess = isApiRecipesSuccess && isApiCategoriesSuccess;
 
-    const { data, meta } = useMemo(() => {
-        if (!apiRecipes?.data || !apiCategories) return { data: [], meta: {} };
-        return adaptRecipesFromDto(apiRecipes, apiCategories);
-    }, [apiRecipes, apiCategories]);
+    const result =
+        !apiRecipes?.data || !apiCategories
+            ? { data: [], meta: {} }
+            : adaptRecipesFromApi(apiRecipes, apiCategories);
 
-    return { data, isError, isFetching, isLoading, isSuccess, meta };
-}
+    return { ...result, isError, isFetching, isLoading, isSuccess };
+};

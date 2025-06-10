@@ -31,7 +31,7 @@ export const FollowedBloggerCard: FC<FollowedBloggerCardProps> = ({ blogger }) =
                     followers={blogger.followersCount}
                 >
                     <Button
-                        {...styles.bloggerRecipesButton}
+                        {...styles}
                         data-test-id={DATA_TEST_ATTRIBUTES.BLOGS_CARD_RECIPES_BUTTON}
                         onClick={handleNavigateToBlogger}
                     >

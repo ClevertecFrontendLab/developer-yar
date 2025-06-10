@@ -1,8 +1,8 @@
 import { hasItems } from '~/shared/lib';
 
-import { CategoryDto } from '../dto/category.dto';
+import { CategoryApi } from '../api/category.api';
 
-const getFallbackCategory = (): CategoryDto => ({
+const getFallbackCategory = (): CategoryApi => ({
     _id: '67c48d99d02fb83fc3d8100f',
     category: 'vegan',
     description:
@@ -67,7 +67,7 @@ const isTestEnv = () => typeof window !== 'undefined' && 'Cypress' in window;
 const isEmptyObject = (obj: unknown): obj is object =>
     obj != null && typeof obj === 'object' && !hasItems(Object.keys(obj));
 
-export const adaptSubcategoriesByCategory = (data: CategoryDto): CategoryDto => {
+export const adaptSubcategoriesByCategory = (data: CategoryApi): CategoryApi => {
     if (isEmptyObject(data) && isTestEnv()) {
         return getFallbackCategory();
     }

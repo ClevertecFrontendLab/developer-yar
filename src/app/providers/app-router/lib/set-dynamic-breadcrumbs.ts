@@ -13,9 +13,9 @@ import { ROUTES } from '~/shared/routes';
 import { Params } from '../model/types';
 import { assertParamsExist } from './asserts-params-exist';
 
-async function fetchNavigationData(
+const fetchNavigationData = async (
     categoryUrl: string,
-): Promise<{ categories: Category[]; subcategories: Subcategory[] }> {
+): Promise<{ categories: Category[]; subcategories: Subcategory[] }> => {
     const categories = await getCategoryListQuery();
 
     const category = findCategory(categories, categoryUrl);
@@ -23,16 +23,16 @@ async function fetchNavigationData(
     const subcategories = await getSubcategoriesByCategoryQuery(category.id);
 
     return { categories, subcategories };
-}
+};
 
-function findCategory(categories: Category[], categorySlug: string): Category {
+const findCategory = (categories: Category[], categorySlug: string): Category => {
     const category = categories.find(({ slug }) => slug === categorySlug);
     if (!category) throw new Error('Category not found');
 
     return category;
-}
+};
 
-function findSubcategory(subcategories: Subcategory[], subcategorySlug: string): Subcategory {
+const findSubcategory = (subcategories: Subcategory[], subcategorySlug: string): Subcategory => {
     const subcategory = subcategories.find(
         ({ slug }) => slug === (typeof Cypress !== 'undefined' ? 'snacks' : subcategorySlug),
     );
@@ -40,17 +40,15 @@ function findSubcategory(subcategories: Subcategory[], subcategorySlug: string):
     if (!subcategory) throw new Error('Subcategory not found');
 
     return subcategory;
-}
+};
 
-function buildCategorySubcategoryBreadcrumbs(
+const buildCategorySubcategoryBreadcrumbs = (
     category: Category,
     subcategory: Subcategory,
-): Record<'title' | 'url', string>[] {
-    return [
-        { title: category.title, url: category.url },
-        { title: subcategory.title, url: subcategory.url },
-    ];
-}
+): Record<'title' | 'url', string>[] => [
+    { title: category.title, url: category.url },
+    { title: subcategory.title, url: subcategory.url },
+];
 
 export const setCategoryAndSubcategory = async (params: Params): Promise<Breadcrumb[]> => {
     assertParamsExist(params, ['category', 'subcategory']);
@@ -67,9 +65,8 @@ export const setCategoryAndSubcategory = async (params: Params): Promise<Breadcr
 };
 
 export const setRecipe = async (params: Params): Promise<Breadcrumb[]> => {
-    assertParamsExist(params, ['category', 'subcategory']);
+    assertParamsExist(params, ['category', 'subcategory', 'recipeId']);
 
-    assertParamsExist(params, ['recipeId']);
     const recipeId = params.recipeId;
 
     const recipe = await getRecipeByIdQuery(recipeId);
@@ -87,9 +84,11 @@ export const setRecipe = async (params: Params): Promise<Breadcrumb[]> => {
 };
 
 export const setBlogger = async (params: Params): Promise<Breadcrumb[]> => {
-    const { bloggerId } = params;
+    assertParamsExist(params, ['bloggerId']);
 
-    const blogger = await getBloggerByIdQuery(bloggerId!);
+    const bloggerId = params.bloggerId;
+
+    const blogger = await getBloggerByIdQuery(bloggerId);
 
     if (!blogger) throw new Error('Blogger not found');
 
