@@ -4,7 +4,7 @@ import { FC, PropsWithChildren } from 'react';
 import { bloggersConatinerTitleStyles as styles } from './index.styles';
 
 export const BloggersContainerTitle: FC<PropsWithChildren> = ({ children }) => (
-    <Heading as='h2' {...styles.title}>
+    <Heading as='h2' {...styles}>
         {children}
     </Heading>
 );

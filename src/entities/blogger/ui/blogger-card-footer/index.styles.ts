@@ -15,6 +15,7 @@ export const bloggerCardFooterStyles: BloggerCardFooterStyleProps = {
         align: variant === 'row' ? 'flex-start' : 'flex-end',
         direction: variant === 'row' ? 'row' : 'column-reverse',
         gap: 4,
+        wrap: 'wrap',
         justify: 'space-between',
         mt: 'auto',
         w: 'full',

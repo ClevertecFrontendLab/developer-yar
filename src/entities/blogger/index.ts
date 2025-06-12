@@ -1,6 +1,6 @@
 export { getBloggerByIdQuery } from './lib/get-blogger-by-id';
 export { getBloggerFirstNote } from './lib/get-blogger-first-note';
-export { mapBloggerFollowToDto } from './mappers/map-blogger-follow-to-dto';
+export { mapBloggerFollowToApi } from './mappers/map-blogger-follow-to-api';
 export {
     bloggersApi,
     useFollowBloggerMutation,

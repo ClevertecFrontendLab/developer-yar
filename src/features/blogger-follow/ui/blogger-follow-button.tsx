@@ -1,7 +1,7 @@
 import { Button } from '@chakra-ui/react';
 import { FC, useEffect } from 'react';
 
-import { mapBloggerFollowToDto, useFollowBloggerMutation } from '~/entities/blogger';
+import { mapBloggerFollowToApi, useFollowBloggerMutation } from '~/entities/blogger';
 import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
 import { getCurrentUserId } from '~/shared/lib';
 import { FollowIcon, UnfollowIcon } from '~/shared/ui/icons';
@@ -24,7 +24,7 @@ export const BloggerFollowButton: FC<BloggerFollowButtonProps> = ({
     const [followBlogger, { isLoading }] = useFollowBloggerMutation();
 
     const handleBloggerToggleStatus = () => {
-        const data = mapBloggerFollowToDto({ bloggerId, currentUserId });
+        const data = mapBloggerFollowToApi({ bloggerId, currentUserId });
         followBlogger(data).unwrap();
     };
 

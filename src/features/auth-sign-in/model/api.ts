@@ -2,7 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { createBaseQuery, ENDPOINTS } from '~/shared/api';
 
-import { SignInDataDto } from '../dto/sign-in-data.dto';
+import { SignInDataApi } from '../api/sign-in-data.api';
 
 export const signInApi = createApi({
     baseQuery: createBaseQuery(),
@@ -10,7 +10,7 @@ export const signInApi = createApi({
         checkAuth: builder.query<unknown, void>({
             query: () => ENDPOINTS.CHECK_AUTH,
         }),
-        signIn: builder.mutation<unknown, SignInDataDto>({
+        signIn: builder.mutation<unknown, SignInDataApi>({
             query: (body) => ({
                 body,
                 method: 'POST',

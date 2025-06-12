@@ -1,4 +1,4 @@
-export { adaptRecipeToDto } from './adapters/adapt-recipe-to-dto';
+export { adaptRecipeToApi } from './adapters/adapt-recipe-to-api';
 export { useFileUploader } from './hooks/use-file-uploader';
 export { useRecipeById } from './hooks/use-recipe-by-id';
 export { useRecipeForm } from './hooks/use-recipe-form';

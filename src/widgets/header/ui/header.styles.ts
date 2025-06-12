@@ -79,8 +79,6 @@ export const headerStyles: HeaderStyleProps = {
         boxShadow: '0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.1)',
         gap: 3,
         maxH: 'calc(100vh - var(--chakra-sizes-headerBase))',
-        maxW: '344px',
-        minW: 'var(--chakra-sizes-minPageWidth)',
         ml: 'auto',
         overflowY: 'auto',
         pos: 'relative',
@@ -88,10 +86,10 @@ export const headerStyles: HeaderStyleProps = {
         right: 2,
         sx: {
             '@media screen and (max-width: 359px)': {
-                maxWidth: 'calc(100vw - 16px)',
+                w: 'calc(100vw - 16px)',
             },
         },
         top: 'var(--chakra-sizes-headerBase)',
-        w: 'full',
+        w: '344px',
     },
 };

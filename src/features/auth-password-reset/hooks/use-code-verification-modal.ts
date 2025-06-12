@@ -4,7 +4,7 @@ import { ApiError, ERRORS, isApiError } from '~/shared/api';
 import { AppErrorMessage, useApiStatusSync } from '~/shared/model';
 
 import { STEPS } from '../consts/steps';
-import { mapOtpCodeVerificationDataToDto } from '../mappers/map-otp-code-verification-data-to-dto copy';
+import { mapOtpCodeVerificationDataToApi } from '../mappers/map-otp-code-verification-data-to-api copy';
 import { useVerifyOtpCodeMutation } from '../model/api';
 import { OtpCodeVerificationData } from '../model/types';
 import { usePasswordResetContext } from './use-password-reset-context';
@@ -38,7 +38,7 @@ export const useCodeVerificationModal = () => {
 
     const onSubmitCallback = useCallback(
         async (data: OtpCodeVerificationData) => {
-            const dto = mapOtpCodeVerificationDataToDto(data);
+            const dto = mapOtpCodeVerificationDataToApi(data);
 
             setOtpCode('');
             setIsInvalidOtpCode(false);

@@ -1,5 +1,5 @@
 import { Box, Flex, Stack, Text } from '@chakra-ui/react';
-import { FC, PropsWithChildren, ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 
 import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
 import { ProfileCard } from '~/shared/ui/profile-card';
@@ -12,7 +12,7 @@ type BaseBloggerCardProps = {
     blogger: Blogger;
     footer?: ReactNode;
     header?: ReactNode;
-} & PropsWithChildren;
+};
 
 export const BaseBloggerCard: FC<BaseBloggerCardProps> = ({ blogger, header, footer }) => (
     <Flex {...styles.bloggerCardContainer} data-test-id={DATA_TEST_ATTRIBUTES.BLOGS_CARD}>

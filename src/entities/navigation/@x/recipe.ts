@@ -1,5 +1,5 @@
-export { adaptCategoryListFromDto } from '../adapters/adapt-category-list-from-dto';
-export type { CategoryDto } from '../dto/category.dto';
+export { adaptCategoryListFromApi } from '../adapters/adapt-category-list-from-api';
+export type { CategoryApi } from '../api/category.api';
 export { useCategoryList } from '../hooks/use-category-list';
 export { useSubcategoriesByCategory } from '../hooks/use-subcategories-by-category';
 export { getCategoryListQuery } from '../lib/get-category-list';

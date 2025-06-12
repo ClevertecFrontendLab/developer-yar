@@ -3,11 +3,11 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { createBaseQuery, ENDPOINTS } from '~/shared/api';
 import { buildAbsoluteUrl, queryWithParams } from '~/shared/lib';
 
-import { RecipeDto } from '../dto/recipe.dto';
-import { RecipeFormDto } from '../dto/recipe-form.dto';
-import { RecipeItemDto } from '../dto/recipe-item.dto';
-import { RecipesByUserDto } from '../dto/recipes-by-user.dto';
-import { mapUploadedFileFromDto } from '../mappers/map-uploaded-file-from-dto';
+import { RecipeApi } from '../api/recipe.api';
+import { RecipeFormApi } from '../api/recipe-form.api';
+import { RecipeItemApi } from '../api/recipe-item.api';
+import { RecipesByUserApi } from '../api/recipes-by-user.api';
+import { mapUploadedFileFromApi } from '../mappers/map-uploaded-file-from-api';
 import {
     EditRecipeArgs,
     GetAllRecipesQueryParams,
@@ -34,7 +34,7 @@ export const recipesApi = createApi({
             }),
         }),
 
-        draftRecipe: builder.mutation<void, RecipeFormDto>({
+        draftRecipe: builder.mutation<void, RecipeFormApi>({
             query: (data) => ({
                 body: data,
                 method: 'POST',
@@ -42,7 +42,7 @@ export const recipesApi = createApi({
             }),
         }),
 
-        editRecipe: builder.mutation<RecipeItemDto, EditRecipeArgs>({
+        editRecipe: builder.mutation<RecipeItemApi, EditRecipeArgs>({
             invalidatesTags: (_result, _error, { id }) => [{ id, type: 'Recipe' }, 'RecipesList'],
             query: ({ id, data }) => ({
                 body: data,
@@ -51,18 +51,18 @@ export const recipesApi = createApi({
             }),
         }),
 
-        getAllRecipes: builder.query<RecipeDto, GetAllRecipesQueryParams>({
+        getAllRecipes: builder.query<RecipeApi, GetAllRecipesQueryParams>({
             providesTags: ['RecipesList'],
             query: (params: GetAllRecipesQueryParams) =>
                 queryWithParams({ params, url: ENDPOINTS.RECIPES }),
         }),
 
-        getRecipeById: builder.query<RecipeItemDto, string>({
+        getRecipeById: builder.query<RecipeItemApi, string>({
             providesTags: (_result, _error, id) => [{ id, type: 'Recipe' }],
             query: (id: string) => buildAbsoluteUrl(ENDPOINTS.RECIPES, id),
         }),
 
-        getRecipesBySubcategoryId: builder.query<RecipeDto, GetRecipesBySubcategoryIdArgs>({
+        getRecipesBySubcategoryId: builder.query<RecipeApi, GetRecipesBySubcategoryIdArgs>({
             providesTags: ['RecipesList'],
             query: ({ id, params }: GetRecipesBySubcategoryIdArgs) =>
                 queryWithParams({
@@ -71,7 +71,7 @@ export const recipesApi = createApi({
                 }),
         }),
 
-        getRecipesByUserId: builder.query<RecipesByUserDto, string>({
+        getRecipesByUserId: builder.query<RecipesByUserApi, string>({
             providesTags: ['RecipesList'],
             query: (id: string) => buildAbsoluteUrl(ENDPOINTS.RECIPES_BY_USER, id),
         }),
@@ -84,7 +84,7 @@ export const recipesApi = createApi({
             }),
         }),
 
-        publishRecipe: builder.mutation<RecipeItemDto, RecipeFormDto>({
+        publishRecipe: builder.mutation<RecipeItemApi, RecipeFormApi>({
             invalidatesTags: ['RecipesList'],
             query: (data) => ({
                 body: data,
@@ -104,7 +104,7 @@ export const recipesApi = createApi({
                     url: ENDPOINTS.UPLOAD_FILE,
                 };
             },
-            transformResponse: mapUploadedFileFromDto,
+            transformResponse: mapUploadedFileFromApi,
         }),
     }),
     reducerPath: 'recipesApi',

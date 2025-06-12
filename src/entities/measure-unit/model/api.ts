@@ -2,7 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { createBaseQuery, ENDPOINTS } from '~/shared/api';
 
-import { mapMeasureUnitsFromDto } from '../mappers/map-measure-units-from-dto';
+import { mapMeasureUnitsFromApi } from '../mappers/map-measure-units-from-api';
 import { MeasureUnit } from './types';
 
 export const measureUnitsApi = createApi({
@@ -10,7 +10,7 @@ export const measureUnitsApi = createApi({
     endpoints: (build) => ({
         getMeasureUnits: build.query<MeasureUnit[], void>({
             query: () => ENDPOINTS.MEASURE_INITS,
-            transformResponse: mapMeasureUnitsFromDto,
+            transformResponse: mapMeasureUnitsFromApi,
         }),
     }),
     reducerPath: 'measureUnitsApi',
