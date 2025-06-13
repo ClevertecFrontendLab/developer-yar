@@ -9,7 +9,7 @@ type PageHeroStyleProps = {
 const shadowStyles: StackProps = {
     borderRadius: { '2xl': '3xl', base: 'lg' },
     boxShadow: '0 10px 10px -5px rgba(0, 0, 0, 0.04), 0 20px 25px -5px rgba(0, 0, 0, 0.1)',
-    margin: 'auto',
+    m: 'auto',
 };
 
 export const pageHeroStyles: PageHeroStyleProps = {

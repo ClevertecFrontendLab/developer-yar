@@ -5,8 +5,8 @@ import { PictureIcon } from '../icons';
 import { imageUploaderStyles as styles } from './image-uploader.styles';
 
 type ImageUploaderProps = {
-    id?: string;
     onFileUpload: (file: File) => void;
+    id?: string;
 } & CenterProps;
 
 export const ImageUploader: FC<ImageUploaderProps> = ({ id, onFileUpload, ...props }) => {

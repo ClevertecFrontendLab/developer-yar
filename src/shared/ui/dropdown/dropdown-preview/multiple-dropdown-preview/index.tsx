@@ -6,14 +6,14 @@ import { SelectedItemTag } from '~/shared/ui/selected-item-tag';
 import { DropdownPreviewStyles as styles } from '../index.styles';
 import { DropdownPreviewItem } from '../index.types';
 
-type Props = {
-    crop?: boolean;
+type MultipleDropdownProps = {
     items: DropdownPreviewItem[];
-    placeholder?: string;
     shouldShowPlaceholder: boolean;
+    crop?: boolean;
+    placeholder?: string;
 };
 
-export const MultipleDropdownPreview: FC<Props> = ({
+export const MultipleDropdownPreview: FC<MultipleDropdownProps> = ({
     crop = false,
     items,
     placeholder = 'Выберите из списка...',

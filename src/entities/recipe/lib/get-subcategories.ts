@@ -1,8 +1,8 @@
 import { Category, Subcategory } from '~/entities/navigation/@x/recipe';
 
-import { RecipeItemDto } from '../dto/recipe-item.dto';
+import { RecipeItemApi } from '../api/recipe-item.api';
 
-export const getSubcategories = (recipe: RecipeItemDto, categories: Category[]): Subcategory[] =>
+export const getSubcategories = (recipe: RecipeItemApi, categories: Category[]): Subcategory[] =>
     categories
         .flatMap((c) => c.submenu ?? [])
         .reduce<Subcategory[]>((accumulator, subcategory) => {

@@ -11,6 +11,7 @@ export const newRecipesStyles: NewRecipesStyleProps = {
         gap: 6,
         overflow: { '2xl': 'visible', xl: 'hidden' },
         pos: 'relative',
+        zIndex: 'base',
     },
     recipeCardContainer: {
         h: 'full',

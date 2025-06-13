@@ -1,7 +1,7 @@
 export type AppErrorType = 'auth' | 'server' | 'redirect';
 export type AppErrorMessage = {
-    description?: string;
     title: string;
+    description?: string;
 };
 
 export type AppMessageAlignment = 'left' | 'center' | 'right';
@@ -16,15 +16,15 @@ export type AppStatus = {
     successMessage: string;
 };
 
-export type ErrorStatus = {
-    alignment?: AppMessageAlignment;
-    isError?: boolean;
-    message?: AppErrorMessage;
-    type?: AppErrorType;
-};
+export type ErrorStatus = Partial<{
+    alignment: AppMessageAlignment;
+    isError: boolean;
+    message: AppErrorMessage;
+    type: AppErrorType;
+}>;
 
-export type SuccessStatus = {
-    alignment?: AppMessageAlignment;
-    isSuccess?: boolean;
-    message?: string;
-};
+export type SuccessStatus = Partial<{
+    alignment: AppMessageAlignment;
+    isSuccess: boolean;
+    message: string;
+}>;

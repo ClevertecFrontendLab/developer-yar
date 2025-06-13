@@ -1,8 +1,8 @@
+import { Note } from '~/entities/blogger/@x/recipe';
 import { Category, Subcategory } from '~/entities/navigation/@x/recipe';
-import { User } from '~/entities/user/@x/recipe';
 import { InferFormData } from '~/shared/model';
 
-import { RecipeCreationDto } from '../dto/recipe-creation.dto';
+import { RecipeFormApi } from '../api/recipe-form.api';
 import { baseSchema } from './schema';
 
 export type UploadedFile = string;
@@ -11,7 +11,7 @@ export type RecipeFormData = InferFormData<typeof baseSchema>;
 export type RecipeFormFiledName = keyof InferFormData<typeof baseSchema>;
 
 export type EditRecipeArgs = {
-    data: RecipeCreationDto;
+    data: RecipeFormApi;
     id: string;
 };
 
@@ -45,26 +45,26 @@ export type Recipe = {
 };
 
 export type RecipeItem = {
-    author: User;
+    authorId: string;
     bookmarks: number;
     categories: Category[];
     date: string;
     description: string;
-    garnish?: string;
     id: string;
     image: string;
     ingredients: Ingredient[];
     likes: number;
-    meat?: string;
     nutritionValue: NutritionValue;
     portions: number;
-    recommendedBy?: User;
     steps: Step[];
     subcategories: Subcategory[];
     time: number;
     title: string;
     url: string;
     views: number;
+    garnish?: string;
+    meat?: string;
+    recommendedBy?: unknown;
 };
 
 export type RecipeMeta = {
@@ -72,6 +72,11 @@ export type RecipeMeta = {
     page: number;
     total: number;
     totalPages: number;
+};
+
+export type RecipesByUser = {
+    notes: Note[];
+    recipes: RecipeItem[];
 };
 
 export type NutritionValue = {
@@ -89,8 +94,8 @@ export type Ingredient = {
 
 export type Step = {
     description: string;
-    image?: string | null;
     stepNumber: number;
+    image?: string | null;
 };
 
 export type TagColor = 'yellow' | 'green';

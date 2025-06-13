@@ -10,10 +10,10 @@ import { ImageUploadModal } from './image-upload-modal';
 import { recipeImageUploadPreviewStyles as styles } from './index.styles';
 
 type RecipeImageUploadPreviewProps = {
-    imageSrc?: string;
-    isInvalid?: boolean;
     onFileDelete: () => void;
     onFileSave: (uploadedFile: UploadedFile) => void;
+    imageSrc?: string;
+    isInvalid?: boolean;
 } & CenterProps;
 
 export const RecipeImageUploadPreview: FC<RecipeImageUploadPreviewProps> = ({
@@ -25,12 +25,7 @@ export const RecipeImageUploadPreview: FC<RecipeImageUploadPreviewProps> = ({
 }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-    const {
-        recipeImageBlockPreviewImage,
-        recipeImageBlock,
-        recipeStepsImageBlockPreviewImage,
-        recipeStepsImageBlock,
-    } = useRecipeDataTestAttributesContext();
+    const { recipeImageBlockPreviewImage, recipeImageBlock } = useRecipeDataTestAttributesContext();
 
     return (
         <>
@@ -39,13 +34,11 @@ export const RecipeImageUploadPreview: FC<RecipeImageUploadPreviewProps> = ({
                 {...styles.container}
                 {...getErrorOutline(Boolean(isInvalid))}
                 {...props}
-                data-test-id={recipeImageBlock ?? recipeStepsImageBlock}
+                data-test-id={recipeImageBlock}
             >
                 {imageSrc ? (
                     <Image
-                        data-test-id={
-                            recipeImageBlockPreviewImage ?? recipeStepsImageBlockPreviewImage
-                        }
+                        data-test-id={recipeImageBlockPreviewImage}
                         src={imageSrc}
                         {...styles.image}
                     />

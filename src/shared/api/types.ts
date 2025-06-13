@@ -1,7 +1,7 @@
 export type ApiError = {
     data: {
-        error?: string;
         message: string;
+        error?: string;
         statusCode?: number;
     };
     status: unknown;

@@ -1,8 +1,9 @@
-import { BoxProps, FlexProps, MenuButtonProps, StackProps } from '@chakra-ui/react';
+import { BoxProps, FlexProps, IconProps, MenuButtonProps, StackProps } from '@chakra-ui/react';
 
 type HeaderStyleProps = {
     breadcrumbsBox: BoxProps;
     burgerButton: MenuButtonProps;
+    closeMenuIcon: IconProps;
     headerContainer: (withMenu: boolean) => BoxProps;
     headerContent: FlexProps;
     infoPanelWrapper: BoxProps;
@@ -10,6 +11,7 @@ type HeaderStyleProps = {
     menuListWrapper: BoxProps;
     mobileUserStats: (withMenu: boolean) => BoxProps;
     navOverlay: BoxProps;
+    openMenuIcon: IconProps;
     profileBox: BoxProps;
     slideOutMenuBox: StackProps;
 };
@@ -26,6 +28,9 @@ export const headerStyles: HeaderStyleProps = {
         boxSize: 12,
         cursor: 'pointer',
         zIndex: 'docked',
+    },
+    closeMenuIcon: {
+        boxSize: 3,
     },
     headerContainer: (withMenu) => ({
         bg: { base: withMenu ? 'white' : 'lime.50', xl: 'lime.50' },
@@ -63,6 +68,7 @@ export const headerStyles: HeaderStyleProps = {
         pos: 'fixed',
         w: 'full',
     },
+    openMenuIcon: { boxSize: 6 },
     profileBox: {
         ml: 'auto',
     },
@@ -73,8 +79,6 @@ export const headerStyles: HeaderStyleProps = {
         boxShadow: '0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.1)',
         gap: 3,
         maxH: 'calc(100vh - var(--chakra-sizes-headerBase))',
-        maxW: '344px',
-        minW: 'var(--chakra-sizes-minPageWidth)',
         ml: 'auto',
         overflowY: 'auto',
         pos: 'relative',
@@ -82,10 +86,10 @@ export const headerStyles: HeaderStyleProps = {
         right: 2,
         sx: {
             '@media screen and (max-width: 359px)': {
-                maxWidth: 'calc(100vw - 16px)',
+                w: 'calc(100vw - 16px)',
             },
         },
         top: 'var(--chakra-sizes-headerBase)',
-        w: 'full',
+        w: '344px',
     },
 };

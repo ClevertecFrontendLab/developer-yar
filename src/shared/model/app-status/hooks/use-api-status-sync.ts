@@ -1,28 +1,17 @@
 import { useEffect, useMemo } from 'react';
 
+import { useLockScroll } from '~/shared/lib';
+
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { selectErrorInfo } from '../selectors';
 import { hideError, setLoading, showError, showSuccess } from '../slice';
-import { AppErrorMessage, AppErrorType, AppMessageAlignment } from '../types';
-
-type ErrorStatus = {
-    alignment?: AppMessageAlignment;
-    isError?: boolean;
-    message?: AppErrorMessage;
-    type?: AppErrorType;
-};
-
-type SuccessStatus = {
-    alignment?: AppMessageAlignment;
-    isSuccess?: boolean;
-    message?: string;
-};
+import { ErrorStatus, SuccessStatus } from '../types';
 
 const DEFAULT_ERROR_STATUS: Required<ErrorStatus> = {
     alignment: 'center',
     isError: false,
     message: {
-        description: 'Попробуйте поискать снова попозже',
+        description: 'Попробуйте немного позже.',
         title: 'Ошибка сервера',
     },
     type: 'server',
@@ -39,9 +28,20 @@ export const useApiStatusSync = (
     rawError: ErrorStatus = DEFAULT_ERROR_STATUS,
     rawSuccess: SuccessStatus = DEFAULT_SUCCESS_STATUS,
 ) => {
+    const dispatch = useAppDispatch();
+    const { errorType } = useAppSelector(selectErrorInfo);
+
     const error = useMemo(
-        () => rawError,
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        () => ({
+            alignment: rawError.alignment,
+            isError: rawError.isError ?? false,
+            message: {
+                description:
+                    rawError.message?.description ?? DEFAULT_ERROR_STATUS.message.description,
+                title: rawError.message?.title ?? DEFAULT_ERROR_STATUS.message.title,
+            },
+            type: rawError.type,
+        }),
         [
             rawError.isError,
             rawError.message?.title,
@@ -52,69 +52,55 @@ export const useApiStatusSync = (
     );
 
     const success = useMemo(
-        () => rawSuccess,
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        () => ({
+            alignment: rawSuccess.alignment,
+            isSuccess: rawSuccess.isSuccess,
+            message: rawSuccess.message,
+        }),
         [rawSuccess.isSuccess, rawSuccess.message, rawSuccess.alignment],
     );
 
-    useGlobalLoading(isLoading);
-
-    useHideErrorIfSuccess(success.isSuccess);
-
-    useGlobalError(
-        error.isError ?? DEFAULT_ERROR_STATUS.isError,
-        error.message ?? DEFAULT_ERROR_STATUS.message,
-        error.type ?? DEFAULT_ERROR_STATUS.type,
-        error.alignment ?? DEFAULT_ERROR_STATUS.alignment,
-    );
-
-    useGlobalSuccess(
-        success.isSuccess ?? DEFAULT_SUCCESS_STATUS.isSuccess,
-        success.message ?? DEFAULT_SUCCESS_STATUS.message,
-        success.alignment ?? DEFAULT_SUCCESS_STATUS.alignment,
-    );
-};
-
-const useHideErrorIfSuccess = (isSuccess?: boolean) => {
-    const dispatch = useAppDispatch();
-    const { errorType } = useAppSelector(selectErrorInfo);
-
-    useEffect(() => {
-        if (isSuccess && errorType) {
-            dispatch(hideError());
-        }
-    }, [isSuccess, errorType, dispatch]);
-};
-
-const useGlobalLoading = (isLoading: boolean) => {
-    const dispatch = useAppDispatch();
+    useLockScroll(isLoading);
 
     useEffect(() => {
         dispatch(setLoading(isLoading));
     }, [isLoading, dispatch]);
-};
-
-const useGlobalError = (
-    isError: boolean,
-    message: AppErrorMessage,
-    type: AppErrorType,
-    alignment: AppMessageAlignment,
-) => {
-    const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (isError) {
-            dispatch(showError({ alignment, message, type }));
+        if (error.isError) {
+            dispatch(
+                showError({
+                    alignment: error.alignment ?? DEFAULT_ERROR_STATUS.alignment,
+                    message: {
+                        description:
+                            error.message.description ?? DEFAULT_ERROR_STATUS.message.description,
+                        title: error.message.title ?? DEFAULT_ERROR_STATUS.message.title,
+                    },
+                    type: error.type ?? DEFAULT_ERROR_STATUS.type,
+                }),
+            );
         }
-    }, [isError, message, type, alignment, dispatch]);
-};
-
-const useGlobalSuccess = (isSuccess: boolean, message: string, alignment: AppMessageAlignment) => {
-    const dispatch = useAppDispatch();
+    }, [
+        error.isError,
+        error.message.title,
+        error.message.description,
+        error.type,
+        error.alignment,
+        dispatch,
+    ]);
 
     useEffect(() => {
-        if (isSuccess) {
-            dispatch(showSuccess({ alignment, message }));
+        if (success.isSuccess) {
+            if (errorType) {
+                dispatch(hideError());
+            }
+
+            dispatch(
+                showSuccess({
+                    alignment: success.alignment ?? DEFAULT_SUCCESS_STATUS.alignment,
+                    message: success.message ?? DEFAULT_SUCCESS_STATUS.message,
+                }),
+            );
         }
-    }, [isSuccess, message, alignment, dispatch]);
+    }, [success.isSuccess, success.message, success.alignment, errorType, dispatch]);
 };

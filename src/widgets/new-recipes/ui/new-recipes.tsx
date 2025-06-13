@@ -41,29 +41,27 @@ export const NewRecipes: FC = () => {
                 </Box>
                 <Box>
                     <Swiper {...swiperConfig} data-test-id={DATA_TEST_ATTRIBUTES.CAROUSEL}>
-                        {recipes
-                            .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-                            .map((recipe, index) => (
-                                <SwiperSlide
-                                    key={recipe.id}
-                                    style={{ ...styles.swiperSlide }}
-                                    onClick={handleClick(recipe.url)}
+                        {recipes.map((recipe, index) => (
+                            <SwiperSlide
+                                key={recipe.id}
+                                style={{ ...styles.swiperSlide }}
+                                onClick={handleClick(recipe.url)}
+                            >
+                                <Box
+                                    {...styles.recipeCardContainer}
+                                    data-test-id={`${DATA_TEST_ATTRIBUTES.CAROUSEL_CARD}-${index}`}
                                 >
-                                    <Box
-                                        {...styles.recipeCardContainer}
-                                        data-test-id={`${DATA_TEST_ATTRIBUTES.CAROUSEL_CARD}-${index}`}
-                                    >
-                                        <RecipeSliderCard
-                                            bookmarks={recipe.bookmarks}
-                                            categories={recipe.categories}
-                                            description={recipe.description}
-                                            image={recipe.image}
-                                            likes={recipe.likes}
-                                            title={recipe.title}
-                                        />
-                                    </Box>
-                                </SwiperSlide>
-                            ))}
+                                    <RecipeSliderCard
+                                        bookmarks={recipe.bookmarks}
+                                        categories={recipe.categories}
+                                        description={recipe.description}
+                                        image={recipe.image}
+                                        likes={recipe.likes}
+                                        title={recipe.title}
+                                    />
+                                </Box>
+                            </SwiperSlide>
+                        ))}
                     </Swiper>
                 </Box>
             </Stack>

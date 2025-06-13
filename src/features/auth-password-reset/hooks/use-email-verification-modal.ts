@@ -5,7 +5,7 @@ import { useZodForm } from '~/shared/lib';
 import { AppErrorMessage, useApiStatusSync } from '~/shared/model';
 
 import { STEPS } from '../consts/steps';
-import { mapEmailVerificationDataToDto } from '../mappers/map-email-verification-data-to-dto copy 2';
+import { mapEmailVerificationDataToApi } from '../mappers/map-email-verification-data-to-api copy 2';
 import { useForgotPasswordMutation } from '../model/api';
 import { schemas } from '../model/schemas';
 import { EmailVerificationData } from '../model/types';
@@ -24,7 +24,7 @@ const mapErrorToMessage = (error: ApiError) => {
             };
         case ERRORS.INTERNAL_SERVER_ERRROR:
             return {
-                description: 'Попробуйте немного позже',
+                description: 'Попробуйте немного позже.',
                 title: 'Ошибка сервера',
             };
         default:
@@ -44,7 +44,7 @@ export const useEmailVerificationModal = () => {
     const [forgotPassword, { isError, isLoading }] = useForgotPasswordMutation();
 
     const onSubmitCallback = async (data: EmailVerificationData) => {
-        const dto = mapEmailVerificationDataToDto(data);
+        const dto = mapEmailVerificationDataToApi(data);
 
         reset();
         try {

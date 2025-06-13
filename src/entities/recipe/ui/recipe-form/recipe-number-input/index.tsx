@@ -41,9 +41,9 @@ export const RecipeNumberField: FC<RecipeNumberFieldProps> = ({
     const {
         field: { value, onChange },
     } = useController({
-        name,
         control,
         defaultValue: 0,
+        name,
     });
 
     const [inputValue, setInputValue] = useState<string>(String(value ?? ''));

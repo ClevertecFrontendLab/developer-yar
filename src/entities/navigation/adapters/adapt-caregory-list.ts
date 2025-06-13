@@ -1,6 +1,8 @@
-import { CategoryDto } from '../dto/category.dto';
+import { hasItems } from '~/shared/lib';
 
-const getFallbackCategoryList = (): CategoryDto[] => [
+import { CategoryApi } from '../api/category.api';
+
+const getFallbackCategoryList = (): CategoryApi[] => [
     {
         _id: '67c46dc5f51967aa8390bee6',
         category: 'salads',
@@ -802,9 +804,9 @@ const getFallbackCategoryList = (): CategoryDto[] => [
 const isTestEnv = () => typeof window !== 'undefined' && 'Cypress' in window;
 
 const isEmptyObject = (obj: unknown): obj is object =>
-    obj != null && typeof obj === 'object' && Object.keys(obj).length === 0;
+    obj != null && typeof obj === 'object' && !hasItems(Object.keys(obj));
 
-export const adaptCategoryList = (data: CategoryDto[]): CategoryDto[] => {
+export const adaptCategoryList = (data: CategoryApi[]): CategoryApi[] => {
     if (isEmptyObject(data) && isTestEnv()) {
         return getFallbackCategoryList();
     }

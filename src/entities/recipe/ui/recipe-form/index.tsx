@@ -1,8 +1,9 @@
 import { Button, Flex, Grid, Input, Stack } from '@chakra-ui/react';
-import { FC } from 'react';
+import { FC, FocusEventHandler } from 'react';
 import {
     Control,
     Controller,
+    ControllerRenderProps,
     FieldArrayWithId,
     FieldErrors,
     UseFormRegister,
@@ -16,10 +17,10 @@ import { Form } from '~/shared/ui/form';
 import { RecipeDataTestAttributesContext } from '../../contexts/recipe/context';
 import { registerWithTrim } from '../../lib/register-with-trim';
 import { Ingredient, RecipeFormData, Step, UploadedFile } from '../../model/types';
-import { CookingSteps } from './cooking-steps';
 import { recipeFormStyles as styles } from './index.styles';
-import { IngredientsSection } from './ingredients-section';
+import { RecipeCookingSteps } from './recipe-cooking-steps';
 import { RecipeImageUploadPreview } from './recipe-image-upload-preview';
+import { RecipeIngredientsSection } from './recipe-ingredients-section';
 import { RecipeNumberField } from './recipe-number-input';
 import { RecipeSubcategoriesMenu } from './recipe-subcategories-menu';
 import { RecipeTextLabel } from './recipe-text-label';
@@ -30,6 +31,10 @@ export type RecipeFormProps = {
     appendStep: (value: Step) => void;
     control: Control<RecipeFormData>;
     errors: FieldErrors<RecipeFormData>;
+    handleCheckboxChange: (
+        id: string,
+        field: ControllerRenderProps<RecipeFormData, 'subcategories'>,
+    ) => void;
     handleFileDelete: () => void;
     handleFileSave: (file: UploadedFile) => void;
     ingredients: FieldArrayWithId<RecipeFormData, 'ingredients', 'id'>[];
@@ -40,23 +45,26 @@ export type RecipeFormProps = {
     removeStep: (index: number) => void;
     setValidatedValue: UseFormSetValue<RecipeFormData>;
     steps: FieldArrayWithId<RecipeFormData, 'steps', 'id'>[];
-    trimField: (fieldName: keyof RecipeFormData) => void;
+    trimField: (
+        fieldName: keyof RecipeFormData,
+    ) => FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 };
 
 export const RecipeForm: FC<RecipeFormProps> = ({
+    appendIngredient,
+    appendStep,
     control,
     errors,
-    register,
-    trimField,
-    setValidatedValue,
-    ingredients,
-    appendIngredient,
-    removeIngredient,
-    steps,
-    appendStep,
-    removeStep,
-    handleFileSave,
+    handleCheckboxChange,
     handleFileDelete,
+    handleFileSave,
+    ingredients,
+    register,
+    removeIngredient,
+    removeStep,
+    setValidatedValue,
+    steps,
+    trimField,
     onDraftButton,
     onPublishButton,
 }) => (
@@ -97,13 +105,7 @@ export const RecipeForm: FC<RecipeFormProps> = ({
                                     <RecipeSubcategoriesMenu
                                         isInvalid={Boolean(errors[field.name])}
                                         items={field.value}
-                                        onCheckboxChange={(id) =>
-                                            field.onChange(
-                                                field.value.includes(id)
-                                                    ? field.value.filter((i) => i !== id)
-                                                    : [...field.value, id],
-                                            )
-                                        }
+                                        onCheckboxChange={(id) => handleCheckboxChange(id, field)}
                                     />
                                 )}
                             />
@@ -117,12 +119,14 @@ export const RecipeForm: FC<RecipeFormProps> = ({
                                 {...getErrorOutline(Boolean(errors.title))}
                                 data-test-id={DATA_TEST_ATTRIBUTES.RECIPE_TITLE}
                             />
+
                             <RecipeTextarea
                                 placeholder='Краткое описание рецепта'
                                 {...registerWithTrim('description', register, trimField)}
                                 {...getErrorOutline(Boolean(errors.description))}
                                 data-test-id={DATA_TEST_ATTRIBUTES.RECIPE_DESCRIPTION}
                             />
+
                             <RecipeNumberField
                                 control={control}
                                 id={DATA_TEST_ATTRIBUTES.RECIPE_PORTIONS}
@@ -130,6 +134,7 @@ export const RecipeForm: FC<RecipeFormProps> = ({
                                 label='На сколько человек ваш рецепт?'
                                 name='portions'
                             />
+
                             <RecipeNumberField
                                 control={control}
                                 id={DATA_TEST_ATTRIBUTES.RECIPE_TIME}
@@ -141,15 +146,16 @@ export const RecipeForm: FC<RecipeFormProps> = ({
                     </Grid>
                 </Grid>
 
-                <Stack {...styles.ingredientsAndStepsContainer}>
-                    <IngredientsSection
+                <Stack {...styles.recipeIngredientsAndStepsContainer}>
+                    <RecipeIngredientsSection
                         append={appendIngredient}
                         control={control}
                         errors={errors}
                         fields={ingredients}
                         remove={removeIngredient}
                     />
-                    <CookingSteps
+
+                    <RecipeCookingSteps
                         append={appendStep}
                         control={control}
                         errors={errors}
@@ -157,6 +163,7 @@ export const RecipeForm: FC<RecipeFormProps> = ({
                         remove={removeStep}
                         setValue={setValidatedValue}
                     />
+
                     <Flex {...styles.actionButtons}>
                         <Button
                             {...styles.saveRecipeToDraft}

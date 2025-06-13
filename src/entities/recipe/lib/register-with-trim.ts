@@ -4,8 +4,8 @@ import { RecipeFormData } from '../model/types';
 
 const mergeOnBlur =
     (
-        original?: React.FocusEventHandler<unknown>,
-        custom?: React.FocusEventHandler<unknown>,
+        original?: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>,
+        custom?: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>,
     ): React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement> =>
     (e) => {
         custom?.(e);

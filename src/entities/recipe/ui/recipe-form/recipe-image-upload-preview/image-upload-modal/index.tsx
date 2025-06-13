@@ -1,7 +1,6 @@
 import { BoxProps, Image } from '@chakra-ui/react';
 import { FC } from 'react';
 
-import { useUploadImageMutation } from '~/entities/recipe';
 import { DATA_TEST_ATTRIBUTES } from '~/shared/consts';
 import { useApiStatusSync } from '~/shared/model';
 import { ImageUploader } from '~/shared/ui/image-uploader';
@@ -19,14 +18,15 @@ import {
 
 import { useRecipeDataTestAttributesContext } from '../../../../hooks/use-data-test-attributes-context';
 import { useFileUploader } from '../../../../hooks/use-file-uploader';
+import { useUploadImageMutation } from '../../../../model/api';
 import { imageWithPreviewStyles as styles } from './index.styles';
 
 type ImageUploadModalProps = {
-    imageSrc?: string;
     isOpen: boolean;
     onClose: () => void;
     onFileDelete: () => void;
     onFileSave: (uploadedFile: string) => void;
+    imageSrc?: string;
 } & BoxProps;
 
 export const ImageUploadModal: FC<ImageUploadModalProps> = ({
@@ -38,8 +38,7 @@ export const ImageUploadModal: FC<ImageUploadModalProps> = ({
 }) => {
     const [uploadImage, { isLoading, isError }] = useUploadImageMutation();
 
-    const { recipeImageBlockInputFile, recipeStepsImageBlockInputFile } =
-        useRecipeDataTestAttributesContext();
+    const { recipeImageBlockInputFile } = useRecipeDataTestAttributesContext();
 
     const { file, handleFileUpload, imagePreview, clearImagePreview } = useFileUploader();
 
@@ -99,7 +98,7 @@ export const ImageUploadModal: FC<ImageUploadModalProps> = ({
                     ) : (
                         <ImageUploader
                             data-test-id={DATA_TEST_ATTRIBUTES.RECIPE_IMAGE_MODAL_IMAGE_BLOCK}
-                            id={recipeImageBlockInputFile ?? recipeStepsImageBlockInputFile}
+                            id={recipeImageBlockInputFile}
                             onFileUpload={handleFileUpload}
                             {...styles.imageUploader}
                         />

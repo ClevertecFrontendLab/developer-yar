@@ -6,7 +6,7 @@ type AuthResetCredentialsModalStyleProps = {
 
 export const authResetCredentialsModalStyles: AuthResetCredentialsModalStyleProps = {
     headerText: {
-        margin: 'auto',
+        m: 'auto',
         maxW: 60,
     },
 };

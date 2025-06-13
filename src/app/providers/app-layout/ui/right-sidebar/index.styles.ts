@@ -27,7 +27,7 @@ export const rightSidebarStyles: RightSidebarStyleProps = {
         zIndex: 'overlay',
     },
     mainGrid: {
-        margin: 'auto',
+        m: 'auto',
         maxW: 'var(--chakra-sizes-maxPageWidth)',
         pb: { base: 'var(--chakra-sizes-footer)', xl: 0 },
         pt: { base: 'var(--chakra-sizes-headerBase)', xl: 'var(--chakra-sizes-headerXL)' },

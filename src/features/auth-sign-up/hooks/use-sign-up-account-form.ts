@@ -9,7 +9,7 @@ import { ROUTES } from '~/shared/routes';
 import { ACCOUNT_FIELDS } from '../consts/fields';
 import { accountDataFieldSet as fields } from '../consts/sign-up-fields';
 import { STEPS } from '../consts/steps';
-import { mapSignUpDataToDto } from '../mappers/map-sign-up-data-to-dto';
+import { mapSignUpDataToApi } from '../mappers/map-sign-up-data-to-api';
 import { useSignUpMutation } from '../model/api';
 import { signUpAccountSchema } from '../model/schemas';
 import { SignUpAccountData } from '../model/types';
@@ -21,7 +21,7 @@ const mapErrorToMessage = (error: ApiError) => {
             return { title: error.data.message };
         case ERRORS.INTERNAL_SERVER_ERRROR:
             return {
-                description: 'Попробуйте немного позже',
+                description: 'Попробуйте немного позже.',
                 title: 'Ошибка сервера',
             };
         default:
@@ -44,10 +44,10 @@ export const useSignUpAccountForm = () => {
     const navigate = useNavigate();
 
     const onSubmitCallback = async (data: SignUpAccountData) => {
-        const signUpDataDto = mapSignUpDataToDto({ ...formDataPersonal, ...data });
+        const signUpDataApi = mapSignUpDataToApi({ ...formDataPersonal, ...data });
 
         try {
-            await signUp(signUpDataDto).unwrap();
+            await signUp(signUpDataApi).unwrap();
 
             setIsVerificationModalOpen(true);
         } catch (error) {

@@ -4,6 +4,8 @@ import { AppLayout } from '~/app/providers/app-layout';
 import { ROUTES } from '~/shared/routes';
 
 import { authPage } from '../consts/auth-page';
+import { bloggerPage } from '../consts/blogger-page';
+import { blogsPage } from '../consts/blogs-page';
 import { editRecipePage } from '../consts/edit-recipe-page';
 import { homePage } from '../consts/home-page';
 import { newRecipePage } from '../consts/new-recipe-page';
@@ -21,6 +23,8 @@ const routesWithBreadcrumbs = [
     recipesPage,
     recipePage,
     editRecipePage,
+    blogsPage,
+    bloggerPage,
 ].map(withBreadcrumbs);
 
 export const Router = createBrowserRouter([

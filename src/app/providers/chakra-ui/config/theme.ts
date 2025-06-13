@@ -10,14 +10,14 @@ const styles = {
             scrollbarWidth: 'thin',
         },
         '*::-webkit-scrollbar': {
-            width: '2px',
+            w: '2px',
         },
         '*::-webkit-scrollbar-thumb': {
-            backgroundColor: 'var(--chakra-colors-blackAlpha-300)',
+            bgColor: 'var(--chakra-colors-blackAlpha-300)',
             borderRadius: '0.5rem',
         },
         '*::-webkit-scrollbar-track': {
-            backgroundColor: 'var(--chakra-colors-blackAlpha-50)',
+            bgColor: 'var(--chakra-colors-blackAlpha-50)',
             borderRadius: '0.5rem',
         },
     },
@@ -42,15 +42,22 @@ const gridLayout = {
     },
 };
 
+const blogsLayout = {
+    alignItems: 'center',
+    bgColor: 'lime.300',
+    borderRadius: '2xl',
+    gap: { '2xl': 6, base: 3, xl: 4 },
+    p: { base: 3, xl: 6 },
+};
+
 const overlay = {
     backdropFilter: 'blur(4px)',
     background: 'blackAlpha.300',
-    h: 'full',
+    h: '100vh',
     inset: 0,
-    minH: '100vh',
     overflow: 'hidden',
-    pointerEvents: 'none',
-    pos: 'absolute',
+    pointerEvents: 'all',
+    pos: 'fixed',
     zIndex: 'overlay',
 };
 
@@ -80,6 +87,7 @@ const subtleOutlineHover = {
 };
 
 export const layerStyles = {
+    blogsLayout,
     gridLayout,
     overlay,
     pageLayout,

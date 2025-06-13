@@ -1,12 +1,9 @@
 import { createContext } from 'react';
 
 type RecipeDataTestAttributesContextType = {
-    recipeImageBlock?: string;
-    recipeImageBlockInputFile?: string;
-    recipeImageBlockPreviewImage?: string;
-    recipeStepsImageBlock?: string;
-    recipeStepsImageBlockInputFile?: string;
-    recipeStepsImageBlockPreviewImage?: string;
+    recipeImageBlock: string;
+    recipeImageBlockInputFile: string;
+    recipeImageBlockPreviewImage: string;
 };
 
 export const RecipeDataTestAttributesContext =

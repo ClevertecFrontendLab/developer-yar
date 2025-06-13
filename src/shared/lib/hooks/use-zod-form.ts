@@ -26,10 +26,10 @@ type Mode = 'onBlur' | 'onChange' | 'onSubmit' | 'onTouched' | 'all';
 
 export const useZodForm = <T extends z.ZodTypeAny>(
     schema: T,
-    options?: {
-        defaultValues?: InferFormData<T>;
-        mode?: Mode;
-    },
+    options?: Partial<{
+        defaultValues: InferFormData<T>;
+        mode: Mode;
+    }>,
 ) => {
     type FormData = InferFormData<T>;
 

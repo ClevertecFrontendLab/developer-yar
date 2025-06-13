@@ -13,7 +13,7 @@ export const loadMoreButtonStyles: LoadMoreButtonStyleProps = {
         fontWeight: 600,
         h: 10,
         lineHeight: '6',
-        margin: 'auto',
+        m: 'auto',
         px: 4,
         w: '152px',
     },

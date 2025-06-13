@@ -7,7 +7,7 @@ import { useZodForm } from '~/shared/lib';
 import { AppErrorMessage, useApiStatusSync } from '~/shared/model';
 import { ROUTES } from '~/shared/routes';
 
-import { mapSignInDataToDto } from '../mappers/map-sign-in-data-to-dto';
+import { mapSignInDataToApi } from '../mappers/map-sign-in-data-to-api';
 import { useSignInMutation } from '../model/api';
 import { signInSchema } from '../model/schemas';
 import { SignInData } from '../model/types';
@@ -41,7 +41,7 @@ export const useSignInForm = () => {
     const navigate = useNavigate();
 
     const onSubmitCallback = async (data: SignInData) => {
-        const dto = mapSignInDataToDto(data);
+        const dto = mapSignInDataToApi(data);
 
         try {
             await signIn(dto).unwrap();

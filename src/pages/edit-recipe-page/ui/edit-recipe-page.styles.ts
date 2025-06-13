@@ -2,23 +2,19 @@ import { BoxProps, StackProps } from '@chakra-ui/react';
 
 type EditRecipePageStyleProps = {
     layout: StackProps;
-    nutritionValueWrapper: BoxProps;
     pageContainer: StackProps;
     recipeContentWrapper: StackProps;
+    recipeNutritionValueWrapper: BoxProps;
 };
 
 const baseEditRecipePageStyles = {
-    margin: 'auto',
+    m: 'auto',
     w: 'full',
 };
 
 export const editRecipePageStyles: EditRecipePageStyleProps = {
     layout: {
         layerStyle: 'pageLayout',
-    },
-    nutritionValueWrapper: {
-        maxW: { '2xl': '668px', md: '728px', xl: '578px' },
-        ...baseEditRecipePageStyles,
     },
     pageContainer: {
         pb: { base: 4, xl: 8 },
@@ -27,6 +23,10 @@ export const editRecipePageStyles: EditRecipePageStyleProps = {
     recipeContentWrapper: {
         gap: { base: 6, xl: 10 },
         maxW: { '2xl': '668px', base: '604px', xl: '578px' },
+        ...baseEditRecipePageStyles,
+    },
+    recipeNutritionValueWrapper: {
+        maxW: { '2xl': '668px', md: '728px', xl: '578px' },
         ...baseEditRecipePageStyles,
     },
 };

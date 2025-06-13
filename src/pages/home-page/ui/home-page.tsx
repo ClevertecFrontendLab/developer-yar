@@ -1,7 +1,9 @@
 import { Box, Flex } from '@chakra-ui/react';
 import { FC } from 'react';
 
+import { useGetAllBloggersQuery } from '~/entities/blogger';
 import { useFoundRecipes } from '~/features/recipe-refinement';
+import { getCurrentUserId } from '~/shared/lib';
 import { useApiStatusSync } from '~/shared/model';
 import { PageTitle } from '~/shared/ui/page-title';
 import { FoundRecipes } from '~/widgets/found-recipes';
@@ -18,7 +20,24 @@ const HomePage: FC = () => {
     const { isRecipesError, isRecipesLoading, isRecipesSuccess, mode, recipes, searchQuery } =
         useFoundRecipes();
 
-    useApiStatusSync(isRecipesLoading, { isError: isRecipesError });
+    const currentUserId = getCurrentUserId();
+
+    const {
+        data: bloggers,
+        isLoading: isBloggersloading,
+        isError: isBloggersError,
+        isSuccess: isBloggersSuccess,
+    } = useGetAllBloggersQuery({
+        currentUserId,
+        limit: '',
+    });
+
+    const isLoading = isRecipesLoading || isBloggersloading;
+    const isError = isRecipesError || isBloggersError;
+
+    useApiStatusSync(isLoading, {
+        isError: isError,
+    });
 
     return (
         <>
@@ -34,11 +53,14 @@ const HomePage: FC = () => {
                     ) : mode === 'filter' ? (
                         <Recipes recipes={recipes} />
                     ) : (
-                        <>
-                            <NewRecipes />
-                            <TheJuiciest />
-                            <FoodBlog />
-                        </>
+                        isBloggersSuccess &&
+                        bloggers && (
+                            <>
+                                <NewRecipes />
+                                <TheJuiciest />
+                                <FoodBlog bloggers={bloggers.others} />
+                            </>
+                        )
                     )}
                     <RecipesByRandomCategory />
                 </Flex>

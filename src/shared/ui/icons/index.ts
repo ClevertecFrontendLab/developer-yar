@@ -16,6 +16,7 @@ export { LikeIcon } from './common/like-icon';
 export { LoginIcon } from './common/login-icon';
 export { LogoutIcon } from './common/logout-icon';
 export { PictureIcon } from './common/picture-icon';
+export { UnfollowIcon } from './common/unfollow-icon';
 export { WriteRecipeIcon } from './common/write-recipe-icon';
 export { DessertIcon } from './food/dessert';
 export { DrinkIcon } from './food/drink';

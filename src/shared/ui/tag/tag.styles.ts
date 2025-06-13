@@ -19,6 +19,7 @@ export const tagStyles: TagStyleProps = {
         gap: 2,
         h: 6,
         lineHeight: '5',
+        maxW: 'calc(100vw - 200px)',
         px: { base: 1, xl: 2 },
         py: 0.5,
         textTransform: 'none',

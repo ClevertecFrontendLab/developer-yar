@@ -4,16 +4,16 @@ import { createBaseQuery, ENDPOINTS } from '~/shared/api';
 
 import { adaptCategoryList } from '../adapters/adapt-caregory-list';
 import { adaptSubcategoriesByCategory } from '../adapters/adapt-subcategories-by-category';
-import { CategoryDto } from '../dto/category.dto';
+import { CategoryApi } from '../api/category.api';
 
 export const navigationApi = createApi({
     baseQuery: createBaseQuery(),
     endpoints: (build) => ({
-        getCategoryList: build.query<CategoryDto[], void>({
+        getCategoryList: build.query<CategoryApi[], void>({
             query: () => ENDPOINTS.CATEGORIES,
             transformResponse: adaptCategoryList,
         }),
-        getSubcategoriesByCategory: build.query<CategoryDto, string>({
+        getSubcategoriesByCategory: build.query<CategoryApi, string>({
             query: (id) => `${ENDPOINTS.CATEGORIES}/${id}`,
             transformResponse: adaptSubcategoriesByCategory,
         }),

@@ -24,8 +24,8 @@ type RecipeGalleryCardProps = {
     id: string;
     image: string;
     likes: number;
-    recommendedBy?: User;
     title: string | ReactNode;
+    recommendedBy?: User;
 } & PropsWithChildren;
 
 export const RecipeGalleryCard: FC<RecipeGalleryCardProps> = ({

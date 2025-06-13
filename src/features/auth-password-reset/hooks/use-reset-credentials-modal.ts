@@ -4,7 +4,7 @@ import { ApiError, ERRORS, isApiError } from '~/shared/api';
 import { useZodForm } from '~/shared/lib';
 import { AppErrorMessage, useApiStatusSync } from '~/shared/model';
 
-import { mapResetCredentialsDataToDto } from '../mappers/map-reset-credentials-data-to-dto';
+import { mapResetCredentialsDataToApi } from '../mappers/map-reset-credentials-data-to-api';
 import { useResetPasswordMutation } from '../model/api';
 import { schemas } from '../model/schemas';
 import { ResetCredentialsData } from '../model/types';
@@ -18,7 +18,7 @@ const mapErrorToMessage = (error: ApiError) => {
             };
         case ERRORS.INTERNAL_SERVER_ERRROR:
             return {
-                description: 'Попробуйте немного позже',
+                description: 'Попробуйте немного позже.',
                 title: 'Ошибка сервера',
             };
         default:
@@ -44,7 +44,7 @@ export const useResetCredentialsModal = () => {
     }, [isSuccess, handleModalClose]);
 
     const onSubmitCallback = async (data: ResetCredentialsData) => {
-        const dto = mapResetCredentialsDataToDto(data, email);
+        const dto = mapResetCredentialsDataToApi(data, email);
 
         try {
             await resetPassword(dto).unwrap();

@@ -10,13 +10,13 @@ import {
 type RecipeFormStyleProps = {
     actionButtons: FlexProps;
 
-    ingredientsAndStepsContainer: StackProps;
     publishRecipe: ButtonProps;
     recipeCreationContainer: StackProps;
-
     recipeCreationHeader: GridProps;
+
     recipeData: StackProps;
     recipeImage: CenterProps;
+    recipeIngredientsAndStepsContainer: StackProps;
     recipeSubcategoriesMenuContainer: GridProps;
 
     recipeText: StackProps;
@@ -43,12 +43,6 @@ export const recipeFormStyles: RecipeFormStyleProps = {
         justify: 'center',
         w: 'full',
     },
-    ingredientsAndStepsContainer: {
-        gap: 10,
-        margin: 'auto',
-        maxW: { '2xl': '668px', base: 'full', md: '604px', xl: '658px' },
-        w: 'full',
-    },
     publishRecipe: {
         ...baseButtonStyles,
         bgColor: 'blackAlpha.900',
@@ -58,7 +52,6 @@ export const recipeFormStyles: RecipeFormStyleProps = {
     recipeCreationContainer: {
         gap: { base: 8, xl: 10 },
     },
-
     recipeCreationHeader: {
         alignContent: 'start',
         gap: { base: 4, xl: 6 },
@@ -70,6 +63,7 @@ export const recipeFormStyles: RecipeFormStyleProps = {
             xl: '0.37fr 0.63fr',
         },
     },
+
     recipeData: {
         alignContent: 'start',
         gap: 8,
@@ -77,6 +71,12 @@ export const recipeFormStyles: RecipeFormStyleProps = {
     recipeImage: {
         h: { base: '224px', xl: '430px' },
         objectFit: 'cover',
+        w: 'full',
+    },
+    recipeIngredientsAndStepsContainer: {
+        gap: 10,
+        m: 'auto',
+        maxW: { '2xl': '668px', base: 'full', md: '604px', xl: '658px' },
         w: 'full',
     },
     recipeSubcategoriesMenuContainer: {
